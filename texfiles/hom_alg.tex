@@ -1,0 +1,356 @@
+\documentclass{memoir}
+
+\input{header}
+\title{Homological algebra}
+\author{Emile T. Okada}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Abelian Categories}
+\section{Additive categories}
+Let $\mathcal C$ be a category such that the hom-sets carry the structure of an abelian group and composition is bilinear. We call such a category $\Ab$-enriched.
+An additive category is an $\Ab$-enriched category which has finite coproducts.
+\section{Abelian categories}
+\section{Exact sequences}
+\label{sec:es}
+\begin{equation}
+    \begin{tikzcd}
+        & & \coker(\theta) \\
+        \mathcal F \arrow[r,"\theta"] \arrow[d] & \mathcal G \arrow[r,"\phi"] \arrow[ur] & \mathcal H \\
+        \im(\theta) \arrow[r,"\alpha"] \arrow[ur] & \ker(\phi) \arrow[u] &
+    \end{tikzcd}
+\end{equation}
+\subsection{Split sequences}
+\subsection{Homology}
+\section{Adjoint functors}
+Let $L:\mathcal A\to\mathcal B$ be an additive functor between abelian categories.
+If $L$ admits a right adjoint $R:\mathcal B\to\mathcal A$ then it turns out $L$ has a lot of useful properties. 
+In this section we explore these properties.
+\begin{proposition}
+    Suppose $L\dashv R$. Then $L$ is right exact and $R$ is left exact.
+\end{proposition}
+\begin{proof}
+    Consider the short exact sequence $0\to B_1\to B_2\to B_3\to 0$. For every $A\in\mathcal A$ we get the following commutative diagram 
+    \begin{equation}
+        \begin{tikzcd}
+            0 \arrow[r] & \Hom(L(A),B_1) \arrow[r] \arrow[d,"\cong"] & \Hom(L(A),B_2) \arrow[r] \arrow[d,"\cong"] & \Hom(L(A),B_3) \arrow[d,"\cong"] \\
+            0 \arrow[r] & \Hom(A,R(B_1)) \arrow[r] & \Hom(A,R(B_2)) \arrow[r] & \Hom(A,R(B_3))
+        \end{tikzcd}
+    \end{equation}
+    where the top row is exact.
+    It follows that the bottom row is exact for all $A$ and so the bottow row is too.
+    It follows that 
+    \begin{equation}
+        \begin{tikzcd}
+            0 \arrow[r] & R(B_1) \arrow[r] & R(B_2) \arrow[r] & R(B_3)
+        \end{tikzcd}
+    \end{equation}
+    is exact and so $R$ is left exact.
+    By a similar argument $L$ is right exact.
+\end{proof}
+\begin{proposition}
+    Suppose $L\dashv R$. Then
+    \begin{enumerate}
+        \item if $L$ is exact then $R$ preserves injectives
+        \item if $R$ is exact then $L$ preserves projectives.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Suppose $L$ is exact and $I$ is an injective object in $\mathcal B$.
+    We need to show that $\Hom(-,R(I))$ is exact.
+    To do this it suffices to show that given $f:A\to B$ injective, the map $f^*:\Hom(B,R(I))\to\Hom(A,R(I))$ is surjective.
+    But $L$ is exact so $Lf$ is injective and so $(Lf)^*:\Hom(LB,I)\to\Hom(LA,I)$ is surjective.
+    We also have that $L\dashv R$ and so 
+    \begin{equation}
+        \begin{tikzcd}
+            \Hom(L(B),I) \arrow[d,"\cong"] \arrow[r,"(Lf)^*"] & \Hom(L(A),I) \arrow[d,"\cong"] \\
+            \Hom(B,R(I)) \arrow[r,"f^*"] & \Hom(A,R(I))
+        \end{tikzcd}
+    \end{equation}
+    commutes.
+    It follows that $f^*$ is surjective as required.
+
+    The corresponding result for $R$ follows similarly.
+\end{proof}
+\chapter{Sheaf Theory}
+\section{Presheaves}
+Let $\mathcal C$ be any category, $\mathcal A$ be an abelian category and define $\PreSh(\mathcal C) = \Fun(\mathcal C^{op},\mathcal A)$ to be the category of presheaves on $\mathcal C$ with values in $\mathcal A$.
+The functor sending all objects to $0$ is certainly both initial and terminal, direct sums can be defined pointwise, and the hom-sets in $\PreSh(\mathcal C)$ inherit an additive structure from $\mathcal A$ so $\PreSh(\mathcal C)$ is naturally an additive category.
+Moreover kernels and cokernels can be contructed in the obvious way and it is clear that they satisfy the axioms for an abelian category and so $\PreSh(C)$ is abelian.
+\section{Sheaves}
+To define sheaves we restrict to the case when $X$ be a topological space, $\mathcal U$ the poset of open sets of X, and $\mathcal A$ be an abelian category.
+We write $\PreSh(X)$ for $\PreSh(\mathcal U)$.
+The category of sheaves on $X$ with values in $\mathcal A$, $\Sh(X)$, is defined to be the full subcategory of $\PreSh(X)$ with objects given by presheaves $\shf{F}$ for which the following diagram is an equalizer for all open coverings $U = \cup_i U_i$
+\begin{equation}
+\shf{F}(U)\rightarrow \prod_i \shf{F}(U_i) \rightrightarrows \prod_{i,j} \shf{F}(U_i\cap U_j).
+\end{equation}
+Since $\mathcal A$ is an abelian category this is equivalent to the following diagram being exact
+\begin{equation}
+0\rightarrow \shf{F}(U)\rightarrow \prod_i \shf{F}(U_i) \xrightarrow[]{\text{diff}} \prod_{i,j} \shf{F}(U_i\cap U_j).
+\end{equation}
+Note that since $\varnothing$ admits the empty covering and the empty product is $0$ this forces $\shf{F}(\varnothing) = 0$.
+
+As in the case of $\PreSh(\mathcal C)$, $\Sh(X)$ is an additive category.
+However, the cokernel of a morphism between sheaves need not be a sheaf and so we must do some more work to show that $\Sh(X)$ is abelian.
+
+Fix $x\in X$.
+For a (pre)sheaf $\shf{F}$ define the stalk of $\shf{F}$ at $x$ to be 
+\begin{equation}
+    \shf{F}_x = \varinjlim_{U\ni x}\shf{F}
+\end{equation}
+when this limit exists. Note that this is a functor since morphisms between (pre)sheaves are natural transformations.
+\begin{thm}
+    Let $\phi:\shf{F}\to \shf{G}$ be a morphism of sheaves.
+    \begin{enumerate}
+        \item If $\phi_x$ is injective for all $x\in X$ then $\phi$ is injective on sections.
+        \item If $\phi_x$ is an isomorphism for all $x\in X$ then $\phi$ is an isomorphism.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+Exercise.
+\end{proof}
+\subsubsection{Aside}
+Although we do not need this right away, given an $A\in \mathcal A$ we can define the (pre)sheaf $x_*A$ by 
+\begin{equation}
+    (x_*A)(U) = \begin{cases}
+        A & \textit{if } x\in U \\
+        0 & otherwise
+    \end{cases}
+\end{equation}
+\begin{proposition}
+    When it exists, the functor $(-)_x:\Sh(X)\to \mathcal A$ is left adjoint to $x_*:\mathcal A\to \Sh(X)$.
+\end{proposition}
+\begin{proof}
+    To see this simply note that morphisms between $\shf{F}$ and $x_*(A)$ correspond naturally to natrual transformations between $\shf{F}$ restricted to $U\ni x$ and $\Delta(A)$.
+\end{proof}
+\begin{remark}
+    The result also holds in $\PreSh(X)$.
+\end{remark}
+\section{\'Etal\'e space of a presheaf and sheafification}
+For a presheaf $\shf{F}$ we are now in the position to define its \'etal\'e space.
+The \'etal\'e space of $\shf{F}$, denoted $\Spe(\shf{F})$ is the topological space with underlying set $\amalg_{x\in X}\shf{F}_x$ and topology generated by the basis of sets given by $\{s_x|x\in U\}$ for $s\in \shf{F}(U)$ where $U\subset X$ is open.
+Together with this space there is also a natural continuous map $\pi:\Spe(\shf{F})\to X$ sending an element $s_x$ to $x$.
+The sheafification of $\shf{F}$, denoted $\shf{F}^+$, is then defined to be the sheaf of sections of $\pi:\Spe(\shf{F})\to X$.
+By unwrapping the definitions we see that the sections can be characterised as
+\begin{align}
+    \shf{F}^+(U) = \{s:U\to\amalg_{x\in U}\shf{F}_x : & \forall x\in U, \exists V\subset U \text{ open containing $x$ and } \nonumber \\
+                                                            & t\in\shf{F}(V) \text{ s.t. }  s(y) = t_y \forall y\in V\}
+\end{align}
+In particular there is a natural morphism $\shf{F} \to \shf{F}^+$ sending $s\in \shf{F}(U)$ to the section $x\mapsto s_x$ which is an isomorphism on stalks.
+From the characterisation of sections it clear that if $\shf{F}$ is a presheaf of $\AbGrp,\Ring,...$ then $\shf{F}^+$ is a sheaf with values in the corresponding abelian category.
+
+We have defined $\Spe$ and $(-)^+$ on objects but they can also be turned into functors.
+If we have a morphism $\phi:\shf{F}\to\shf{G}$ between presheaves, this induces a continuous map $\Spe(\phi):\Spe(\shf{F})\to \Spe(\shf{G})$ given by $s_x\mapsto\phi_x(s_x)$ so that 
+\begin{equation}
+    \begin{tikzcd}
+        \Spe(\shf{F}) \arrow[rr, "\Spe(\phi)"] \arrow[rd,"\pi"] & & \Spe(\shf{G}) \arrow[dl,"\pi"] \\
+                                              & X &
+    \end{tikzcd}
+\end{equation}
+commutes.
+This construction is functorial and turns $\Spe$ into a functor from presheaves to topological bundles over $X$.
+It follows that we also obtain a map of sheaves $\phi^+:\shf{F}^+\to\shf{G}^+$ by composing sections with $\Spe(\phi)$.
+Thus we have a functor $(-)^+:\PreSh(X)\to\Sh(X)$ and in fact the following diagram commutes.
+\begin{equation}
+    \label{eq:sheafif}
+    \begin{tikzcd}
+        \shf{F}^+ \arrow[r,"\phi^+"] & \shf{G}^+ \\
+        \shf{F} \arrow[u] \arrow[r,"\phi"] & \shf{G} \arrow[u]
+    \end{tikzcd}
+\end{equation}
+Note that since the morphism $\shf{F}\to\shf{F}^+$ is an isomorphism when $\shf{F}$ is a sheaf, this says that the functor $(-)^+$ restricted to $\Sh(X)$ is natrually isomorphism to the identity functor.
+
+\begin{thm}
+    Let $\theta:\shf{F}\to\shf{F}^+$ be the natural morphism. 
+    Then for any morphism of presheaves $\phi:\shf{F}\to \shf{G}$ with $\shf{G}$ a sheaf, there exists a unique morphism of sheaves $\psi:\shf{F}^+\to\shf{G}$ so that 
+    \begin{equation}
+        \begin{tikzcd}
+            \shf{F}^+ \arrow[r,"\psi"] & \shf{G} \\
+            \shf{F} \arrow[ur,"\phi"] \arrow[u,"\theta"]
+        \end{tikzcd}
+    \end{equation}
+    commutes.
+\end{thm}
+\begin{proof}
+    This just follows from equation \ref{eq:sheafif}, the fact that $\theta:\shf{G}\to\shf{G}^+$ is an isomorphism when $\shf{G}$ is a sheaf, and by taking stalks.
+\end{proof}
+\begin{corollary}
+    The sheafification functor is left adjoint to the inclusion functor $\iota:\Sh(X)\to\PreSh(X)$.
+\end{corollary}
+\begin{proof}
+    Let $\shf{F}$ be a presheaf and $\shf{G}$ be a sheaf.
+    Given a morphism $\phi:\shf{F}^+\to\shf{G}$ we can precompose it with $\theta:\shf{F}\to\shf{F}^+$ to obtain a map $\shf{F}\to\iota\shf{G}$.
+    Conversely, given $\psi:\shf{F}\to\iota\shf{G}$, we obtain a map $\shf{F}^+\to \shf{G}$ from the theorem.
+    Then the theorem says these operations are inverse so we have a bijection 
+    \begin{equation}
+        \Hom(\shf{F}^+,\shf{G}) \cong \Hom(\shf{F},\iota\shf{G}).
+    \end{equation}
+    Naturality is then an easy check.
+\end{proof}
+\begin{corollary}
+    The sheafification functor is exact.
+\end{corollary}
+\begin{proof}
+    It is a left adjoint so it is right exact.
+    It thus suffices to show that if $\phi:\shf{F}\to\shf{G}$ is injective then so is $\phi^+$.
+    For this it suffices to show that $\phi_x$ is injective for all $x$.
+    But this is obvious.
+\end{proof}
+We can now define the cokernel of a morphism $\phi:\shf{F}\to\shf{G}$ in $\Sh(X)$.
+We simply define it to be the sheafification of the cokernel in $\PreSh(X)$ and it is an easy to check to see that this is indeed a cokernel object in $\Sh(X)$.
+It is then easy to see that $\ker\coker = \coker\ker$ by looking at stalks and so $\Sh(X)$ is an abelian category.
+\begin{remark}
+    While $\Sh(X)$ is a full subcategory of $\PreSh(X)$ that is abelian, it is not a full abelian subcategory.
+\end{remark}
+\section{Exact sequences}
+Now that we know that we are working in an abelian category we can talk about exact sequences in $\Sh(X)$.
+Recall from section \ref{sec:es} that $\shf{F}\xrightarrow{\theta}\shf{G}\xrightarrow{\phi}\shf{H}$ is exact at $\shf{G}$ if $\phi\circ\theta=0$ and the map induced map $\im(\theta)\to\ker(\phi)$ is an isomorphism.
+But the map $\im(\theta)\to\ker(\phi)$ is an isomorphism iff it is an isomorphism at the level of stalks iff $\shf{F}_x\xrightarrow{\theta_x}\shf{G}_x\xrightarrow{\phi_x}\shf{H}_x$ is exact for all $x\in X$.
+Thus exactness in $\Sh(X)$ can be verified by checking exactness at all the stalks.
+\section{Sheaves over different spaces}
+\subsection{Direct image sheaf}
+Let $f:X\to Y$ be a continuous map between topological spaces and $\shf{F}$ a sheaf on $X$.
+We define the direct image of $\shf{F}$ under $f$ to be the sheaf $f_*\shf{F}$ on $Y$ defined by $f_*\shf{F}(U) = \shf{F}(f^{-1}(U))$.
+If we define $f_*$ on morphisms in the obvious way then it is clear that we obtain a functor $f_*:\Sh(X)\to\Sh(Y)$.
+In fact we also obtain a functor $f_*:\PreSh(X)\to\PreSh(Y)$ and it turns out this functor has nice left adjoint.
+
+Define $\lim_f:\PreSh(Y)\to\PreSh(X)$ to be the functor that sends $\shf{F}\in \PreSh(Y)$ to the presheaf $\lim_f(\shf{F})(U) = \varinjlim_{V\supset f(U)}\shf{F}(V)$ on $X$, and does the obvious things to morphisms.
+\begin{thm}
+    $\lim_f\dashv f_*$ as functors between $\PreSh(X)$ and $\PreSh(Y)$.
+\end{thm}
+\begin{proof}
+    Let $\phi:\lim_f\shf{F}\to \shf{G}$ be a morphism of presheaves.
+    For $V$ open in $Y$, $f^{-1}(V)$ is open in $X$ and so we have maps
+    \begin{equation}
+        \shf{F}(V)\to\varinjlim_{W\supset f(U)}\shf{F}(W) \to \shf{G}(U)
+    \end{equation}
+    where $U=f^{-1}(V)$.
+    If $V'\subset V$, $U = f^{-1}(V)$ and $U'=f^{-1}(V')$ then
+    \begin{equation}
+        \begin{tikzcd}
+            \shf{F}(V) \arrow[r] \arrow[d] \arrow[dr] & \displaystyle\varinjlim_{W\supset f(U)}\shf{F}(W) \arrow[r] \arrow[d] & \shf{G}(U) \arrow[d] \\
+            \shf{F}(V') \arrow[r] & \displaystyle\varinjlim_{W\supset f(U')}\shf{F}(W) \arrow[r] & \shf{G}(U')
+        \end{tikzcd}
+    \end{equation}
+    commutes and so these maps in fact define a morphism $\shf{F}\to f_*\shf{G}$.
+
+    Conversely suppose we are given a morphism $\shf{F}\to f_*\shf{G}$.
+    Let $U$ be open in $X$.
+    For $V\supset f(U)$ we have maps
+    \begin{equation}
+        \shf{F}(V)\to \shf{G}(f^{-1}(V)) \to \shf{G}(U).
+    \end{equation}
+    Moreover if $V\supset V'\supset f(U)$ then
+    \begin{equation}
+        \begin{tikzcd}[column sep=tiny,row sep=tiny]
+            \shf{F}(V) \arrow[r] \arrow[dd] & \shf{G}(f^{-1}(V)) \arrow[dd] \arrow[dr] & \\ 
+                                 & & \shf{G}(U) \\
+            \shf{F}(V') \arrow[r] & \shf{G}(f^{-1}(V')) \arrow[ur] & \\ 
+        \end{tikzcd}
+    \end{equation}
+    commutes so we obtain maps $\varinjlim_{V\supset f(U)}\shf{F}(V)\to\shf{G}(U)$.
+    If $U\supset U'$ we have maps
+    \begin{equation}
+        \begin{tikzcd}
+            \displaystyle \varinjlim_{V\supset f(U)}\shf{F}(V) \arrow[r] \arrow[d] & \shf{G}(U) \arrow[d] \\ 
+            \displaystyle \varinjlim_{V\supset f(U')}\shf{F}(V) \arrow[r] & \shf{G}(U').
+        \end{tikzcd}
+    \end{equation}
+    A straighforward calculation shows that this commutes and so we obatin a morphism $\lim_f\shf{F}\to\shf{G}$.
+
+    These operations are clearly inverse to each other.
+    A straightforward calculation shows that the bijection is natural.
+\end{proof}
+\begin{corollary}
+    $\lim_f$ is an exact functor.
+\end{corollary}
+\begin{proof}
+    It is a left adjoint so it is right exact. 
+    Thus it suffices to show that it sends injective maps to injective maps. But this is obvious.
+\end{proof}
+\subsection{Inverse image sheaf}
+Let $f:X\to Y$ be a continuous map between topological spaces and $\shf{F}$ a sheaf on $Y$.
+Let $f^{-1}\Spe(\shf{F})$ be the pullback 
+\begin{equation}
+    \begin{tikzcd}
+        f^{-1}\Spe(\shf{F}) \arrow[r,dashed] \arrow[d,dashed,"\pi"] \arrow[dr, phantom, "\lrcorner", very near start] & \Spe(\shf{F}) \arrow[d,"\pi"] \\
+        X \arrow[r,"f"] & Y.
+    \end{tikzcd}
+\end{equation}
+We define the inverse image sheaf $f^{-1}\shf{F}$ to be the sheaf of sections of $\pi:f^{-1}\Spe(\shf{F})\to X$.
+Equivalently, it is the sheaf
+\begin{equation}
+    \label{eq:invimg}
+    f^{-1}\shf{F}(U) = \left\{s:U\to\Spe(\shf{F}): 
+    \begin{tikzcd}
+        & \Spe(\shf{F}) \arrow[d,"\pi"] \\
+        U \arrow[r,"f|_U"] \arrow[ur,"s"] & Y
+    \end{tikzcd} 
+    \text{ commutes }
+    \right\}
+\end{equation}
+or also equivalently, the sheaf
+\begin{align}
+    f^{-1}\shf{F}(U) = \{s:U\to\amalg_{x\in U}\shf{F}_{f(x)} : & \forall x\in U, \exists W\subset Y, V\subset f^{-1}(W)\cap U \text{ open and} \nonumber \\
+                                                             & t\in\shf{F}(W) \text{ s.t. } x\in V \wedge  s(y) = t_{f(y)} \forall y\in V\}.
+\end{align}
+It is clear from the construction that we obtain a functor $f^{-1}:\Sh(Y)\to\Sh(X)$.
+\begin{remark}
+    A direct calculation shows that $f^{-1}\shf{F}_x$ and $\shf{F}_{f(x)}$ are naturally isomorphic and so there is a natrual bijection between $f^{-1}\Spe(\shf{F})$ and $\Spe(f^{-1}\shf{F})$.
+    It is then a straightforward exercise to check that this bijection is in fact a homeomorphism i.e. $f^{-1}\Spe(\shf{F})\cong\Spe(f^{-1}\shf{F})$.
+\end{remark}
+\begin{thm}
+    $f^{-1}$ is naturally isomorphic to $(-)^+\circ \lim_f$.
+\end{thm}
+\begin{proof}
+    Let $U$ be an open subset of $X$ and $s\in\lim_f\shf{F}(U)$.
+    There is a natural map $\phi_x:(\lim_f\shf{F})_x\to\shf{F}_{f(x)}$ so we can define a map $U\to\Spe(\shf{F})$ by $x\mapsto \phi_x(s_x)$.
+    It is clear that this gives an element of $f^{-1}\shf{F}(U)$ as characterised by equation \ref{eq:invimg}.
+    Thus we obtain a morphism $\lim_f\shf{F}\to f^{-1}\shf{F}$.
+    On stalks this map is given by $\phi_x$.
+    A direct calculation shows that $\phi_x$ is an isomorphism for all $x\in X$ and so the induced map $(\lim_f\shf{F})^+\to f^{-1}\shf{F}$ must be an isomorphism.
+    It is straightforward to see that this defines a natural transformation.
+\end{proof}
+\begin{corollary}
+    $f^{-1}\dashv f_*$ as functors between $\Sh(X)$ and $\Sh(Y)$.
+\end{corollary}
+\begin{proof}
+    $f^{-1}$ is naturally isomophic to $(-)^+\circ \lim_f$ and so for $\shf{F}\in\Sh(Y),\shf{G}\in\Sh(X)$ we have natural bijections
+    \begin{align}
+        \Hom_{\Sh(X)}(f^{-1}\shf{F},\shf{G}) &\cong \Hom_{\Sh(X)}\left((\lim_f\shf{F})^+,\shf{G}\right) \cong \Hom_{\PreSh(X)}\left(\lim_f\shf{F},\shf{G}\right) \nonumber \\
+                                             &\cong \Hom_{\PreSh(Y)}\left(\shf{F},f_*\shf{G}\right) \cong \Hom_{\Sh(Y)}\left(\shf{F},f_*\shf{G}\right).
+    \end{align}
+\end{proof}
+\begin{corollary}
+    $(-)_x\circ f^{-1} = (-)_{f(x)}$.
+\end{corollary}
+\begin{proof}
+    $(-)_x\circ f^{-1} = (-)_x \circ (-)^+ \circ \lim_f = (-)_x \circ \lim_f = (-)_{f(x)}$.
+\end{proof}
+\begin{corollary}
+    $f^{-1}$ is an exact functor.
+\end{corollary}
+\begin{proof}
+    It is the composition of two exact functors.
+    Alternatively take stalks.
+\end{proof}
+\section{The $\sheafHom$ sheaf}
+Let $\shf{F}$ and $\shf{G}$ be sheaves and $f:\Spe(\shf{F})\to \Spe(\shf{G})$ be a continuous map so that 
+\begin{equation}
+    \begin{tikzcd}
+        \Spe(\shf{F}) \arrow[rr, "\Spe(\phi)"] \arrow[rd,"\pi"] & & \Spe(\shf{G}) \arrow[dl,"\pi"] \\
+                                              & X &
+    \end{tikzcd}
+\end{equation}
+commutes.
+Then we obtain a morphism $\shf{F}^+\to\shf{G}^+$ by postcomposing sections with $f$.
+Since $\shf{F}$ and $\shf{G}$ are sheaves we in fact obtain a morphism $\shf{F}\to\shf{G}$.
+But we also know that morphisms $\shf{F}\to \shf{G}$ give continuous maps $\Spe(\shf{F})\to\Spe(\shf{G})$ making the above diagram commute.
+\section{Injective sheaves}
+There are enough injectives.
+\chapter{Spectral sequences}
+
+\chapter{Group cohomology}
+\end{document}
+
