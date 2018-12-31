@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.3.22)  28 DEC 2018 16:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.3.22)  31 DEC 2018 15:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1328,158 +1328,175 @@ LaTeX Font Info:    Font shape `T1/calligra/m/n' will be
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 ]
-Package hyperref Info: bookmark level for unknown proposition defaults to 0 on input line 31.
- [3] [4] [5
+Package hyperref Info: bookmark level for unknown thm defaults to 0 on input line 15.
+ [3] [4]
+Package hyperref Info: bookmark level for unknown proposition defaults to 0 on input line 103.
+Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 129.
+ [5]
+Package hyperref Info: bookmark level for unknown definition defaults to 0 on input line 153.
+Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 162.
+ [6] [7]
+Overfull \hbox (0.47289pt too wide) in paragraph at lines 234--235
+[]\OT1/cmr/m/n/10 From now on we write $[](\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 )$ for $[]([](\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ))$ and $[](\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 )$ for $[]([](\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ))$. 
+ []
 
-]
-Package hyperref Info: bookmark level for unknown thm defaults to 0 on input line 104.
-Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 128.
- [6]
-Package hyperref Info: bookmark level for unknown corollary defaults to 0 on input line 179.
 
+Overfull \hbox (32.20291pt too wide) in paragraph at lines 260--264
+\OT1/cmr/m/n/10 commutes. In par-tic-u-lar there is a mor-phism $[]([](\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ! []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 g\OT1/cmr/m/n/10 )) \OMS/cmsy/m/n/10 ! []\OT1/cmr/m/n/10 ([](\OML/cmm/m/it/10 f[]\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 !
+ []
+
+
+Overfull \hbox (18.13763pt too wide) in paragraph at lines 265--267
+[]\OT1/cmr/m/n/10 One can sim-i-larly con-struct a func-tor $\OML/cmm/m/it/10 H[] \OT1/cmr/m/n/10 : \OMS/cmsy/m/n/10 S ! A$ \OT1/cmr/m/n/10 by con-sid-er-ing $[]([](\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 !
+ []
+
+Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 270.
+[8] [9] [10] [11
+
+] [12]
 
 Class memoir Warning: The material used in the headers is too large
 (13.04448pt) for the given head height (12.0pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 199.
+(in both cases you will find help in the memoir manual). on input line 477.
 
 
 Overfull \vbox (1.04448pt too high) has occurred while \output is active []
 
- [7] [8] [9]
-Overfull \hbox (5.77054pt too wide) in paragraph at lines 297--297
+ [13] [14] [15]
+Overfull \hbox (5.77054pt too wide) in paragraph at lines 575--575
 [] 
  []
 
-[10]
+[16]
 
 LaTeX Font Warning: Font shape `T1/calligra/bx/n' undefined
-(Font)              using `T1/calligra/m/n' instead on input line 338.
+(Font)              using `T1/calligra/m/n' instead on input line 616.
 
 LaTeX Font Info:    Font shape `T1/calligra/m/n' will be
-(Font)              scaled to size 17.28003pt on input line 338.
+(Font)              scaled to size 17.28003pt on input line 616.
 LaTeX Font Info:    Font shape `T1/calligra/bx/n' will be
-(Font)              scaled to size 15.76802pt on input line 338.
+(Font)              scaled to size 15.76802pt on input line 616.
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 338.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathop' on input line 338.
+(hyperref)                removing `math shift' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathcode' on input line 338.
+(hyperref)                removing `\mathop' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathcode' on input line 338.
+(hyperref)                removing `\mathcode' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathcode' on input line 338.
+(hyperref)                removing `\mathcode' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathchardef' on input line 338.
+(hyperref)                removing `\mathcode' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\std@minus' on input line 338.
+(hyperref)                removing `\mathchardef' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathcode' on input line 338.
+(hyperref)                removing `\std@minus' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathcode' on input line 338.
+(hyperref)                removing `\mathcode' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathcode' on input line 338.
+(hyperref)                removing `\mathcode' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathcode' on input line 338.
+(hyperref)                removing `\mathcode' on input line 616.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\mathcode' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \kern 2.22198pt
-(hyperref)                removed on input line 338.
+(hyperref)                removed on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\mathgroup' on input line 338.
+(hyperref)                removing `\mathgroup' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\symoperators' on input line 338.
+(hyperref)                removing `\symoperators' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \kern -5.2pt
-(hyperref)                removed on input line 338.
+(hyperref)                removed on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\new@ifnextchar' on input line 338.
+(hyperref)                removing `\new@ifnextchar' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\char' on input line 338.
+(hyperref)                removing `\char' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \kern -2.20001pt
-(hyperref)                removed on input line 338.
+(hyperref)                removed on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                \kern 1.66702pt
-(hyperref)                removed on input line 338.
+(hyperref)                removed on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\@ifnextchar' on input line 338.
+(hyperref)                removing `\@ifnextchar' on input line 616.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 338.
+(hyperref)                removing `math shift' on input line 616.
 
 
 Package hyperref Warning: Composite letter `\textacute+3'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textacute' on input line 338.
+(hyperref)                removing `\textacute' on input line 616.
 
 
 Package hyperref Warning: Composite letter `\textdotaccent+"'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textdotaccent' on input line 338.
+(hyperref)                removing `\textdotaccent' on input line 616.
 
-[11] [12
+[17] [18
 
-] [13] [14
+] [19] [20
 
 ]
 
 Class memoir Warning: The material used in the headers is too large
 (13.04448pt) for the given head height (12.0pt), it is recommended to
 either increase the head height or redesign the header
-(in both cases you will find help in the memoir manual). on input line 355.
+(in both cases you will find help in the memoir manual). on input line 633.
 
-[15]
+[21]
 \tf@toc=\write8
 \openout8 = `hom_alg.toc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 355.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 355.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 633.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 633.
  (./hom_alg.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 355.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 355.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 633.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 633.
 Package rerunfilecheck Info: File `hom_alg.out' has not changed.
-(rerunfilecheck)             Checksum: 37055666AE54B17153ED0A8BE648BFEA;1007.
+(rerunfilecheck)             Checksum: 6824CE48AF92A1A5C0CE8A0EDFAC3396;1077.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1489,18 +1506,18 @@ Package logreq Info: Writing requests to 'hom_alg.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 32960 strings out of 493117
- 600243 string characters out of 6135433
- 1069943 words of memory out of 5000000
- 35711 multiletter control sequences out of 15000+600000
+ 33875 strings out of 493117
+ 622336 string characters out of 6135433
+ 1072226 words of memory out of 5000000
+ 36565 multiletter control sequences out of 15000+600000
  26422 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,27n,82p,3233b,1085s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/calligra-type1/callig15.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
-Output written on hom_alg.pdf (15 pages, 252366 bytes).
+ 63i,27n,82p,3233b,1087s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/calligra-type1/callig15.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb>
+Output written on hom_alg.pdf (21 pages, 299075 bytes).
 PDF statistics:
- 328 PDF objects out of 1000 (max. 8388607)
- 287 compressed objects within 3 object streams
- 96 named destinations out of 1000 (max. 500000)
- 141 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 434 PDF objects out of 1000 (max. 8388607)
+ 385 compressed objects within 4 object streams
+ 157 named destinations out of 1000 (max. 500000)
+ 149 words of extra memory for PDF output out of 10000 (max. 10000000)
 

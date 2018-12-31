@@ -6,38 +6,38 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Additive categories}{3}{section.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Abelian categories}{3}{section.1.2}
+\contentsline {section}{\numberline {1.2}Semiadditive categories}{4}{section.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.3}Exact sequences}{3}{section.1.3}
+\contentsline {section}{\numberline {1.3}Abelian categories}{6}{section.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.3.1}Split sequences}{3}{subsection.1.3.1}
+\contentsline {section}{\numberline {1.4}Exact sequences}{8}{section.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.3.2}Homology}{3}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.4.1}Split sequences}{9}{subsection.1.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.4}Adjoint functors}{3}{section.1.4}
+\contentsline {section}{\numberline {1.5}Adjoint functors}{9}{section.1.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {2}Sheaf Theory}{5}{chapter.2}
+\contentsline {chapter}{\chapternumberline {2}Sheaf Theory}{11}{chapter.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}Presheaves}{5}{section.2.1}
+\contentsline {section}{\numberline {2.1}Presheaves}{11}{section.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Sheaves}{5}{section.2.2}
+\contentsline {section}{\numberline {2.2}Sheaves}{11}{section.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Aside}{6}{section*.2}
+\contentsline {subsubsection}{Aside}{12}{section*.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}\'Etal\'e space of a presheaf and sheafification}{6}{section.2.3}
+\contentsline {section}{\numberline {2.3}\'Etal\'e space of a presheaf and sheafification}{12}{section.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}Exact sequences}{8}{section.2.4}
+\contentsline {section}{\numberline {2.4}Exact sequences}{14}{section.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Sheaves over different spaces}{8}{section.2.5}
+\contentsline {section}{\numberline {2.5}Sheaves over different spaces}{14}{section.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}Direct image sheaf}{8}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.1}Direct image sheaf}{14}{subsection.2.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.2}Inverse image sheaf}{10}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.2}Inverse image sheaf}{16}{subsection.2.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.6}The $\sheafHom $ sheaf}{11}{section.2.6}
+\contentsline {section}{\numberline {2.6}The $\sheafHom $ sheaf}{17}{section.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.7}Injective sheaves}{11}{section.2.7}
+\contentsline {section}{\numberline {2.7}Injective sheaves}{17}{section.2.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {3}Spectral sequences}{13}{chapter.3}
+\contentsline {chapter}{\chapternumberline {3}Spectral sequences}{19}{chapter.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\chapternumberline {4}Group cohomology}{15}{chapter.4}
+\contentsline {chapter}{\chapternumberline {4}Group cohomology}{21}{chapter.4}

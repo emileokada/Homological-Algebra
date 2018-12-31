@@ -1,9 +1,9 @@
 [0] 554906f9.pm:318> INFO - This is Biber 1.8
-[1] 554906f9.pm:321> INFO - Logfile is 'hom_alg.blg'
-[85] biber-darwin:275> INFO - === Fri Dec 28, 2018, 16:35:07
-[86] Biber.pm:333> INFO - Reading 'hom_alg.bcf'
-[152] Biber.pm:630> INFO - Found 0 citekeys in bib section 0
-[152] Utils.pm:169> WARN - The file 'hom_alg.bcf' does not contain any citations!
-[191] bbl.pm:482> INFO - Writing 'hom_alg.bbl' with encoding 'ascii'
-[191] bbl.pm:555> INFO - Output to hom_alg.bbl
-[192] Biber.pm:105> INFO - WARNINGS: 1
+[0] 554906f9.pm:321> INFO - Logfile is 'hom_alg.blg'
+[92] biber-darwin:275> INFO - === Mon Dec 31, 2018, 15:39:29
+[92] Biber.pm:333> INFO - Reading 'hom_alg.bcf'
+[192] Biber.pm:630> INFO - Found 0 citekeys in bib section 0
+[192] Utils.pm:169> WARN - The file 'hom_alg.bcf' does not contain any citations!
+[233] bbl.pm:482> INFO - Writing 'hom_alg.bbl' with encoding 'ascii'
+[234] bbl.pm:555> INFO - Output to hom_alg.bbl
+[236] Biber.pm:105> INFO - WARNINGS: 1

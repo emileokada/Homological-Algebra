@@ -1,9 +1,10 @@
 # Fdb version 3
-["biber hom_alg"] 1545982505 "hom_alg.bcf" "hom_alg.bbl" "hom_alg" 1545982512
-  "hom_alg.bcf" 1545982512 90438 eac585eb0d655669fb1dbf9fe236a624 ""
+["biber hom_alg"] 1546238367 "hom_alg.bcf" "hom_alg.bbl" "hom_alg" 1546239411
+  "hom_alg.bcf" 1546239411 90438 eac585eb0d655669fb1dbf9fe236a624 ""
   (generated)
+  "hom_alg.blg"
   "hom_alg.bbl"
-["pdflatex"] 1545982510 "hom_alg.tex" "hom_alg.pdf" "hom_alg" 1545982512
+["pdflatex"] 1546239407 "hom_alg.tex" "hom_alg.pdf" "hom_alg" 1546239411
   "/usr/local/texlive/2014/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2014/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -72,6 +73,7 @@
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1248133631 32716 08e384dc442464e7285e891af9f45947 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1248133631 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb" 1248133631 29078 718ea4567ceff944262b0f5b0800e1d9 ""
+  "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb" 1248133631 30457 bc0868ebece724ed7c3d37e3d9bff7bd ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb" 1248133631 31764 459c573c03a4949a528c2cc7f557e217 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2014/texmf-dist/fonts/type1/public/calligra-type1/callig15.pfb" 1318803884 59663 0f5ab3e6252607a93cda8f9d41f35ad6 ""
@@ -277,18 +279,18 @@
   "/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1401025944 1445653 26a0aacf3d70032b1ec192e8c7792117 ""
   "/usr/local/texlive/2014/texmf-var/web2c/pdftex/pdflatex.fmt" 1426997433 3832012 54042bc5fd5ca7423089951d8ca45ae1 ""
   "/usr/local/texlive/2014/texmf.cnf" 1401025936 577 a59edbde8d3a8c549d0eeaab1739e2ff ""
-  "header.tex" 1545982175 10893 53076cf22880e18964ec086145b3321c ""
-  "hom_alg.aux" 1545982512 7943 ede361eb74c8aae19e44b165aac3e052 ""
-  "hom_alg.bbl" 1545982507 466 9b63bd41c34afae085b93d05707d5cc3 "biber hom_alg"
-  "hom_alg.out" 1545982512 1007 37055666ae54b17153ed0a8be648bfea ""
-  "hom_alg.run.xml" 1545982512 2334 be1d4c6d41590b858cb7e2504602ade0 ""
-  "hom_alg.tex" 1545982136 19050 fdda8a3debb2648509cd87698e96f196 ""
-  "hom_alg.toc" 1545982512 2458 30f011f74bdf04c2fc07eb2c1e0b89f6 ""
+  "header.tex" 1546225907 10943 d95522d8228b0f6b0ec709db183bb0a7 ""
+  "hom_alg.aux" 1546239411 10897 8a8067ed24409811f2963c73d3e3f9f7 ""
+  "hom_alg.bbl" 1546238369 466 9b63bd41c34afae085b93d05707d5cc3 "biber hom_alg"
+  "hom_alg.out" 1546239411 1077 6824ce48af92a1a5c0ce8a0edfac3396 ""
+  "hom_alg.run.xml" 1546239411 2334 be1d4c6d41590b858cb7e2504602ade0 ""
+  "hom_alg.tex" 1546239407 34445 f27f1dfda9a956d20e80d9573de3d359 ""
+  "hom_alg.toc" 1546239411 2471 e837121fe111dd9426fbf3673ff7de4c ""
   (generated)
-  "hom_alg.out"
-  "hom_alg.bcf"
-  "hom_alg.pdf"
-  "hom_alg.toc"
-  "hom_alg.run.xml"
-  "hom_alg.aux"
   "hom_alg.log"
+  "hom_alg.pdf"
+  "hom_alg.aux"
+  "hom_alg.run.xml"
+  "hom_alg.out"
+  "hom_alg.toc"
+  "hom_alg.bcf"

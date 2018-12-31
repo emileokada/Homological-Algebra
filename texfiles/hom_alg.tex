@@ -9,20 +9,298 @@
 \tableofcontents
 \chapter{Abelian Categories}
 \section{Additive categories}
-Let $\mathcal C$ be a category such that the hom-sets carry the structure of an abelian group and composition is bilinear. We call such a category $\Ab$-enriched.
-An additive category is an $\Ab$-enriched category which has finite coproducts.
-\section{Abelian categories}
-\section{Exact sequences}
-\label{sec:es}
+Let $\mathcal A$ be a category such that the hom-sets carry the structure of an abelian group and composition is bilinear. We call such a category $\Ab$-enriched.
+An additive category is an $\Ab$-enriched category which has finite coproducts and a zero object.
+\begin{thm}
+    \label{thm:atosa}
+    Let $\mathcal A$ be an additive category.
+    Then finite coproducts in $\mathcal A$ are in fact finite biproducts.
+\end{thm}
+\begin{proof}
+    It is easy to see that initial objects are isomorphic to terminal objects (and they both exist) and so it suffices to show the result for binary coproducts.
+    Let $A,B\in \mathcal A$.
+    Define $p_A:A\coprod B\to A$ and $p_B:A\coprod B\to B$ as the maps making the following diagrams commute.
+    \begin{equation}
+        \begin{tikzcd}[column sep=large]
+            A \arrow[dr,"i_A"] \arrow[drr,bend left=30,"\id_A"] & & & A \arrow[dr,"i_A"] \arrow[drr,bend left=30,"0"] & \\
+                                     & A\coprod B \arrow[r,"p_A"] & A & & A\coprod B \arrow[r] & B \\
+            B \arrow[ur,"i_B"] \arrow[urr,bend right=30,swap,"0"] & & & B \arrow[ur,"i_B"] \arrow[urr,bend right=30,swap,"\id_B"] &
+        \end{tikzcd}
+    \end{equation}
+    Let $f=i_A\circ p_A + i_B\circ p_B$. Then
+    \begin{equation}
+        \begin{tikzcd}[column sep=large]
+            A \arrow[dr,"i_A"] \arrow[drr,bend left=30,"i_A"] &  \\
+                                     & A\coprod B \arrow[r,"f"] & A\coprod B  \\
+            B \arrow[ur,"i_B"] \arrow[urr,bend right=30,swap,"i_B"] & 
+        \end{tikzcd}
+    \end{equation}
+    commutes and so by universality we must have $f = \id_{A\coprod B}$.
+    Now suppose we have maps $f:C\to A$ and $g:C\to B$. 
+    Let $h:C\to A\coprod B$ be the map $i_A\circ f+i_B\circ g$.
+    Then $p_A\circ h = f$ and $p_B\circ h = g$.
+    Moreover, if $h':C\to A\coprod B$ is any other map satisfying $p_A\circ h' = f$ and $p_B\circ h' = g$ then $h' = id_{A\coprod B}\circ h' = i_A\circ f+i_B\circ g = h$ and so $A\coprod B$ is a biproduct.
+\end{proof}
+
+A functor between additive categories is called additive if it is a homomorphism on hom-sets.
+\section{Semiadditive categories}
+The above definition of an additive category includes the additive structure on the hom-sets as data. 
+In this section we provide a definition where the additive structure arises as a property instead.
+
+Let $\mathcal A$ be a category with a zero object.
+Recall that in such a category there always exists a morphism between to any two objects $A,B\in\mathcal A$ given by $A\to 0 \to B$. We call this the $0$ morphism.
+Moreover if finite coproducts and finite products exists there is a canonical map $A\coprod B\to A\prod B$ arising from the diagram
 \begin{equation}
-    \begin{tikzcd}
-        & & \coker(\theta) \\
-        \mathcal F \arrow[r,"\theta"] \arrow[d] & \mathcal G \arrow[r,"\phi"] \arrow[ur] & \mathcal H \\
-        \im(\theta) \arrow[r,"\alpha"] \arrow[ur] & \ker(\phi) \arrow[u] &
+    \begin{tikzcd}[column sep = huge]
+        A \arrow[r,"\id_A"] \arrow[dr,near start,"0"] & A \\
+        B \arrow[r,swap,"\id_B"] \arrow[ur,near start,swap,"0"] & B.
     \end{tikzcd}
 \end{equation}
+We call a category $\mathcal A$ \textit{semiadditive} if it has a zero object, finite products, finite coproducts and the canonical map $A\coprod B\to A\prod B$ is an isomorphism for all $A,B\in \mathcal A$.
+In such a category we write $A\oplus B$ for the biproduct.
+
+\begin{thm}
+    Let $\mathcal A$ be a semiadditive category then it is naturally enriched over the monoidal category of commutative monoids.
+\end{thm}
+\begin{proof}
+    Let $\Delta_A:A\oplus A\to A$ and $\nabla_A:A\to A\oplus A$ be the maps that make
+    \begin{equation}
+        \begin{tikzcd}
+            A \arrow[dr,"i_A"] \arrow[drr,bend left=30,"\id_A"] & & & & & A \\
+                                                                & A\oplus A \arrow[r,"\Delta_A"] & A & A \arrow[r,"\nabla_A"] \arrow[urr,bend left=30,"\id_A"] \arrow[drr,bend right=30,"\id_A"] & A\oplus A \arrow[dr,"p_A'"] \arrow[ur,"p_A"] & \\
+            A \arrow[ru,"i_A'"] \arrow[urr,bend right=30,"\id_A"] & & & & & A
+        \end{tikzcd}
+    \end{equation}
+    commute.
+    Given $f,g:A\to B$ we can construct a map $f\oplus g: A\oplus A\to B\oplus B$ in the obvious way.
+    We can then define $f+g:A\to B$ to be the composite 
+    \begin{equation}
+        \begin{tikzcd}
+            A \arrow[r,"\nabla_A"] & A \oplus A \arrow[r,"f\oplus g"] & B \oplus B \arrow[r,"\Delta_B"] & B.
+        \end{tikzcd}
+    \end{equation}
+    Note that there is a map $t_A:A\oplus A\to A\oplus A$ arising from the diagram
+    \begin{equation}
+        \begin{tikzcd}[column sep = huge]
+            A \arrow[r,"0"] \arrow[dr,near start,"\id_A"] & A \\
+            A \arrow[r,swap,"0"] \arrow[ur,near start,swap,"\id_A"] & A.
+        \end{tikzcd}
+    \end{equation}
+    It is then an easy check to see that $\Delta_A\circ t_A = \Delta_A$ and $t_A\circ \nabla_A = \nabla_A$, from which it follows that $+$ is commutative.
+    Straightforward calculations also show that $+$ is associative, distributes over compositions and has the zero map as identity.
+    The result follows.
+\end{proof}
+A functor between semiadditive categories is called semiadditive if it preserves zero objects and biproducts i.e. there are isomorphisms $F(A\oplus B) \cong F(A)\oplus F(B)$ such that 
+\begin{equation}
+    \begin{tikzcd}[column sep=large]
+        F(A) \arrow[dr,"F(i_A)"] \arrow[drr,bend left=30,"i_{F(A)}"] &  \\
+                                                             & F(A\oplus B) \arrow[r,"\cong"] & F(A)\oplus F(B)  \\
+        F(B) \arrow[ur,"F(i_B)"] \arrow[urr,bend right=30,swap,"i_{F(B)}"] & 
+    \end{tikzcd}
+\end{equation}
+commutes, and similarly for the projection maps.
+\begin{proposition}
+    \label{prop:sa}
+    Let $F:\mathcal A\to\mathcal B$ be a semiadditive functor and $f,g:A\to B$ for $A,B\in\mathcal A$.
+    Then $F(f+g) = F(f)+F(g)$.
+\end{proposition}
+\begin{proof}
+    Obvious.
+\end{proof}
+
+We now define an additive category to be a semiadditive category where the enriched hom-sets are in fact groups.
+\begin{thm}
+    \label{thm:as}
+    Let $\mathcal A$ be an additive category according to the first definition. 
+    By theorem \ref{thm:atosa}, $\mathcal A$ is semiadditive and so the hom-sets naturally carry the structure of a commutative monoid.
+    This monoidal structure agrees with the original group structure.
+\end{thm}
+\begin{proof}
+    Let $A,B\in\mathcal A$ and $f,g:A\to B$.
+    Then the addition arising from the semiadditive structure comes from the composition
+    \begin{equation}
+        \begin{tikzcd}
+            A \arrow[r,"\nabla_A"] & A \oplus A \arrow[r,"f\oplus g"] & B \oplus B \arrow[r,"\Delta_B"] & B.
+        \end{tikzcd}
+    \end{equation}
+    But $\nabla_A = i_A^L+i_A^R,\Delta_B = p_B^L+p_B^R$ and $f\oplus g = i_B^L\circ f\circ p_A^L + i_B^R\circ g\circ p_A^R$ and so their composition is just $f+g$.
+\end{proof}
+\begin{corollary}
+    Let $F:\mathcal A\to \mathcal B$ be a functor between additive categoires. Then $F$ is additive iff $F$ it is semiadditive.
+\end{corollary}
+\begin{proof}
+    Semiadditive $\implies$ additive follows from proposition \ref{prop:sa} and theorem \ref{thm:as}.
+    Additive $\implies$ semiadditive is a straigtforward exercise.
+\end{proof}
+\begin{corollary}
+    Let $F:\mathcal A\to\mathcal B$ be a functor between additive categories which is a left adjoint.
+    Then $F$ is additive.
+\end{corollary}
+\begin{proof}
+    $F$ preserves colimits and so is semiadditive.
+\end{proof}
+\begin{corollary}
+    If $\mathcal A$ is an additive category then $\mathcal A^{op}$ is also additive.
+\end{corollary}
+\begin{proof}
+    The oppositive category of a semiadditive category is clearly also semiadditive.
+    The resulting monoidal structure on the hom-sets are also clearly the same and so the result follows.
+\end{proof}
+\section{Abelian categories}
+Abelian categories are additive categories with more strucure. 
+Before we state exactly what we mean by this we give some definitions.
+\begin{definition}
+    Let $\mathcal A$ be an additive category and $f:A\to B$ a morphism in $\mathcal A$.
+    \begin{enumerate}
+    \item A kernel of $f$ is an equaliser of \begin{tikzcd} A\arrow[r,shift right,swap,"0"] \arrow[r,shift left,"f"] & B\end{tikzcd}.
+    \item A cokernel of $f$ is a coequaliser of the same diagram.
+    \item $f$ is called monic if $f\circ g = 0$ implies $g=0$ for all $g$.
+    \item $f$ is called epi if $g\circ f = 0$ implies $g=0$ for all $g$.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    It is easy to see that all kernels are monic, all cokernels are epi, a map is monic iff its kernel is 0, and a map is epi iff its cokernel is 0.
+\end{remark}
+We call an additive category $\mathcal A$ pre-abelian if all morphisms have kernels and cokernels.
+In such a category, given any morphism $f:A\to B$ we can form 
+\begin{equation}
+    \label{eq:canon-decomp}
+    \begin{tikzcd}
+        & & \ker(\coker(f)) \arrow[dr,"i"] & & \\
+        K \arrow[r,"\ker(f)"] & A \arrow[rr,"f"] \arrow[ur,dashed,"\alpha"] \arrow[dr,"p"] & & B \arrow[r,"\coker(f)"] & C \\
+                          & & \coker(\ker(f)) \arrow[ur,dashed,"\beta"] & & 
+    \end{tikzcd}
+\end{equation}
+where $\alpha$ and $\beta$ exist from the universal property of kernels and cokernerls respectively.
+Since $p$ is epi and $0 = \coker(f)\circ f = \coker(f)\circ \beta\circ p$ it follows that $\coker(f)\circ \beta = 0$ and so there is a map $\gamma:\coker(\ker(f))\to\ker(\coker(f))$ such that $i\circ \gamma = \beta$.
+Similarly there is a map $\gamma':\coker(\ker(f))\to\ker(\coker(f))$ such that $\gamma'\circ p = \alpha$.
+Using that $p$ is epi one can see that $\gamma'=\gamma$ and so for any morphism $f$ there is a canonical decomposition
+\begin{equation}
+    A\xrightarrow{p} \coker(\ker(f)) \xrightarrow{\gamma_f} \ker(\coker(f)) \xrightarrow{i} B.
+\end{equation}
+An abelian category is a pre-abelian category in which $\gamma_f$ is an isomorphism for every $f$.
+\begin{thm}
+    \label{thm:abcat}
+    Let $\mathcal A$ be a pre-abelian category.
+    Then $\gamma_f$ is an isomorphism for all morphism $f$ iff every monic is the kernel of its cokernel and every epi is the cokernel of its kernel.
+\end{thm}
+\begin{proof}
+    $(\Rightarrow)$ The kernel of a monic is the $0$ object with the $0$ map, and the cokernel of this is just $A$ together with the identity.
+    Thus, if $\gamma_f$ is an isomorphism the canonical decomposition of $f$ just becomes
+    \begin{equation}
+        A\xrightarrow{\id} A \xrightarrow{\cong} \ker(\coker(f)) \xrightarrow{i} B
+    \end{equation}
+    and so $f$ is the kernel of its cokernel. 
+    Similarly one obtains that if $f$ is epi it is the cokernel of its kernel.
+    
+    $(\Leftarrow)$ First note that if a kernel is epi then it must be an isomorphism so all epic monics must be isomorphisms (since all monics are kernels).
+    Thus, it suffices to show that the maps $\alpha$ and $\beta$ in equation \ref{eq:canon-decomp} are epi and monic respectively.
+    To see that $\beta$ is monic let $x:X\to \coker(\ker(f))$ be a map such that $\beta\circ x = 0$.
+    Then let $q:\coker(\ker(f))\to\coker(x)$ be the coker of $x$, and $j:\coker(x)\to B$ the map such that $j\circ q = \beta$.
+    Finally let $l:\ker(q\circ p)\to A$ be the kernel of $q\circ p$.
+    Then we have the following diagram
+    \begin{equation}
+        \begin{tikzcd}
+            \ker(q\circ p) \arrow[dr,"l"] \arrow[dd,dashed] & & & \\
+            & A \arrow[rr,"f"] \arrow[dr,"p"] & & B \\
+            \ker(f) \arrow[ru,"k"] & & \coker(\ker(f)) \arrow[dr,"q"] \arrow[ur,"\beta"] & \\
+                               & X \arrow[ru,"x"] & & \coker(x). \arrow[uu,"j"]
+        \end{tikzcd}
+    \end{equation}
+    Since $q\circ p$ is epi it is the coker of $l$.
+    But also $f\circ l = j\circ q\circ p\circ l = 0$, so $l$ factors through $\ker(f)$ and so $p\circ l=0$.
+    Thus there exists $p':\coker(x)\to\coker(\ker(f))$ such that
+    \begin{equation}
+        \begin{tikzcd}
+            \ker(q\circ p) \arrow[r,"l"] & A \arrow[r,"p"] \arrow[d,"q\circ p"] & \coker(\ker(f)) \\
+                                     & \coker(x) \arrow[ur,dashed,swap,"p'"]
+        \end{tikzcd}
+    \end{equation}
+    commutes.
+    Since $p$ is epi, it must follow that $p'\circ q = \id$.
+    Thus $q$ is monic and so $x=0$.
+    It follows that $\beta$ is monic.
+    Similarly one can show that $\alpha$ is epi.
+\end{proof}
+It follows that an abelian category is equvalently a pre-abelian category in which every monic is the kernel of its cokernel and every epi is the cokernel of its kernel.
+\begin{thm}
+    If $\mathcal A$ is an abelian category then $\mathcal A^{op}$ is also an abelian category.
+\end{thm}
+\begin{proof}
+    It is certainly additive.
+    Moreover, kernels and cokernels simply swap roles.
+    $\gamma_f$ is then still an isomorphism for all $f$ and so $\mathcal A^{op}$ is abelian.
+\end{proof}
+From now on we write $\im(f)$ for $\ker(\coker(f))$ and $\coim(f)$ for $\coker(\ker(f))$.
+\section{Exact sequences}
+\label{sec:es}
+Let $\mathcal A$ be an abelian category and $\mathcal S$ be the category with objects given by $A\xrightarrow{f} B\xrightarrow{g} C$ such that $g\circ f = 0$, and morphisms given by chain maps.
+Recall from earlier that $f$ can be factored as
+\begin{equation}
+    \begin{tikzcd}
+        A \arrow[r,twoheadrightarrow,"p_f"] & \im(f) \arrow[r,hookrightarrow,"i_f"] & B.
+    \end{tikzcd}
+\end{equation}
+Since $p_f$ is epi, we must have $g\circ i_f = 0$.
+Thus we can factor $f$ further through $\ker(g)$ to obtain $f:A\to\im(f)\to\ker(g)\to B$.
+Let $H(A\xrightarrow{f} B\xrightarrow{g} C)$ be the cokernel of the morphism $\im(f)\to\ker(g)$.
+If we have the commutative diagram
+\begin{equation}
+    \begin{tikzcd}
+        A \arrow[r,"f"] \arrow[d] & B \arrow[r,"g"] \arrow[d] & C \arrow[d] \\
+        A' \arrow[r,"f'"] & B' \arrow[r,"g'"] & C'
+    \end{tikzcd}
+\end{equation}
+then there exists maps so that 
+\begin{equation}
+    \begin{tikzcd}
+        A \arrow[r] \arrow[d] & \im(f) \arrow[r] \arrow[d] & \ker(g) \arrow[r] \arrow[d] & B \arrow[r] \arrow[d] & C \arrow[d] \\
+        A' \arrow[r] & \im(f') \arrow[r] & \ker(g') \arrow[r] & B' \arrow[r] & C'
+    \end{tikzcd}
+\end{equation}
+commutes.
+In particular there is a morphism $\coker(\im(f)\to\ker(g))\to\coker(\im(f')\to\ker(g'))$.
+It is easy to check that this construction is functorial so we obtain a functor $H:\mathcal S\to \mathcal A$.
+
+One can similarly construct a functor $H':\mathcal S\to\mathcal A$ by considering $\ker(\coker(f)\to\coim(g))$ instead.
+\begin{remark}
+    We may also form a functor by looking simply at the fact that $f$ factors through $\ker(g)$ and then looking at the coker of the resulting morphism $A\to\ker(g)$. It is an easy check to see that this yields a functor naturally isomorphic to $H$. Similarly for $H'$.
+\end{remark}
+\begin{lemma}
+    Let $A\xrightarrow{f} B\xrightarrow{g} C\in\mathcal S$.
+    Recall that we have the factorisation 
+    \begin{equation}
+        A\rightarrow \im(f) \rightarrow \ker(g)\rightarrow B \rightarrow \coker(f) \rightarrow \coim(g) \rightarrow C.
+    \end{equation}
+    Let $h$ be the composition $\ker(g)\to B \to\coker(f)$.
+    Then
+    \begin{enumerate}
+        \item $\ker(h) = \im(f)\to\ker(g)$
+        \item $\coker(h) = \coker(f)\to\coim(g)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Straightforward.
+\end{proof}
+\begin{thm}
+    The functors $H,H':\mathcal S\to\mathcal A$ are naturally isomorphic.
+\end{thm}
+\begin{proof}
+    Let $S := A\xrightarrow{f} B\xrightarrow{g} C\in\mathcal S$ and $h$ be as in the lemma.
+    Then $H(S) = \coker(\ker(h))$ and $H'(S) = \ker(\coker(h))$ so we obtain the factorisation
+    \begin{equation}
+        \ker(g) \to H(S) \xrightarrow{\cong} H'(S) \to \coker(f).
+    \end{equation}
+    Naturality of the isomophism then follows from naturality of this factorisation.
+\end{proof}
+\begin{remark}
+    In a pre-abelian category we still have a natrual transformation $H\Rightarrow H'$, but it might not be an isomorphism.
+\end{remark}
+\begin{definition}
+    Let $S := A\xrightarrow{f} B\xrightarrow{g} C\in\mathcal S$.
+    We say that $S$ is exact at $B$ if $H(S) = 0$.
+\end{definition}
 \subsection{Split sequences}
-\subsection{Homology}
 \section{Adjoint functors}
 Let $L:\mathcal A\to\mathcal B$ be an additive functor between abelian categories.
 If $L$ admits a right adjoint $R:\mathcal B\to\mathcal A$ then it turns out $L$ has a lot of useful properties. 
