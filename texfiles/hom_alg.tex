@@ -231,7 +231,7 @@ It follows that an abelian category is equvalently a pre-abelian category in whi
     Moreover, kernels and cokernels simply swap roles.
     $\gamma_f$ is then still an isomorphism for all $f$ and so $\mathcal A^{op}$ is abelian.
 \end{proof}
-From now on we write $\im(f)$ for $\ker(\coker(f))$ and $\coim(f)$ for $\coker(\ker(f))$.
+From now on we write $\im(f) := \ker(\coker(f))$ and $\coim(f) := \coker(\ker(f))$.
 \section{Exact sequences}
 \label{sec:es}
 Let $\mathcal A$ be an abelian category and $\mathcal S$ be the category with objects given by $A\xrightarrow{f} B\xrightarrow{g} C$ such that $g\circ f = 0$, and morphisms given by chain maps.
@@ -259,10 +259,17 @@ then there exists maps so that
     \end{tikzcd}
 \end{equation}
 commutes.
-In particular there is a morphism $\coker(\im(f)\to\ker(g))\to\coker(\im(f')\to\ker(g'))$.
+In particular there is a morphism 
+\begin{equation}
+    \coker(\im(f)\to\ker(g))\to\coker(\im(f')\to\ker(g')).
+\end{equation}
 It is easy to check that this construction is functorial so we obtain a functor $H:\mathcal S\to \mathcal A$.
 
-One can similarly construct a functor $H':\mathcal S\to\mathcal A$ by considering $\ker(\coker(f)\to\coim(g))$ instead.
+One can similarly construct a functor $H':\mathcal S\to\mathcal A$ by considering 
+\begin{equation}
+    \ker(\coker(f)\to\coim(g))
+\end{equation}
+instead.
 \begin{remark}
     We may also form a functor by looking simply at the fact that $f$ factors through $\ker(g)$ and then looking at the coker of the resulting morphism $A\to\ker(g)$. It is an easy check to see that this yields a functor naturally isomorphic to $H$. Similarly for $H'$.
 \end{remark}
@@ -613,7 +620,7 @@ It is clear from the construction that we obtain a functor $f^{-1}:\Sh(Y)\to\Sh(
     It is the composition of two exact functors.
     Alternatively take stalks.
 \end{proof}
-\section{The $\sheafHom$ sheaf}
+\section{The \texorpdfstring{$\sheafHom$}{Hom} sheaf}
 Let $\shf{F}$ and $\shf{G}$ be sheaves and $f:\Spe(\shf{F})\to \Spe(\shf{G})$ be a continuous map so that 
 \begin{equation}
     \begin{tikzcd}
