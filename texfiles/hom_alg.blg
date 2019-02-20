@@ -1,9 +1,9 @@
 [0] Config.pm:302> INFO - This is Biber 2.9
 [0] Config.pm:305> INFO - Logfile is 'hom_alg.blg'
-[24] biber:313> INFO - === Thu Jan 10, 2019, 09:46:53
-[77] Biber.pm:371> INFO - Reading 'hom_alg.bcf'
-[152] Biber.pm:857> INFO - Found 0 citekeys in bib section 0
-[159] Utils.pm:169> WARN - The file 'hom_alg.bcf' does not contain any citations!
-[166] bbl.pm:617> INFO - Writing 'hom_alg.bbl' with encoding 'ascii'
-[167] bbl.pm:720> INFO - Output to hom_alg.bbl
-[167] Biber.pm:110> INFO - WARNINGS: 1
+[25] biber:313> INFO - === Tue Feb 19, 2019, 17:22:14
+[69] Biber.pm:371> INFO - Reading 'hom_alg.bcf'
+[131] Biber.pm:857> INFO - Found 0 citekeys in bib section 0
+[139] Utils.pm:169> WARN - The file 'hom_alg.bcf' does not contain any citations!
+[146] bbl.pm:617> INFO - Writing 'hom_alg.bbl' with encoding 'ascii'
+[146] bbl.pm:720> INFO - Output to hom_alg.bbl
+[148] Biber.pm:110> INFO - WARNINGS: 1

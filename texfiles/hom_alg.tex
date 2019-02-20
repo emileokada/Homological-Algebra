@@ -1,7 +1,7 @@
 \documentclass{memoir}
 
 \input{header}
-\title{Homological algebra}
+\title{Homological algebra and schemes}
 \author{Emile T. Okada}
 
 \begin{document}
@@ -23,7 +23,7 @@ An additive category is an $\Ab$-enriched category which has finite coproducts a
     \begin{equation}
         \begin{tikzcd}[column sep=large]
             A \arrow[dr,"i_A"] \arrow[drr,bend left=30,"\id_A"] & & & A \arrow[dr,"i_A"] \arrow[drr,bend left=30,"0"] & \\
-                                     & A\coprod B \arrow[r,"p_A"] & A & & A\coprod B \arrow[r] & B \\
+                                     & A\coprod B \arrow[r,dashed,"p_A"] & A & & A\coprod B \arrow[r,dashed,"p_B"] & B \\
             B \arrow[ur,"i_B"] \arrow[urr,bend right=30,swap,"0"] & & & B \arrow[ur,"i_B"] \arrow[urr,bend right=30,swap,"\id_B"] &
         \end{tikzcd}
     \end{equation}
@@ -67,7 +67,7 @@ In such a category we write $A\oplus B$ for the biproduct.
     \begin{equation}
         \begin{tikzcd}
             A \arrow[dr,"i_A"] \arrow[drr,bend left=30,"\id_A"] & & & & & A \\
-                                                                & A\oplus A \arrow[r,"\Delta_A"] & A & A \arrow[r,"\nabla_A"] \arrow[urr,bend left=30,"\id_A"] \arrow[drr,bend right=30,"\id_A"] & A\oplus A \arrow[dr,"p_A'"] \arrow[ur,"p_A"] & \\
+                                                                & A\oplus A \arrow[r,dashed,"\Delta_A"] & A & A \arrow[r,dashed,"\nabla_A"] \arrow[urr,bend left=30,"\id_A"] \arrow[drr,bend right=30,"\id_A"] & A\oplus A \arrow[dr,"p_A'"] \arrow[ur,"p_A"] & \\
             A \arrow[ru,"i_A'"] \arrow[urr,bend right=30,"\id_A"] & & & & & A
         \end{tikzcd}
     \end{equation}
@@ -263,7 +263,7 @@ In particular there is a morphism
 \begin{equation}
     \coker(\im(f)\to\ker(g))\to\coker(\im(f')\to\ker(g')).
 \end{equation}
-It is easy to check that this construction is functorial so we obtain a functor $H:\mathcal S\to \mathcal A$.
+It is easy to check that this construction is functorial and so we obtain a functor $H:\mathcal S\to \mathcal A$.
 
 One can similarly construct a functor $H':\mathcal S\to\mathcal A$ by considering 
 \begin{equation}
@@ -277,7 +277,7 @@ instead.
     Let $A\xrightarrow{f} B\xrightarrow{g} C\in\mathcal S$.
     Recall that we have the factorisation 
     \begin{equation}
-        A\rightarrow \im(f) \rightarrow \ker(g)\rightarrow B \rightarrow \coker(f) \rightarrow \coim(g) \rightarrow C.
+        A\rightarrow \im(f) \rightarrow \ker(g)\xrightarrow{i_g} B \xrightarrow{p_f} \coker(f) \rightarrow \coim(g) \rightarrow C.
     \end{equation}
     Let $h$ be the composition $\ker(g)\to B \to\coker(f)$.
     Then
@@ -287,7 +287,12 @@ instead.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    Straightforward.
+    Let $l:C\to \ker(g)$ be such that $h\circ l = 0$.
+    Then $p_f \circ i_g \circ l = 0$ and so $i_g \circ l$ factors through $\im(f)$.
+    Since $i_g$ is monic it follows that $l$ factors through $\im(f)$.
+    Uniqueness follows automatically.
+    Thus the result follows.
+    The second part follows similarly.
 \end{proof}
 \begin{thm}
     The functors $H,H':\mathcal S\to\mathcal A$ are naturally isomorphic.
@@ -307,7 +312,53 @@ instead.
     Let $S := A\xrightarrow{f} B\xrightarrow{g} C\in\mathcal S$.
     We say that $S$ is exact at $B$ if $H(S) = 0$.
 \end{definition}
+\begin{proposition}
+    $0\rightarrow A \xrightarrow{f} B \xrightarrow{g} C \rightarrow 0$ is a short exact sequence iff $A = \ker(g)$ and $C = \coker(f)$.
+\end{proposition}
+\begin{proof}
+    $(\Rightarrow)$ We have $\ker(g) \cong \im(f) \cong A$ and $\coker(f) \cong \coim(g) \cong C$.
+
+    $(\Leftarrow)$ Certainly have exactness at $A$ and $C$. Exactness at $B$ also holds.
+\end{proof}
 \subsection{Split sequences}
+\begin{thm}
+    Let $0\rightarrow A \xrightarrow{f} B \xrightarrow{g} C \rightarrow 0$ be a short exact sequence.
+    The following are equivalent
+    \begin{enumerate}
+        \item there exists $q:B\to A$ such that $q\circ f = \id_A$
+        \item there exists $p:C\to B$ such that $g\circ p = \id_C$
+        \item there is an isomorphism $h:B\to A\oplus C$ such that $h\circ f$ and $g\circ h^{-1}$ are the natural inclusion and projection respectively.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    $(3)$ certainly implies both $(1)$ and $(2)$.
+
+    $(2)\Rightarrow(3)$ Let $q:B\to A$ be the unique map making the following diagram commute
+    \begin{equation}
+        \begin{tikzcd}
+            A \arrow[r,"f"] & B \arrow[r,"g"] & C. \\
+            B \arrow[ur,swap,"\id_B-p\circ g"] \arrow[u,dashed,"q"] & &
+        \end{tikzcd}
+    \end{equation}
+    Then $\id_B = p\circ g + f\circ q$.
+    It follows that $p = f\circ q\circ p + p$.
+    Since $f$ is monic we have $q\circ p = 0$.
+    Thus $q = q\circ f\circ q$ and so since $q$ is epi, $q\circ f = \id_A$.
+    The result follows. $(1)\Rightarrow(3)$ follows similarly.
+\end{proof}
+\begin{corollary}
+    Let $F:\mathcal A\to \mathcal B$ be an additive functor of abelian categories.
+    Then $F$ applied to a split short exact sequence is also split exact.
+\end{corollary}
+\begin{proposition}
+    Let $0\rightarrow A \xrightarrow{f} B \xrightarrow{g} C \rightarrow 0$ be a short exact sequence.
+    If either
+    \begin{enumerate}
+        \item $A$ is injective or 
+        \item $C$ is projective
+    \end{enumerate}
+    then the sequence is split.
+\end{proposition}
 \section{Adjoint functors}
 Let $L:\mathcal A\to\mathcal B$ be an additive functor between abelian categories.
 If $L$ admits a right adjoint $R:\mathcal B\to\mathcal A$ then it turns out $L$ has a lot of useful properties. 
@@ -358,7 +409,73 @@ In this section we explore these properties.
 
     The corresponding result for $R$ follows similarly.
 \end{proof}
+\section{Limits and derived functors}
+\begin{proposition}
+    An abelian category $\mathcal A$ is cocomplete iff it has all direct sums.
+\end{proposition}
+\begin{proof}
+    We already have kernels and hence equalisers so the statement follows.
+\end{proof}
+\begin{remark}
+    The same result holds if we replace direct sums with product and cocomplete with complete.
+\end{remark}
+\begin{thm}
+    Let $\mathcal A$ be a cocomplete abelian category with enough projectives.
+    If $F:\mathcal A \to \mathcal B$ is a left adjoint, then for every set $\{A_i\}$ of objects in $\mathcal A$ we have
+    \begin{equation}
+        L_*F\left(\bigoplus_{i\in I}A_i\right) \cong \bigoplus_{i\in I} L_*F(A_i).
+    \end{equation}
+\end{thm}
+\begin{proof}
+    Let $P_i\to A_i$ be projective resolutions.
+    Then $\oplus_iP_i\to \oplus_iA_i$ is also a projective resolution.
+    Hence
+    \begin{equation}
+        L_*F(\oplus_iA_i) = H_*(F(\oplus_iP_i)) \cong H_*(\oplus_iF(P_i)) \cong \oplus_iH_*(F(P_i)) = \oplus_iL_*F(A_i).
+    \end{equation}
+\end{proof}
+\subsection{Filtered colimits}
+\begin{definition}
+    A category $I$ is called filtered if it has coproduct and coequaliser diagrams.
+    A filtered colimit is the colimit of a functor from a filtered category.
+\end{definition}
+\begin{lemma}
+    Let $I$ be a filtered category, and $A:I\to \Mod-R$. Then
+    \begin{enumerate}
+        \item Every element $a\in\colim_I A$ is the image of some element $a_i\in A_i$ for some $i\in I$ under the canonical map $A_i\to \colim_I A$.
+        \item For every $i$, the kernel of the canonical map $A_i\to \colim_I A$ is the union of the kernels of the maps $A(\phi):A_i\to A_j$ for $\phi:i\to j$ in $I$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Use the explicit construction of the colimit as the cokernel of
+    \begin{equation}
+        \bigoplus_{i\to j}A_i \to \bigoplus_iA_i.
+    \end{equation}
+\end{proof}
+\begin{thm}
+    Filtered colimits of $R$-modules are exact considered as functors from $\Fun(I,\Mod-R)$ to $\Mod-R$.
+\end{thm}
+\begin{proof}
+    We know that $\colim$ is a left adjoint and so is right exact. 
+    It thus suffices to show that if $t:A\to B$ is monic then $\colim_IA\to\colim_IB$ is too.
+    But this follows immediately from the previous proposition.
+\end{proof}
+\begin{definition}
+    We say an abelian category $\mathcal A$ satisfies axiom (AB5) if it is cocomplete and filtered colimits are exact.
+\end{definition}
+\begin{thm}
+    Let $\mathcal A$ be an abelian category satisfying axiom (AB5).
+    Then for $F:\mathcal A\to \mathcal B$ a left adjoint, we have that for all filtered $I$,
+    \begin{equation}
+        L_*F(\colim_IA) \cong \colim_I L_*F(A_i).
+    \end{equation}
+\end{thm}
+\begin{proof}
+    $\colim_I$ is exact so commutes with $H_i$.
+    The rest of the proof is similar to the direct sum proof.
+\end{proof}
 \chapter{Sheaf Theory}
+\label{ch:sheafs}
 \section{Presheaves}
 Let $\mathcal C$ be any category, $\mathcal A$ be an abelian category and define $\PreSh(\mathcal C) = \Fun(\mathcal C^{op},\mathcal A)$ to be the category of presheaves on $\mathcal C$ with values in $\mathcal A$.
 The functor sending all objects to $0$ is certainly both initial and terminal, direct sums can be defined pointwise, and the hom-sets in $\PreSh(\mathcal C)$ inherit an additive structure from $\mathcal A$ so $\PreSh(\mathcal C)$ is naturally an additive category.
@@ -394,6 +511,13 @@ when this limit exists. Note that this is a functor since morphisms between (pre
 \end{thm}
 \begin{proof}
 Exercise.
+\end{proof}
+\begin{proposition}
+    Let $\shf{F},\shf{G}$ be presheaves and $\phi,\psi:\shf{F}\to\shf{G}$ be morphisms that are equal on stalks.
+    If $\shf{G}$ satisfies sheaf condition (A) then $\phi = \psi$.
+\end{proposition}
+\begin{proof}
+    Consider $\phi-\psi$.
 \end{proof}
 \subsubsection{Aside}
 Although we do not need this right away, given an $A\in \mathcal A$ we can define the (pre)sheaf $x_*A$ by 
@@ -488,11 +612,32 @@ It is then easy to see that $\ker\coker = \coker\ker$ by looking at stalks and s
 \begin{remark}
     While $\Sh(X)$ is a full subcategory of $\PreSh(X)$ that is abelian, it is not a full abelian subcategory.
 \end{remark}
+\section{Maps defined on a basis}
+\begin{thm}
+    Let $\shf{F},\shf{G}$ be sheafs on $X$ and let $\mathcal B$ be a basis for the topology on $X$.
+    Then any morphism $\phi|_{\mathcal B}:\shf{F}|_{\mathcal B} \to \shf{G}|_{\mathcal B}$ extends uniquely to a morphism $\phi:\shf{F}\to \shf{G}$.
+    Moreover this procedure is functorial.
+\end{thm}
+\begin{proof}
+    There is a natural isomorphism between $\varinjlim_{U\ni x}\shf{F}$ and $\varinjlim_{B\ni x}\shf{F}$. 
+    Thus we obtain a map $\phi:=\phi|_{\mathcal B}^+:\shf{F}\to \shf{G}$.
+    It is clear that this is a morphism of sheaves.
+    Moreover for $U\in\mathcal B$ and $s\in\shf{F}(U)$ it is clear that $\phi(U)(s)$ and $\phi|_{\mathcal B}(U)(s)$ have the same stalks and so must be equal.
+    Thus $\phi$ extends $\phi|_{\mathcal B}$.
+    Finally, if a morphism extends $\phi|_{\mathcal B}$ then it is determined on stalks and hence must equal to $\phi$, which gives us uniqueness.
+    Functoriality is clear.
+\end{proof}
 \section{Exact sequences}
 Now that we know that we are working in an abelian category we can talk about exact sequences in $\Sh(X)$.
 Recall from section \ref{sec:es} that $\shf{F}\xrightarrow{\theta}\shf{G}\xrightarrow{\phi}\shf{H}$ is exact at $\shf{G}$ if $\phi\circ\theta=0$ and the map induced map $\im(\theta)\to\ker(\phi)$ is an isomorphism.
 But the map $\im(\theta)\to\ker(\phi)$ is an isomorphism iff it is an isomorphism at the level of stalks iff $\shf{F}_x\xrightarrow{\theta_x}\shf{G}_x\xrightarrow{\phi_x}\shf{H}_x$ is exact for all $x\in X$.
-Thus exactness in $\Sh(X)$ can be verified by checking exactness at all the stalks.
+Thus $(-)_x$ is an exact functor and exactness in $\Sh(X)$ can be verified by checking exactness at all the stalks.
+\section{Direct sums of sheaves}
+If $\mathcal A$ has direct sums, then so does $\PreSh(X)$ since we can compute the direct sum pointwise.
+It follows that $\PreSh(X)$ is cocomplete.
+The sheafification of the direct sum in $\PreSh(X)$ gives us a direct sum in $\Sh(X)$ and hence $\Sh(X)$ is also cocomplete.
+
+We also have products in both $\PreSh(X)$ and $\Sh(X)$ (computed pointwise) and so they are also both complete.
 \section{Sheaves over different spaces}
 \subsection{Direct image sheaf}
 Let $f:X\to Y$ be a continuous map between topological spaces and $\shf{F}$ a sheaf on $X$.
@@ -553,6 +698,29 @@ Define $\lim_f:\PreSh(Y)\to\PreSh(X)$ to be the functor that sends $\shf{F}\in \
 \begin{proof}
     It is a left adjoint so it is right exact. 
     Thus it suffices to show that it sends injective maps to injective maps. But this is obvious.
+\end{proof}
+\subsubsection{Stalks}
+\begin{proposition}
+    Let $\shf{F}$ be a sheaf on $X$ and $f:X\to Y$ a continuous map.
+    Then there is a natural map $(f_*\shf{F})_{f(p)} \to \shf{F}_p$ in the sense that if $\shf{G}$ is another sheaf on $X$ and $\phi:\shf{F}\to \shf{G}$ is a morphism then
+    \begin{equation}
+        \begin{tikzcd}[column sep = huge]
+            (f_*\shf{F})_{f(p)} \arrow[r,"(f_*\phi)_{f(p)}"] \arrow[d] & (f_*\shf{G})_{f(p)} \arrow[d] \\
+            \shf{F}_p \arrow[r,"\phi_p"] & \shf{G}_p
+        \end{tikzcd}
+    \end{equation}
+    commutes.
+\end{proposition}
+\begin{proof}
+    We have
+    \begin{equation}
+        (f_*\shf{F})_{f(p)} = \varinjlim_{U\ni f(p)} f_*\shf{F}(U) = \varinjlim_{U:f^{-1}(U)\ni p}\shf{F}(f^{-1}(U)).
+    \end{equation}
+    But $\{U:f^{-1}(U)\ni p\}\subseteq \{V:V\ni p\}$ and so there is map 
+    \begin{equation}
+        (f_*\shf{F})_{f(p)} = \varinjlim_{U:f^{-1}(U)\ni p}\shf{F}(f^{-1}(U)) \to \varinjlim_{V\ni p}\shf{F}(V) = \shf{F}_p.
+    \end{equation}
+    Naturality is an easy exercise.
 \end{proof}
 \subsection{Inverse image sheaf}
 Let $f:X\to Y$ be a continuous map between topological spaces and $\shf{F}$ a sheaf on $Y$.
@@ -620,22 +788,585 @@ It is clear from the construction that we obtain a functor $f^{-1}:\Sh(Y)\to\Sh(
     It is the composition of two exact functors.
     Alternatively take stalks.
 \end{proof}
+\begin{corollary}
+    There are natural transformations $e:\id\Rightarrow f_*f^{-1}$ and $\epsilon: f^{-1}f_*\to \id$ such that 
+    \begin{align}
+        f^{-1}\xRightarrow{f^{-1}e} &f^{-1}f_*f^{-1} \xRightarrow{\epsilon f^{-1}} f^{-1} \\
+        f_*\xRightarrow{ef_*} &f_*f^{-1}f_* \xRightarrow{f_*\epsilon} f_*
+    \end{align}
+    both compose to the identity natural transformation.
+\end{corollary}
 \section{The \texorpdfstring{$\sheafHom$}{Hom} sheaf}
-Let $\shf{F}$ and $\shf{G}$ be sheaves and $f:\Spe(\shf{F})\to \Spe(\shf{G})$ be a continuous map so that 
+\begin{lemma}
+    Let $\shf{F}$ and $\shf{G}$ be sheaves and $f:\Spe(\shf{F})\to \Spe(\shf{G})$ be a continuous map so that 
+    \begin{equation}
+        \begin{tikzcd}
+            \Spe(\shf{F}) \arrow[rr, "f"] \arrow[rd,"\pi"] & & \Spe(\shf{G}) \arrow[dl,"\pi"] \\
+                                                  & X &
+        \end{tikzcd}
+    \end{equation}
+    commutes.
+    Let $\tilde f: \shf{F}^+\to\shf{G}^+$ be the morphism obtained by postcomposing sections with $f$.
+    Then $\tilde f_x = f|_x$.
+    
+\end{lemma}
+\begin{proof}
+    This follows from the fact that if $s\in\shf{F}^+(U)$ then for $x\in U$, $s_x = s(x)$.
+\end{proof}
+\begin{thm}
+    Let $\shf{F}$ and $\shf{G}$ be sheaves.
+    Then there is a bijection between continuous maps $\Spe(\shf{F})\to \Spe(\shf{G})$ and morphisms of sheaves $\shf{F}\to \shf{G}$.
+\end{thm}
+\begin{proof}
+    For sheaves we have $\shf{F} \cong \shf{F}^+$ and so the results follows from the lemma.
+\end{proof}
+\begin{corollary}
+    The presheaf $\sheafHom(\shf{F},\shf{G})$ defined by 
+    \begin{equation}
+        \sheafHom(\shf{F},\shf{G})(U) = \Hom(\shf{F}|_U,\shf{G}|_U)
+    \end{equation}
+    is in fact a sheaf.
+\end{corollary}
+\section{Injective sheaves}
+\begin{definition}
+    Let $\shf{F}$ be a sheaf.
+    Define $D(\shf{F})$ to be the sheaf of all (not necessarily continuous) sections of $\Spe(\shf{F})\to X$.
+\end{definition}
+\begin{lemma}
+    $D(\shf{F}) = \prod_{x\in X}x_*(\shf{F}_x)$.
+\end{lemma}
+\begin{proof}
+    Obvious.
+\end{proof}
+\begin{thm}
+    $\Sh(X)$ over the abelian category $\AbGrp/\Ring/\Mod_R$ has enough injectives.
+\end{thm}
+\begin{proof}
+    Let $\mathcal A$ denote the abelian category.
+    Recall that $x_*:\mathcal A\to \Sh(X)$ is the right adjoint of an exact functor.
+    Thus it is left exact and preserves injectives.
+    Let $x\in X$. 
+    $\mathcal A$ has enough injectives, so there is some injective object $I_x$ such that $0\to \shf{F}_x \to I_x$ is exact.
+    It follows that $0\to x_*(\shf{F}_x)\to x_*(I_x)$ is also exact.
+    We can then form the exact sequence $0\to \prod_{x\in X}x_*(\shf{F}_x) \to \prod_{x\in X}x_*(I_x)$.
+    The last term is injective since it is a product of injective objects.
+    Composing this with the canonical map $\shf{F}\to D(\shf{F})$ gives the required injection into an injective object.
+\end{proof}
+\chapter{Scheme Theory}
+\section{Locally ringed spaces}
+A locally ringed space is a pair $(X,\shf{O}_X)$ consisting of a topological space $X$ and a sheaf $\shf{O}_X$ of rings on $X$ such that the stalks are local rings.
+A morphism of between the locally ringed spaces $(X,\shf{O}_X)$ and $(Y,\shf{O}_Y)$ is a pair $(f,f^\#)$ consisting of a continuous map $f:X\to Y$ and a morphism of sheaves $f^\#:\shf{O}_Y\to f_*\shf{O}_X$ which induces morphisms of local rings on stalks $f^\#_{p}:\shf{O}_{Y,f(p)} \to \shf{O}_{X,p}$.
+
+Given morphisms $(f,f^\#):(X,\shf{O}_X)\to (Y,\shf{O}_Y)$ and $(g,g^\#):(Y,\shf{O}_Y)\to (Z,\shf{O}_Z)$ we define their composition $(h,h^\#):(X,\shf{O}_X)\to (Z,\shf{O}_Z)$ by $h = g\circ f$ and
+\begin{equation}
+    h^\# = \shf{O}_Z \to g_*\shf{O}_Y \to g_*(f_*\shf{O}_X) = h_*\shf{O}_X.
+\end{equation}
+Note that
 \begin{equation}
     \begin{tikzcd}
-        \Spe(\shf{F}) \arrow[rr, "\Spe(\phi)"] \arrow[rd,"\pi"] & & \Spe(\shf{G}) \arrow[dl,"\pi"] \\
-                                              & X &
+        \shf{O}_{Z,h(p)} \arrow[r] \arrow[rr,bend left=20,"(h^\#)_{h(p)}"] \arrow[dr,swap,"g^\#_{f(p)}"] & (g_*\shf{O}_Y)_{g\circ f(p)} \arrow[r] \arrow[d] & (g_*f_*\shf{O}_X)_{g\circ f(p)} \arrow[d] \arrow[dd,bend left=60] \\
+                                                            & \shf{O}_{Y,f(p)} \arrow[r] \arrow[dr,swap,"f^\#_p"] & (f_*\shf{O}_X)_{f(p)} \arrow[d] \\
+                                   & & \shf{O}_{X,p}
     \end{tikzcd}
 \end{equation}
-commutes.
-Then we obtain a morphism $\shf{F}^+\to\shf{G}^+$ by postcomposing sections with $f$.
-Since $\shf{F}$ and $\shf{G}$ are sheaves we in fact obtain a morphism $\shf{F}\to\shf{G}$.
-But we also know that morphisms $\shf{F}\to \shf{G}$ give continuous maps $\Spe(\shf{F})\to\Spe(\shf{G})$ making the above diagram commute.
-\section{Injective sheaves}
-There are enough injectives.
-\chapter{Spectral sequences}
+commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings and so $(h,h^\#)$ is indeed a morphism of locally ringed spaces.
+\begin{proposition}
+    \label{prop:factor}
+    Let $(f,f^\#):(X,\shf{O}_X)\to (Y,\shf{O}_Y)$ be a morphism of locally ringed spaces.
+    If $f(X)\subseteq U$ for some open subset $U\subseteq Y$ then $(f,f^\#)$ factors through $(U,\shf{O}_Y\mid_U)$.
+\end{proposition}
+\begin{proof}
+    Let $\bar f:X\to U$ denote the map $f$ viewed as having codomain $U$, and $i:U\to Y$.
+    Then $f = i\circ \bar f$.
+    Moreover, there is a natural morphism $i^\#:\shf{O}_Y\to i_*(\shf{O}_Y\mid_U)$ given by the restriction maps.
+    Since $\bar f^{-1}(V) = f^{-1}(V)$ for $V\subseteq U$, there is also a natural map $\bar f^\#:\shf{O}_Y\mid_U \to \bar f_*\shf{O}_X$ given by the restriction of $f^\#$.
+    It is straightforward to see that $f^\# = i^\#\circ \bar f^\#$.
+\end{proof}
+\begin{thm}
+    Let $(f,f^\#):(X,\shf{O}_X)\to (Y,\shf{O}_Y)$ be a morphism of locally ringed spaces.
+    $(f,f^\#)$ is an isomorphism iff $f$ is a homeomorphism and $f^\#$ is an isomorphism.
+\end{thm}
+\begin{proof}
+    The forwards direction is obvious.
+    Now suppose $f$ is a homeomorphism and $f^\#$ is an isomorphism.
+    Let $g = f^{-1}:Y\to X$ and $g^\# = (g_*f^\#)^{-1}$.
+    Then $(g,g^\#) \circ (f,f^\#) = \id$ and $(f,f^\#) \circ (g,g^\#) = \id$.
+\end{proof}
+\begin{corollary}
+    Let $(f,f^\#):(X,\shf{O}_X)\to (Y,\shf{O}_Y)$ be a morphism of locally ringed spaces.
+    If 
+    \begin{enumerate}
+        \item $U:=f(X)$ is an open subset of $Y$,
+        \item $f$ is a homeomorphism onto its image,
+        \item $f^\#_p$ is an isomorphism for all $p\in X$
+    \end{enumerate}
+    then $(X,\shf{O}_X)\cong (U,\shf{O}_Y\mid_U)$.
+\end{corollary}
+\begin{proof}
+    By proposition \ref{prop:factor}, $(f,f^\#)$ factors through $(\bar f,\bar f^\#):(X,\shf{O}_X)\to (U,\shf{O}_Y\mid_U)$.
+    By the theorem it suffices to check that $\bar f^\#_p$ is an isomorphism for all $p\in X$.
+    But this follows from the fact that $i^\#$ is an isomorphism on stalks.
+\end{proof}
+\subsection{Gluing morphisms}
+\begin{lemma}
+    Let $(f,f^\#),(g,g^\#):(X,\shf{O}_X)\to (Y,\shf{O}_Y)$ be morphisms of locally ringed spaces.
+    Let $\mathcal U = \{U_i\}$ be an open covering of $X$.
+    If the morphisms agree on the restrictions to the $U_i$ then they are equal.
+\end{lemma}
+\begin{proof}
+    We certainly have $f = g$.
+    The result then follows from sheaf condition (A).
+\end{proof}
+\section{Morphisms}
+\subsection{Quasi-compact}
+\begin{definition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes.
+    We say $(f,f^\#)$ is quasi-compact if there is an affine covering $\{V_i\}_i$ of $Y$ such that $f^{-1}(V_i)$ is quasi-compact for all $i$.
+\end{definition}
+\begin{proposition}
+    Let $(f,f^\#):X\to Y$ be quasi-compact.
+    Then for any affine $V\subseteq Y$, $f^{-1}(V)$ is quasi-compact.
+\end{proposition}
+\begin{proof}
 
+\end{proof}
+\subsection{Locally of finite type}
+\begin{definition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes.
+    We say $(f,f^\#)$ is locally of finite type if there is an affine covering $\{V_i\}_i$ of $Y$, and for each $i$, and affine covering $\{U_{ij}\}_j$ of $f^{-1}(V_i)$ such that $\shf{O}_X(U_{ij})$ is as finitely generated $\shf{O}_Y(V_i)$-algebra.
+\end{definition}
+\begin{proposition}
+    Let $(f,f^\#):X\to Y$ be locally of finite type.
+    Then for any affine $V\subseteq Y$ and affine $U\subseteq f^{-1}(V)$, $\shf{O}_X(U)$ is a finitely generated $\shf{O}_Y(V)$-algebra.
+\end{proposition}
+\begin{proof}
+    Affine schemes are quasi-compact and so $V$ can be covered by finitely many $V\cap V_i$.
+    But.
+\end{proof}
+\subsection{Finite type}
+\begin{definition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes.
+    We say $(f,f^\#)$ is of finite type if it is quasi-compact and locally of finite type.
+\end{definition}
+\subsection{Closed immersion}
+\begin{definition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes.
+    We say $(f,f^\#)$ is a closed immersion if $f(X)$ is closed in $Y$, $f$ is a homeomorphism onto its image, and the morphism $f^\#$ is surjective.
+\end{definition}
+\subsection{Open immersion}
+\begin{definition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes.
+    We say $(f,f^\#)$ is an open immersion if $f(X)$ is open in $Y$, $f$ is a homeomorphism onto its image, and $f_p^\#$ is an isomorphism for all $p\in X$.
+\end{definition}
+\subsection{Affine}
+\begin{definition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes.
+    We say $(f,f^\#)$ is affine if there is an affine covering $\{V_i\}_i$ of $Y$ such that $f^{-1}(V_i)$ is affine for all $i$.
+\end{definition}
+\begin{proposition}
+    Let $(f,f^\#):X\to Y$ be affine.
+    Then for any affine $V\subseteq Y$, $f^{-1}(V)$ is affine.
+\end{proposition}
+\begin{proof}
+
+\end{proof}
+\section{\texorpdfstring{$\shf{O}_X$}{OX}-Modules}
+\begin{definition}
+    Let $(X,\shf{O}_X)$ be a locally ringed space.
+    An $\shf{O}_X$-module is a sheaf $\shf{F}$ of abelian groups with a compatible $\shf{O}_X$ action.
+    Morphisms of $\shf{O}_X$-modules are morphisms of sheaves of abelian groups that respect the $\shf{O}_X$-module structure.
+\end{definition}
+\begin{thm}
+    The category of $\shf{O}_X$-modules is an abelian category.
+\end{thm}
+\begin{proof}
+    Additive structure on hom-sets is obvious.
+    Kernels are the same as the kernels in $\Ab(X)$, with the obvious $\shf{O}_X$-module structure.
+    Similarly for cokernels (if a presheaf has an $\shf{O}_X$-module structure, then so does its sheafification by acting on the stalks).
+    The rest then follows.
+\end{proof}
+\begin{definition}
+    (Tensor product).
+    Let $\shf{F}$ and $\shf{G}$ be $\shf{O}_X$-modules.
+    Define the tensor product of $\shf{F}$ and $\shf{G}$, $\shf{F}\otimes_{\shf{O}_X}\shf{G}$ to be the sheafification of the presheaf tensor product.
+\end{definition}
+\begin{definition}
+    (Pullback).
+    Let $f:X\to Y$ be a continuous map, and $\shf{F}$ an $\shf{O}_Y$.
+    Then $f^{-1}\shf{F}$ is naturally a $f^{-1}\shf{O}_Y$-module.
+    Moreover from the inverse image - direct image adjunction we obtain a map $f^{-1}\shf{O}_Y\to \shf{O}_X$ from $f^\#:\shf{O}_Y\to f_*\shf{O}_X$.
+    We can thus form the sheaf $f^{-1}\shf{F}\otimes_{f^{-1}\shf{O}_Y}\shf{O}_X$.
+    This sheaf is naturally an $\shf{O}_X$-module and we call it $f^*\shf{F}$.
+\end{definition}
+\begin{definition}
+    (Direct image).
+    Let $f:X\to Y$ be a continuous map, and $\shf{F}$ an $\shf{O}_X$.
+    Then $f_*\shf{F}$ is naturally a $f_*\shf{O}_X$ module, and hence a $\shf{O}_Y$-module via $f^\#:\shf{O}_Y\to f_*\shf{O}_X$.
+\end{definition}
+\begin{thm}
+    \label{thm:tensor-hom}
+    Let $\shf{F}$ be a $(\shf{A},\shf{B})$-bimodule.
+    Then $-\otimes_{\shf{A}}\shf{F}\dashv \sheafHom_{\shf{B}}(\shf{F},-)$ as functors between $\Mod(\shf{A})$ and $\Mod(\shf{B})$.
+\end{thm}
+\begin{proof}
+    Follows from the corresponding tensor-hom adjunction for modules.
+\end{proof}
+\begin{lemma}
+    Let $f:X\to Y$, $\shf{F}\in \Mod(Y)$ and $\shf{G}\in \Mod(X)$.
+    Then under the natural bijection
+    \begin{equation}
+        \Hom_\Ab(f^{-1}\shf{F},\shf{G}) \leftrightarrow \Hom_\Ab(\shf{F},f_*\shf{G})
+    \end{equation}
+    $f^{-1}\shf{O}_Y$-module morphisms biject with $\shf{O}_Y$-module morphisms.
+\end{lemma}
+\begin{thm}
+    Let $f:X\to Y$ be a continuous map. 
+    Then $f^*\dashv f_*$ as functors between $\Mod(X)$ and $\Mod(Y)$.
+\end{thm}
+\begin{proof}
+    Let $\shf{F}\in \Mod(Y)$ and $\shf{G}\in \Mod(X)$.
+    Note that $\shf{O}_X$ is an $(f^{-1}\shf{O}_Y,\shf{O}_X)$-bimodule.
+    We thus have the following chain of natural bijections
+    \begin{align}
+        \Hom_{\shf{O}_X}(f^*\shf{F},\shf{G}) &\leftrightarrow \Hom_{f^{-1}\shf{O}_Y}(f^{-1}\shf{F},\sheafHom_{\shf{O}_X}(\shf{O}_X,\shf{G})) \nonumber \\
+                                             &\leftrightarrow \Hom_{f^{-1}\shf{O}_Y}(f^{-1}\shf{F},\shf{G}) \nonumber \\
+                                             &\leftrightarrow \Hom_{\shf{O}_Y}(\shf{F},f_*\shf{G})
+    \end{align}
+    where the last bijection follows from the lemma.
+\end{proof}
+\begin{definition}
+    Let $R$ be a ring and $M$ an $R$-module. 
+    Define $\tilde M$ to be the $\shf{O}_{\Spec(R)}$-module which is locally $M_r$.
+\end{definition}
+\begin{thm}
+    $\tilde \bullet$ is a fully faithful exact functor from $\Mod_R$ to $\Mod(\Spec(R))$.
+\end{thm}
+\begin{proof}
+    Localisation is exact.
+\end{proof}
+\begin{corollary}
+    $\tilde \bullet$ and $\Gamma$ form part of an adjoint equivalence of categories between $\Mod_R$ and $\Mod(\Spec(R))$.
+\end{corollary}
+\section{Sheaf of ideals}
+\begin{definition}
+    Let $\shf{F}$ be a sheaf on $X$.
+    Then $\supp(\shf{F}) = \{x\in X: \shf{F}_x \ne 0\}$.
+\end{definition}
+\begin{proposition}
+    \label{prop:supp}
+    If $\shf{F}$ is a finitely generated $\shf{O}_X$-module then $\supp(X)$ is a closed subset of $X$.
+\end{proposition}
+\begin{definition}
+    A subsheaf of $\shf{O}_X$ is called a \textit{sheaf of ideals} on $X$.
+\end{definition}
+\begin{definition}
+    Let $\shf{J}$ be a sheaf of ideals on $X$.
+    Let $Z = \supp(\shf{O}_X/\shf{J})$.
+    By proposition \ref{prop:supp}, $Z$ is a closed subset of $X$.
+    Let $i:Z\to X$ be the inclusion map.
+    Then we define the structure sheaf on $X$ to be $\shf{O}_Z = i^{-1}(\shf{O}_X/\shf{J})$.
+    This turns $Z$ into a locally ringed space.
+\end{definition}
+\begin{proposition}
+    $i_*\shf{O}_Z \cong \shf{O}_X/\shf{J}$.
+\end{proposition}
+\begin{proof}
+    There is a natural map $\shf{O}_X/\shf{J}\to i_*\shf{O}_Z = i_*i^{-1}(\shf{O}_X/\shf{J})$ arising from the inverse image-direct image adjunction.
+    Looking at stalks shows that this is an isomorphism.
+\end{proof}
+\begin{remark}
+    In particular there is a natural map $i^\#:\shf{O}_X\to i_*\shf{O}_Z$ given by the composition $\shf{O}_X\to \shf{O}_X/\shf{J}\to i_*\shf{O}_Z$ inducing a morphism $(i,i^\#)$ of locally ringed spaces.
+\end{remark}
+\begin{corollary}
+    The map $(i,i^\#):(Z,\shf{O}_Z)\to (X,\shf{O}_X)$ is a closed immersion and $\shf{J} = \ker(i^\#)$.
+\end{corollary}
+\begin{lemma}
+    Let $A$ be a ring and $I\normal A$ be an ideal.
+    Then the sheaf $(A/I)^\sim$ on $\Spec(A)$ has support $V(I)$.
+\end{lemma}
+\begin{proof}
+    Consider the following exact sequence of $A$-modules
+    \begin{equation}
+        0\to I \to A \to A/I \to 0.
+    \end{equation}
+    If $I\nsubseteq \mathfrak p$ then $IA_{\mathfrak p} = A_{\mathfrak p}$ and so $(A/I)_{\mathfrak p} = 0$.
+    If $I\subseteq \mathfrak p$ then $(A/I)_{\mathfrak p} \cong (A/I)_{\mathfrak q}$ where $\mathfrak q = \mathfrak p/I$ and so is in particular not $0$.
+\end{proof}
+\begin{thm}
+    \label{thm:sheaf_of_ideals}
+    If $\shf{J}$ is quasi-coherent then $(Z,\shf{O}_Z)$ is a scheme and for any affine piece $(U,\shf{O}_X|_U) \cong (\Spec(A),\shf{O}_{\Spec(A)})$ of $X$, $(Z\cap U,\shf{O}_Z|_{Z\cap U})$ is isomorphic to $(\Spec(A/I),\shf{O}_{\Spec(A/I)})$ where $I$ is the ideal of $A$ corresponding to $J(U)$.
+\end{thm}
+\begin{proof}
+    It suffices to show the second part of the theorem.
+    Let $(U,\shf{O}_X|_U) \cong (\Spec(A),\shf{O}_{\Spec(A)})$ be an affine piece of $X$.
+    Restricting the short exact sequence $0\to\shf{J}\to\shf{O}_X\to i_*\shf{O}_Z\to 0$ to $U$ we get
+    \begin{equation}
+        0\to\shf{J}|_U \to\shf{O}_X|_U \to (i_{U\cap Z})_*(\shf{O}_Z|_{U\cap Z})\to 0.
+    \end{equation}
+    It follows that 
+    \begin{equation}
+        \label{eq:sh_isoms}
+        (i_{U\cap Z})_*(\shf{O}_Z|_{U\cap Z}) \cong (A/I)^\sim \cong \Spec(\phi)_*\shf{O}_{\Spec(A/I)}
+    \end{equation}
+    where $\phi:A\to A/I$ is the quotient map.
+    By the lemma $U\cap Z = V(I)$ and so there is a homeomorphism $\psi:\Spec(A/I)\to U\cap Z$.
+    Since both $i_{U\cap Z}$ and $\Spec(\phi)$ are homeomorphisms onto their images, the isomorphisms in equation \ref{eq:sh_isoms} induce isomorphisms of sheaves.
+    Taking stalks moreover shows that we get an isomorphism of locally ringed spaces as required.
+\end{proof}
+\section{Reduced schemes}
+\begin{definition}
+    A scheme $(X,\shf{O}_X)$ is reduced if $\shf{O}_X(U)$ is reduced for all $U\subseteq X$ open.
+\end{definition}
+\begin{lemma}
+    $(X,\shf{O}_X)$ is reduced iff $\shf{O}_{X,p}$ is reduced for all $p\in X$.
+\end{lemma}
+\begin{lemma}
+    Let $\shf{J}$ be the ideal sheaf of $\shf{O}_X$ given by $U\mapsto N(\shf{O}_X)$.
+    Then $\shf{J}$ is quasi-coherent.
+\end{lemma}
+\begin{proof}
+    It suffices to show that $\shf{J}\cong N(\shf{O}_X(X))^\sim$ when $X$ is affine.
+    But we have an isomorphism on the basis and hence between sheaves.
+\end{proof}
+\begin{definition}
+    Let $(X,\shf{O}_X)$ be a scheme. 
+    We define $(X_{red},(\shf{O}_X)_{red})$ to be the scheme associated with the sheaf of ideals $\shf{J}$ given by $\shf{J}(U) = N(\shf{O}_X(U))$.
+    Let $(z,z^\#):(X_{red},(\shf{O}_X)_{red})\to (X,\shf{O}_X)$ be the associated closed embedding.
+\end{definition}
+\begin{remark}
+    $X_{red}$ is reduced since it is reduced on affine pieces.
+\end{remark}
+\begin{proposition}
+    $z$ is a homeomorphism.
+\end{proposition}
+\begin{proof}
+    It suffices to check that $\supp(\shf{O}_X/\shf{J}) = X$ for affine $X$.
+    Let $\phi:R\to R/N(R)$ be the quotient map. Then $\Spec(\phi)$ is a homeomorphism.
+    It follows that $\supp(\shf{O}_X/\shf{J}) = X$ and so $z$ is the identity map.
+\end{proof}
+\begin{thm}
+    Let $f:X\to Y$ be a morphism of schemes and suppose $X$ is reduced.
+    Then $f$ factors through $Y_{red}$.
+\end{thm}
+\begin{proof}
+    Universal property of cokernels.
+\end{proof}
+\begin{definition}
+    For an affine scheme $X$, let $I(Z)$ be the radical ideal corresponding to a closed set $Z\subset X$.
+    For a general scheme $X$ and a closed subset $Z\subseteq X$, let $\shf{J}_Z$ be the sheaf
+    \begin{equation}
+        \shf{J}_Z(U) = \{f\in \shf{O}_X(U) : f_x\in m_x, \forall x\in U\cap Z\}.
+    \end{equation}
+\end{definition}
+\begin{lemma}
+    Let $X$ be an affine scheme and $Z\subseteq X$ a closed subset. 
+    Then $\shf{J}_Z\cong \tilde{I(Z)}$.
+\end{lemma}
+\begin{proof}
+    This holds on global sections and $\rad$ commutes with localisation.
+\end{proof}
+\begin{thm}
+    Let $X$ be a scheme and $Z\subseteq X$ a closed subset.
+    Then there is a unique quasi-coherent ideal $\shf{J}$ such that the associated closed immersion $Z'\to X$ has image $Z$ and $Z'$ reduced.
+\end{thm}
+\begin{proof}
+    $\shf{J} = \shf{J}_Z$ is quasi-coherent and the associated embedding has image $Z$.
+    It is clear that $Z'$ is reduced (check on affine pieces).
+    It thus remains to check the uniqueness of $\shf{J}$.
+    For this it suffices to consider the affine case.
+    Let $X = \Spec(A)$ and $\shf{J} = \tilde I$. 
+    Then $Z' = \Spec(A/I)$ and $V(I) = Z$.
+    But $Z'$ is reduced iff $I = I(Z)$.
+    Thus $\shf{J} = \shf{J}_{Z}$.
+\end{proof}
+\begin{remark}
+    If we take $Z = X$ then $Z' = X_{red}$.
+\end{remark}
+\section{Tangent space}
+
+\chapter{Spectral sequences}
+\begin{thm}
+    (Grothendieck spectral sequence).
+    Let $F:\mathcal A \to \mathcal B$ and $G:\mathcal B \to \mathcal C$ be left exact functors and suppose that $F$ sends injective objects to $G$-acylic objects.
+    Then for $A$ an object in $\mathcal A$ there is a spectral sequence $\{E_r(A)\}$ such that 
+    \begin{equation}
+        E_2^{p,q}(A) = R^pG(R^qF(A)) \Rightarrow R^{p+q}(GF)(A).
+    \end{equation}
+\end{thm}
+\begin{corollary}
+    (Leray spectral sequence).
+    Let $f:X\to Y, g:Y\to Z$ be continuous maps.
+    Then for a sheaf $\shf{F}$, there is a $E_2$ cohomological spectral sequence
+    \begin{equation}
+        R^pg_*(R^qf_*(\shf{F})) \Rightarrow R^{p+q}(g\circ f)_*(\shf{F})
+    \end{equation}
+    which is functorial in $\shf{F}$.
+\end{corollary}
+\begin{proof}
+    $f_*$ sends injective sheaves to flabby sheaves, which are $g_*$-acyclic.
+\end{proof}
 \chapter{Group cohomology}
+
+\chapter{Appendix}
+\section{Category theory results}
+\begin{proposition}
+    \label{prop:cat_factor}
+    Let $F\dashv G$ and $G$ be full.
+    Let $e$ be the unit of the adjunction.
+    Then every morphism $x\to Gy$ factors uniquely through $e_x:x\to GFx$.
+\end{proposition}
+\begin{proof}
+    Let $\alpha$ and $\beta$ denote the forward and backward maps in
+    \begin{equation}
+        \Hom(Fx,y) \leftrightarrow \Hom(x,Gy)
+    \end{equation}
+    respectively.
+    Let $f:x\to Gy$.
+    Then $f = \alpha(\beta(f))$.
+    But $\alpha(\beta(f)) = G\beta(f)\circ e_x$ so we get existence of a factorisation.
+    For uniqueness, suppose $f = h\circ e_x$.
+    Since $G$ is full there is a $l:Fx\to y$ such that $h = Gl$.
+    So $\alpha(l) = \alpha(\beta(f))$.
+    But $\alpha$ is a bijection so $l = \beta(f)$ and hence $h = G\beta(f)$ which gives uniqueness.
+\end{proof}
+
+\section{Properties of sheaves of rings}
+\begin{thm}
+    Let $\shf{F}$ be a sheaf of rings on X, $U = \cup_iU_i$ and $s\in \shf{F}(U)$.
+    Then $s$ is invertible iff $s|_{U_i}$ is invertible for all i.
+\end{thm}
+\begin{proof}
+    The forwards direction is trivial. Now suppose $s|_{U_i}$ is invertible for all $i$.
+    Then there are $t_i\in\shf{F}(U_i)$ such that $t_is|_{U_i} = 1$.
+    But then, since inverses are unique we must have $t_i|_{U_i\cap U_j} = t_j|_{U_i\cap U_j}$ since they are both the inverse of $s|_{U_i\cap U_j}$.
+    Thus there is a section $t\in \shf{F}(U)$ that restricts to the $t_i$.
+    Checking locally it follows that $ts = 1$ and so $s$ is invertible.
+\end{proof}
+\begin{thm}
+    Let $(X,\shf{O}_X)$ be a scheme and $A$ a ring. 
+    Then there is a natural bijection
+    \begin{equation}
+        \Hom_\Sch(X,\Spec(A)) \leftrightarrow \Hom_\Ring(A,\Gamma(X,\shf{O}_X)).
+    \end{equation}
+    In other words $\Gamma \dashv \Spec$ as functors between $\Sch$ and $\Ring^{op}$.
+\end{thm}
+\begin{proof}
+    Given a morphism $(f,f^\#):(X,\shf{O}_X) \to (\Spec(A),\shf{O}_{\Spec(A)})$ we obtain map $A\to \Gamma(X,\shf{O}_X)$ from $f^\#(\Spec(A))$.
+
+    Conversely, suppose we have $\phi:A\to \Gamma(X,\shf{O}_X)$.
+    For an affine $U\subseteq X$, we have the map $A\to \Gamma(X,\shf{O}_X) \to \Gamma(U,\shf{O}_X)$, and we thus obtain a map $U\to \Spec(A)$.
+    Let $U,V\subseteq X$ be affine and $W\subseteq U\cap V$ also be affine.
+    The following diagram commutes
+    \begin{equation}
+        \begin{tikzcd}[column sep=small,row sep=small]
+            & & \Gamma(U,\shf{O}_X) \arrow[dr] & \\
+            A \arrow[r] & \Gamma(X,\shf{O}_X) \arrow[ur] \arrow[dr] \arrow[rr] & & \Gamma(W,\shf{O}_X) \\
+                        & & \Gamma(V,\shf{O}_X) \arrow[ur] &
+        \end{tikzcd}
+    \end{equation}
+    and so 
+    \begin{equation}
+        \begin{tikzcd}[column sep=small,row sep=small]
+                     & U \arrow[dl] & \\
+            \Spec(A) & & W \arrow[dl] \arrow[ul] \arrow[ll] \\
+                     & V \arrow[ul] &
+        \end{tikzcd}
+    \end{equation}
+    also commutes.
+    So the morphisms agree on overlaps and so can be glued to get a morphism $X\to \Spec(A)$.
+
+    It is straightforward to check that this defines a bijection.
+\end{proof}
+\begin{corollary}
+    Let $(X,\shf{O}_X)$ be a scheme. 
+    There is a canonical morphism $X\to \Spec(\Gamma(X,\shf{O}_X)$ such that every morphism from $X$ to an affine scheme factors through this map uniquely.
+\end{corollary}
+\begin{proof}
+    This follows from proposition \ref{prop:cat_factor}.
+\end{proof}
+\section{Restriction}
+\begin{remark}
+    Recall from chapter \ref{ch:sheafs} that given $f:X\to Y$ we obtain functors $f_*,\lim_f,f^{-1}$ between $\Sh(X)$ and $\Sh(Y)$.
+    These constructions were themselves functorial and give rise to contra/co-variant functors $\Top\to \Set$.
+    The same also holds for $f_*,f^*$ as functors between $\Mod(X)$ and $\Mod(Y)$.
+\end{remark}
+\begin{thm}
+    Let $f:X\to Y$ be a continuous map and $U\subseteq X$, $V\subseteq Y$ be open subsets such that $f(U)\subseteq V$.
+    Moreover, let $f|_{U,V}$ denote the map $U\to V$ arising from $f|_U$.
+    Then for $\shf{F}\in \Sh(X)$ and $\shf{G}\in \Sh(Y)$ we have
+    \begin{enumerate}
+        \item $(f^{-1}\shf{G})|_U \cong f|_U^{-1}\shf{G} \cong f|_{U,V}^{-1}(\shf{G}|_V)$
+        \item $(f_*\shf{F})|_V \cong (f|_{U,V})_*(\shf{F}|_U)$ when $U = f^{-1}(V)$
+    \end{enumerate}
+    where are isomorphisms are natural.
+\end{thm}
+\begin{proof}
+    \begin{enumerate}
+        \item $f|_U = f \circ i_U$ and so we obtain the first isomorphism.
+            $f|_U = i_V \circ f|_{U,V}$ and so we obtain the second isomorphism.
+        \item Straightforward calculation.
+    \end{enumerate}
+\end{proof}
+\section{Results on schemes}
+\begin{proposition}
+    Let $X, Y$ and $\{Z_i\}_i$ be schemes together with open immersions $f_i:Z_i\to X, g_i:Z_i\to Y$.
+    Let $\alpha:X\to Y$ be a morphism such that $\alpha\circ f_i = g_i$ for all $i$ and $\alpha:f_i(Z_i)\cap f_j(Z_j) \to g_i(Z_i)\cap g_j(Z_j)$ is an isomorphism for all $i,j$.
+    Then $\alpha$ is an isomorphism.
+\end{proposition}
+\begin{proof}
+    We have that $\alpha:f_i(Z_i)\to g_i(Z_i)$ is an isomorphism for all $i$.
+    So we can define inverses $\beta_i:g_i(Z_i)\to f_i(Z_i)$.
+    They agree on overlaps and so they glue to give a global inverse $\beta$.
+\end{proof}
+\begin{definition}
+    Let $F:\Sch^{op}\to \Set$ be a functor.
+    We call $F$ locally sheafy if for any scheme $X$, $F|_{\Top(X)}$ is a sheaf of sets.
+\end{definition}
+\begin{thm}
+    Let $F,G:\Sch^{op}\to \Set$ be locally sheafy functors and suppose there is a natural transformation $\eta:F|_{\Aff^{op}}\Rightarrow G|_{\Aff^{op}}$.
+    Then there is a unique natural transformation $\zeta:F\Rightarrow G$ such that $\zeta|_{\Aff} = \eta$.
+\end{thm}
+\begin{proof}
+    Let $X$ be a scheme and $s\in F(X)$.
+    We wish to define $\zeta_X(s)\in G(X)$.
+    For each affine piece $U$ of $X$, define $t_U = \eta_{U}(s|_{U})\in G(U)$.
+    Given any two affine pieces $U$ and $V$ we have $t_U|_{U\cap V} = \eta_{U\cap V}(s|_{U\cap V}) = t_V|_{U\cap V}$.
+    Since the union of all affine pieces of $X$ is $X$ we obtain an element $t\in G(X)$ such that $t|_U = t_U$ for all affine $U\subseteq X$.
+    Define $\zeta_X(s) = t$.
+    Note that if $X$ was already affine then $\zeta_X = \eta_X$.
+    We claim that $\zeta$ is a natural transformation.
+    
+    Let $X,Y$ be schemes and $f:X\to Y$ a morphism (in $\Sch$).
+    Let $U\subseteq Y$ and $V\subseteq f^{-1}(U)\subseteq X$ be affine pieces and $f|_{V,U}:V\to U$ denote the map such that $f \circ i_V = i_U \circ f|_{V,U}$.
+    Then we know that 
+    \begin{equation}
+        \begin{tikzcd}
+            F(U) \arrow[rrr,"\eta_U"] \arrow[ddd,"Ff_{V,U}"] & & & G(U) \arrow[ddd,"Ff_{V,U}"] \\
+                                         & F(Y) \arrow[r,"\zeta_Y"] \arrow[ul] \arrow[d,"Ff"] & G(Y) \arrow[d,"Gf"] \arrow[ur] & \\
+                                        & F(X) \arrow[r,"\zeta_X"] \arrow[dl] & G(X) \arrow[dr] & \\
+            F(V) \arrow[rrr,"\eta_V"] & & & G(V)
+        \end{tikzcd}
+    \end{equation}
+    commutes except for the middle square.
+    Thus $G(i_V) \circ (Gf \circ \zeta_Y) = G(i_V) \circ (\zeta_X \circ Ff)$.
+    But we can vary the $U$ and $V$ so that the $V$ cover $X$.
+    It follows that $Gf \circ \zeta_Y = \zeta_X \circ Gf$.
+    Thus $\zeta$ is a natural transformation.
+
+    To see that $\zeta$ is unique, suppose $\xi:F\Rightarrow G$ is another natural transformation extending $\eta$.
+    Then let $s\in F(X)$ and $U\subseteq X$ be an affine piece.
+    We must have $G(i_U) \circ \zeta_X(s) = \eta_U \circ F(i_U) = G(i_U) \circ \xi_X(s)$.
+    But we can vary $U$ to cover $X$ and so we must have $\zeta_X(s) = \xi_X(s)$ for all $s\in F(X)$ and hence $\zeta_X = \xi_X$ for all $X$ and hence $\zeta = \xi$.
+\end{proof}
+\begin{corollary}
+    Let $F,G:\Sch^{op}\to \Set$ be locally sheafy functors such that $F|_{\Aff^{op}} \cong G|_{\Aff^{op}}$.
+    Then $F\cong G$.
+\end{corollary}
+\begin{conjecture}
+    There is an equivalence of categories between locally sheafy presheafs on $\Sch$ and locally sheafy presheafs on $\Aff$.
+\end{conjecture}
+\begin{proof}
+    Given $F:\Aff^{op}\to \Set$ define $\tilde F:\Sch^{op}\to \Set$ by $X\mapsto \varprojlim_{U\subseteq X}F(U)$ where $U$ ranges over affine subsets of $X$ and send morphisms to the obvious things.
+\end{proof}
 \end{document}
 
