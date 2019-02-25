@@ -907,28 +907,42 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     By the theorem it suffices to check that $\bar f^\#_p$ is an isomorphism for all $p\in X$.
     But this follows from the fact that $i^\#$ is an isomorphism on stalks.
 \end{proof}
-\subsection{Gluing morphisms}
-\begin{lemma}
-    Let $(f,f^\#),(g,g^\#):(X,\shf{O}_X)\to (Y,\shf{O}_Y)$ be morphisms of locally ringed spaces.
-    Let $\mathcal U = \{U_i\}$ be an open covering of $X$.
-    If the morphisms agree on the restrictions to the $U_i$ then they are equal.
-\end{lemma}
-\begin{proof}
-    We certainly have $f = g$.
-    The result then follows from sheaf condition (A).
-\end{proof}
+\begin{thm}
+    Let $(X,\shf{O}_X)$ and $(Y,\shf{O}_Y)$ be locally ringed spaces.
+    The presheaf $U\mapsto \Hom((U,\shf{O}_X|_U),(Y,\shf{O}_Y))$ on $\Top(X)$ is a sheaf of sets.
+\end{thm}
 \section{Morphisms}
 \subsection{Quasi-compact}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
     We say $(f,f^\#)$ is quasi-compact if there is an affine covering $\{V_i\}_i$ of $Y$ such that $f^{-1}(V_i)$ is quasi-compact for all $i$.
 \end{definition}
-\begin{proposition}
+\begin{lemma}
+    Let $X$ be a topological space.
+    If $X$ is a finite union of quasi-compact open sets then $X$ is quasi-compact.
+\end{lemma}
+\begin{lemma}
+    \label{lemma:qc-aff}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes, $X$ be quasi-compact and $Y$ affine.
+    Then for any affine $V\subseteq Y$, $f^{-1}(V)$ is quasi-compact.
+\end{lemma}
+\begin{proof}
+    $X$ is quasi-compact so has a finite affine covering $\set{V_i}_i$. 
+    The preimage of the basic open sets in $Y$ are of the form $X_r$.
+    But $X_r$ admits a covering $\set{(V_i)_r}_i$ which are also affine.
+    Thus $X_r$ is quasi-compact.
+    But any affine in $Y$ can be covered by finitely many basic open sets, and so its preimage is covered by finitely many quasi-compact sets and hence is quasi-compact.
+\end{proof}
+\begin{thm}
     Let $(f,f^\#):X\to Y$ be quasi-compact.
     Then for any affine $V\subseteq Y$, $f^{-1}(V)$ is quasi-compact.
-\end{proposition}
+\end{thm}
 \begin{proof}
-
+    Let $\set{V_i}_i$ be and affine covering of $Y$ such that $f^{-1}(V_i)$ is quasi-compact for all $i$.
+    Then for any $W\subseteq Y$ affine, since affines are quasi-compact, there are $i_1,\dots,i_k$ such that $W = \cup_jW\cap V_{i_j}$.
+    Since $W$ is quasi-compact, we can find a finite collection of affines $\set{Z_{jk}}$ such that $W\cap V_{i_j} = \cup_kZ_{jk}$ (since $W = \cup_{j,k}Z_{jk}$).
+    By lemma \ref{lemma:qc-aff}, $f^{-1}(Z_{jk})$ is quasi-compact for all $j,k$.
+    Thus $f^{-1}(W)$ is a finite union of quasi-compact open sets and so is quasi-compact.
 \end{proof}
 \subsection{Locally of finite type}
 \begin{definition}
@@ -1242,6 +1256,54 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     Thus there is a section $t\in \shf{F}(U)$ that restricts to the $t_i$.
     Checking locally it follows that $ts = 1$ and so $s$ is invertible.
 \end{proof}
+\section{Locally ringed spaces}
+\begin{lemma}
+    Let $(f,f^\#),(g,g^\#):(X,\shf{O}_X)\to (Y,\shf{O}_Y)$ be morphisms of locally ringed spaces.
+    Let $\mathcal U = \{U_i\}$ be an open covering of $X$.
+    If the morphisms agree on the restrictions to the $U_i$ then they are equal.
+\end{lemma}
+\begin{proof}
+    We certainly have $f = g$.
+    The result then follows from sheaf condition (A).
+\end{proof}
+\begin{proposition}
+    Let $X, Y$ and $\{Z_i\}_i$ be locally ringed spaces together with open immersions $f_i:Z_i\to X, g_i:Z_i\to Y$.
+    Let $\alpha:X\to Y$ be a morphism such that $\alpha\circ f_i = g_i$ for all $i$ and $\alpha:f_i(Z_i)\cap f_j(Z_j) \to g_i(Z_i)\cap g_j(Z_j)$ is an isomorphism for all $i,j$.
+    Then $\alpha$ is an isomorphism.
+\end{proposition}
+\begin{proof}
+    We have that $\alpha:f_i(Z_i)\to g_i(Z_i)$ is an isomorphism for all $i$.
+    So we can define inverses $\beta_i:g_i(Z_i)\to f_i(Z_i)$.
+    They agree on overlaps and so they glue to give a global inverse $\beta$.
+\end{proof}
+\begin{proposition}
+    Let $f:X\to Y$ be a morphism of schemes and let $\set{U_i}$ be an open cover of $Y$ such that the restriction of $f$ to a morphism $f^{-1}(U_i) \to U_i$ is an isomorphism for all $i$.
+    Then $f$ is an isomorphism.
+\end{proposition}
+\section{Restriction}
+\begin{remark}
+    Recall from chapter \ref{ch:sheafs} that given $f:X\to Y$ we obtain functors $f_*,\lim_f,f^{-1}$ between $\Sh(X)$ and $\Sh(Y)$.
+    These constructions were themselves functorial and give rise to contra/co-variant functors $\Top\to \Set$.
+    The same also holds for $f_*,f^*$ as functors between $\Mod(X)$ and $\Mod(Y)$.
+\end{remark}
+\begin{thm}
+    Let $f:X\to Y$ be a continuous map and $U\subseteq X$, $V\subseteq Y$ be open subsets such that $f(U)\subseteq V$.
+    Moreover, let $f|_{U,V}$ denote the map $U\to V$ arising from $f|_U$.
+    Then for $\shf{F}\in \Sh(X)$ and $\shf{G}\in \Sh(Y)$ we have
+    \begin{enumerate}
+        \item $(f^{-1}\shf{G})|_U \cong f|_U^{-1}\shf{G} \cong f|_{U,V}^{-1}(\shf{G}|_V)$
+        \item $(f_*\shf{F})|_V \cong (f|_{U,V})_*(\shf{F}|_U)$ when $U = f^{-1}(V)$
+    \end{enumerate}
+    where are isomorphisms are natural.
+\end{thm}
+\begin{proof}
+    \begin{enumerate}
+        \item $f|_U = f \circ i_U$ and so we obtain the first isomorphism.
+            $f|_U = i_V \circ f|_{U,V}$ and so we obtain the second isomorphism.
+        \item Straightforward calculation.
+    \end{enumerate}
+\end{proof}
+\section{Results on schemes}
 \begin{thm}
     Let $(X,\shf{O}_X)$ be a scheme and $A$ a ring. 
     Then there is a natural bijection
@@ -1284,40 +1346,7 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{proof}
     This follows from proposition \ref{prop:cat_factor}.
 \end{proof}
-\section{Restriction}
-\begin{remark}
-    Recall from chapter \ref{ch:sheafs} that given $f:X\to Y$ we obtain functors $f_*,\lim_f,f^{-1}$ between $\Sh(X)$ and $\Sh(Y)$.
-    These constructions were themselves functorial and give rise to contra/co-variant functors $\Top\to \Set$.
-    The same also holds for $f_*,f^*$ as functors between $\Mod(X)$ and $\Mod(Y)$.
-\end{remark}
-\begin{thm}
-    Let $f:X\to Y$ be a continuous map and $U\subseteq X$, $V\subseteq Y$ be open subsets such that $f(U)\subseteq V$.
-    Moreover, let $f|_{U,V}$ denote the map $U\to V$ arising from $f|_U$.
-    Then for $\shf{F}\in \Sh(X)$ and $\shf{G}\in \Sh(Y)$ we have
-    \begin{enumerate}
-        \item $(f^{-1}\shf{G})|_U \cong f|_U^{-1}\shf{G} \cong f|_{U,V}^{-1}(\shf{G}|_V)$
-        \item $(f_*\shf{F})|_V \cong (f|_{U,V})_*(\shf{F}|_U)$ when $U = f^{-1}(V)$
-    \end{enumerate}
-    where are isomorphisms are natural.
-\end{thm}
-\begin{proof}
-    \begin{enumerate}
-        \item $f|_U = f \circ i_U$ and so we obtain the first isomorphism.
-            $f|_U = i_V \circ f|_{U,V}$ and so we obtain the second isomorphism.
-        \item Straightforward calculation.
-    \end{enumerate}
-\end{proof}
-\section{Results on schemes}
-\begin{proposition}
-    Let $X, Y$ and $\{Z_i\}_i$ be schemes together with open immersions $f_i:Z_i\to X, g_i:Z_i\to Y$.
-    Let $\alpha:X\to Y$ be a morphism such that $\alpha\circ f_i = g_i$ for all $i$ and $\alpha:f_i(Z_i)\cap f_j(Z_j) \to g_i(Z_i)\cap g_j(Z_j)$ is an isomorphism for all $i,j$.
-    Then $\alpha$ is an isomorphism.
-\end{proposition}
-\begin{proof}
-    We have that $\alpha:f_i(Z_i)\to g_i(Z_i)$ is an isomorphism for all $i$.
-    So we can define inverses $\beta_i:g_i(Z_i)\to f_i(Z_i)$.
-    They agree on overlaps and so they glue to give a global inverse $\beta$.
-\end{proof}
+\subsection{Presheaves on the category of schemes}
 \begin{definition}
     Let $F:\Sch^{op}\to \Set$ be a functor.
     We call $F$ locally sheafy if for any scheme $X$, $F|_{\Top(X)}$ is a sheaf of sets.
@@ -1367,6 +1396,31 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \end{conjecture}
 \begin{proof}
     Given $F:\Aff^{op}\to \Set$ define $\tilde F:\Sch^{op}\to \Set$ by $X\mapsto \varprojlim_{U\subseteq X}F(U)$ where $U$ ranges over affine subsets of $X$ and send morphisms to the obvious things.
+\end{proof}
+\subsection{Basic open sets}
+\begin{proposition}
+    Let $X$ be a scheme and $f\in \Gamma(X,\shf{O}_X)$.
+    Then for affine $U\subseteq X$, $X_f\cap U = U_{f|_U}$ is a basic open set.
+\end{proposition}
+\begin{proof}
+    It suffice to prove that for $X=\Spec(R)$ and $r\in R$, $X_r = D_r(R)$.
+    But
+    \begin{equation}
+        X_r = \set{\mathfrak p \normal R : r/1 \not\in \mathfrak p_{\mathfrak p}} = \set{\mathfrak p \normal R : r\not\in \mathfrak p} = D_r(R).
+    \end{equation}
+\end{proof}
+\begin{proposition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes and $r\in \Gamma(Y,\shf{O}_Y)$.
+    Then $f^{-1}(Y_r) = X_{f^\#(Y)(r)}$.
+\end{proposition}
+\begin{proof}
+    Recall that $f^\#_x:\shf{O}_{Y,f(x)}\to \shf{O}_{X,x}$ is a morphism of local rings.
+    Thus $r_{f(x)}\in \mathfrak m_{f(x)}$ iff $f^\#_x(r_{f(x)}) \in \mathfrak m_x$.
+    But $f^\#_x(r_{f(x)}) = f^\#(Y)(r)_x$ and so
+    \begin{align}
+        f^{-1}(Y_r) &= \set{x\in X: r_{f(x)} \not\in \mathfrak m_{f(x)}} \nonumber \\
+                    &= \set{x\in X: f^\#(Y)(r)_x \not\in \mathfrak m_x} = X_{f^\#(Y)(r)}.
+    \end{align}
 \end{proof}
 \end{document}
 
