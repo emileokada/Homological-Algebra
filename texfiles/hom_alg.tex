@@ -559,6 +559,9 @@ If we have a morphism $\phi:\shf{F}\to\shf{G}$ between presheaves, this induces 
 \end{equation}
 commutes.
 This construction is functorial and turns $\Spe$ into a functor from presheaves to topological bundles over $X$.
+\begin{remark}
+    The natural map $\shf{F}\to \shf{F}^+$ induces a homeomorphism $\Spe(\shf{F}) \to \Spe(\shf{F}^+)$.
+\end{remark}
 It follows that we also obtain a map of sheaves $\phi^+:\shf{F}^+\to\shf{G}^+$ by composing sections with $\Spe(\phi)$.
 Thus we have a functor $(-)^+:\PreSh(X)\to\Sh(X)$ and in fact the following diagram commutes.
 \begin{equation}
@@ -568,7 +571,7 @@ Thus we have a functor $(-)^+:\PreSh(X)\to\Sh(X)$ and in fact the following diag
         \shf{F} \arrow[u] \arrow[r,"\phi"] & \shf{G} \arrow[u]
     \end{tikzcd}
 \end{equation}
-Note that since the morphism $\shf{F}\to\shf{F}^+$ is an isomorphism when $\shf{F}$ is a sheaf, this says that the functor $(-)^+$ restricted to $\Sh(X)$ is natrually isomorphism to the identity functor.
+Note that since the morphism $\shf{F}\to\shf{F}^+$ is an isomorphism when $\shf{F}$ is a sheaf, this says that the functor $(-)^+$ restricted to $\Sh(X)$ is natrually isomorphic to the identity functor.
 
 \begin{thm}
     Let $\theta:\shf{F}\to\shf{F}^+$ be the natural morphism. 
@@ -754,7 +757,7 @@ It is clear from the construction that we obtain a functor $f^{-1}:\Sh(Y)\to\Sh(
     It is then a straightforward exercise to check that this bijection is in fact a homeomorphism i.e. $f^{-1}\Spe(\shf{F})\cong\Spe(f^{-1}\shf{F})$.
 \end{remark}
 \begin{thm}
-    $f^{-1}$ is naturally isomorphic to $(-)^+\circ \lim_f$.
+    $f^{-1}$ is naturally isomorphic to $(-)^+\circ \lim_f$ as functors $\PreSh(Y)\to \Sh(X)$.
 \end{thm}
 \begin{proof}
     Let $U$ be an open subset of $X$ and $s\in\lim_f\shf{F}(U)$.
@@ -765,6 +768,9 @@ It is clear from the construction that we obtain a functor $f^{-1}:\Sh(Y)\to\Sh(
     A direct calculation shows that $\phi_x$ is an isomorphism for all $x\in X$ and so the induced map $(\lim_f\shf{F})^+\to f^{-1}\shf{F}$ must be an isomorphism.
     It is straightforward to see that this defines a natural transformation.
 \end{proof}
+\begin{remark}
+    In fact $f^{-1} \circ (-)^+$, $f^{-1}$ and $(-)^+\circ \lim_f$ are all naturally isomorphic.
+\end{remark}
 \begin{corollary}
     $f^{-1}\dashv f_*$ as functors between $\Sh(X)$ and $\Sh(Y)$.
 \end{corollary}
@@ -827,6 +833,64 @@ It is clear from the construction that we obtain a functor $f^{-1}:\Sh(Y)\to\Sh(
     \end{equation}
     is in fact a sheaf.
 \end{corollary}
+\section{Sheaves of modules}
+\begin{definition}
+    Let $\shf{A}$ be a presheaf of rings and $\shf{F}$ a presheaf of groups.
+    We say that $\shf F$ is an $\shf A$-module if there is a morphism $\shf A\times \shf F\to \shf F$ satisfying the usual commutative diagrams.
+    Write $\PreMod(\shf A)$ for the category of presheaf $\shf A$-modules, and $\Mod(\shf A)$ for the category of $\shf A$-modules.
+\end{definition}
+\begin{proposition}
+    Let $\shf A$ be a presheaf of rings.
+    There is an isomorphism of categories between $\Mod(\shf A)$ and $\Mod(\shf A^+)$.
+\end{proposition}
+\begin{proof}
+    Given $\shf A\times \shf F\to \shf F$ we obtain $\shf A^+\times \shf F\to \shf F$ via sheafification.
+    Conversely, given $\shf A^+\times \shf F\to \shf F$ we obtain $\shf A\times \shf F\to \shf F$ by composing with $\shf A\times \shf F\to \shf A^+\times \shf F$.
+    These operations are clearly inverse and respect morphisms.
+\end{proof}
+\begin{proposition}
+    Let $\shf A$ be a sheaf of rings and $\shf F\in \PreMod(\shf A)$.
+    Then $\shf F^+\in \Mod(\shf A^+)$ and the canonical morphism $\shf F\to \shf F^+$ is an $\shf A$-module map.
+\end{proposition}
+\section{Tensors}
+\begin{definition}
+    Let $\shf{A}$ be a presheaf of rings, and $\shf{F},\shf{G}\in\PreMod(\shf A)$.
+    Define $\shf F\otimes_{\shf A}\shf G$ to be the sheafification of the presheaf tensor product.
+    $\shf F\otimes_{\shf A}\shf G$ is a $\shf A^+$-module.
+    Write $\shf F\otimes_{\shf A}'\shf G$ for the presheaf tensor.
+\end{definition}
+\begin{thm}
+    Let $\shf A$ be a sheaf of rings.
+    Then any $\shf A$-bilinear morphism $\shf F\times\shf G\to \shf H$ where $\shf H\in\Mod(\shf A)$ factors uniquely through $\shf F\times\shf G\to \shf F\otimes_{\shf A}\shf G$.
+\end{thm}
+\begin{thm}
+    $-\otimes_{\shf A}-:\PreMod(\shf A)\times\PreMod(\shf A)\to \Mod(\shf A^+)$ is a functor.
+\end{thm}
+\begin{proposition}
+    Let $\shf A$ be a presheaf of rings on $Y$, $\shf F, \shf G\in \PreMod(\shf A)$, and $f:X\to Y, g:Y\to Z$ be continuous maps.
+    Then there are natural isomorphisms
+    \begin{enumerate}
+        \item $\shf{F}\otimes_{\shf{A}}\shf{A} \cong \shf{F}$
+        \item $\shf{F}\otimes_{\shf{A}}\shf{G} \cong \shf{F}^+\otimes_{\shf{A}^+}\shf{G}^+$
+        \item $f^{-1}(\shf F\otimes_{\shf A}\shf G) \cong f^{-1}\shf F\otimes_{f^{-1}\shf A}f^{-1}\shf G$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \begin{enumerate}
+        \item Obvious.
+        \item Use universal property.
+        \item It is straightforward to check that $\lim_f(\shf F\otimes_{\shf A}' \shf G) \cong \lim_f\shf F\otimes_{\lim_f\shf A}'\lim_f\shf G$.
+            But then
+            \begin{align}
+                f^{-1}(\shf F\otimes_{\shf A}\shf G) &\cong f^{-1}(\shf F\otimes_{\shf A}'\shf G) \cong \left(\lim_f(\shf F\otimes_{\shf A}'\shf G)\right)^+ \nonumber \\
+                                                     &\cong f^{-1}\shf F\otimes_{f^{-1}\shf A}f^{-1}\shf G
+            \end{align}
+    \end{enumerate}
+\end{proof}
+\begin{proposition}
+    Let $\shf A$ be a presheaf of rings on $X$ and $\shf F,\shf G\in \Mod(X)$. 
+    Then $(\shf F\otimes_{\shf A}\shf G)_p \cong \shf F_p\otimes_{\shf A_p}\shf G_p$ for all $p\in X$.
+\end{proposition}
 \section{Injective sheaves}
 \begin{definition}
     Let $\shf{F}$ be a sheaf.
@@ -921,52 +985,105 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     Let $X$ be a topological space.
     If $X$ is a finite union of quasi-compact open sets then $X$ is quasi-compact.
 \end{lemma}
-\begin{lemma}
-    \label{lemma:qc-aff}
-    Let $(f,f^\#):X\to Y$ be a morphism of schemes, $X$ be quasi-compact and $Y$ affine.
-    Then for any affine $V\subseteq Y$, $f^{-1}(V)$ is quasi-compact.
-\end{lemma}
-\begin{proof}
-    $X$ is quasi-compact so has a finite affine covering $\set{V_i}_i$. 
-    The preimage of the basic open sets in $Y$ are of the form $X_r$.
-    But $X_r$ admits a covering $\set{(V_i)_r}_i$ which are also affine.
-    Thus $X_r$ is quasi-compact.
-    But any affine in $Y$ can be covered by finitely many basic open sets, and so its preimage is covered by finitely many quasi-compact sets and hence is quasi-compact.
-\end{proof}
 \begin{thm}
     Let $(f,f^\#):X\to Y$ be quasi-compact.
     Then for any affine $V\subseteq Y$, $f^{-1}(V)$ is quasi-compact.
 \end{thm}
 \begin{proof}
-    Let $\set{V_i}_i$ be and affine covering of $Y$ such that $f^{-1}(V_i)$ is quasi-compact for all $i$.
-    Then for any $W\subseteq Y$ affine, since affines are quasi-compact, there are $i_1,\dots,i_k$ such that $W = \cup_jW\cap V_{i_j}$.
-    Since $W$ is quasi-compact, we can find a finite collection of affines $\set{Z_{jk}}$ such that $W\cap V_{i_j} = \cup_kZ_{jk}$ (since $W = \cup_{j,k}Z_{jk}$).
-    By lemma \ref{lemma:qc-aff}, $f^{-1}(Z_{jk})$ is quasi-compact for all $j,k$.
-    Thus $f^{-1}(W)$ is a finite union of quasi-compact open sets and so is quasi-compact.
+    Let us say that an open affine subset $V\subseteq Y$ has the property $(P)$ if $f^{-1}(V)$ is quasi-compact.
+    We show that $(P)$ is an affine-local property.
+    \begin{enumerate}
+        \item If $V$ has property $(P)$, then certainly $V_g$ for $g\in \shf{O}_Y(V)$ does too.
+        \item Suppose that $(g_1,\dots,g_k) = \shf{O}_Y(V)$ and that $V_{g_i}$ has property $(P)$ for all $i$.
+            Then $f^{-1}(V) = \cup_if^{-1}(V_{f_i})$ is a finite union of quasi-compact open sets and so is quasi compact.
+    \end{enumerate}
+    The result follows from the affine communication lemma.
 \end{proof}
+\begin{remark}
+    It follows easily from the theorem that $f^{-1}(V)$ is quasi-compact for all open quasi-compact subsets $V$ of $Y$.
+\end{remark}
+\begin{remark}
+    If $\phi:A\to B$ is ring homomorphism, then $\Spec(\phi)$ is always quasi-compact (choose the trivial covers for both spaces).
+\end{remark}
+\subsection{Quasi-separated}
+\begin{definition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes.
+    We say $(f,f^\#)$ is quasi-separated if there is an affine covering $\{V_i\}_i$ of $Y$ such that $f^{-1}(V_i)$ is quasi-separated for all $i$.
+\end{definition}
+\begin{thm}
+    Let $(f,f^\#):X\to Y$ be quasi-separated.
+    Then for any affine $V\subseteq Y$, $f^{-1}(V)$ is quasi-separated.
+\end{thm}
+\begin{proof}
+    Let us say that an open affine subset $V\subseteq Y$ has the property $(P)$ if $f^{-1}(V)$ is quasi-separated.
+    We show that $(P)$ is an affine-local property.
+    \begin{enumerate}
+        \item If $V$ has property $(P)$, then certainly $V_g$ for $g\in \shf{O}_Y(V)$ does too.
+        \item Suppose that $(g_1,\dots,g_k) = \shf{O}_Y(V)$ and that $V_{g_i}$ has property $(P)$ for all $i$.
+            Then for each $i$, $f^{-1}(V_{g_i})$ has an open cover $\set{W_{ij}}_j$ such that the intersection between any two elements of the cover is quasi-compact.
+            It is clear that $\set{W_{ij}}_{i,j}$ cover $f^{-1}(V)$ and so it suffices to show that $W_{ij}\cap W_{kl}$ is quasi-compact for $i\ne k$.
+            But by part $(1)$, the $V_{g_ig_j}$ also have property $(P)$.
+            Moreover, $W_{ij}\cap W_{kl}\subseteq f^{-1}(V_{g_ig_k})$ and so $W_{ij}\cap W_{kl} = W_{ij}\cap f^{-1}(V_{g_ig_k}) \cap W_{kl}\cap f^{-1}(V_{g_ig_k})$.
+            But $W_{ij}\cap f^{-1}(V_{g_ig_k}) = (W_{ij})_{f^\#(V)(g_k)}$ is affine.
+            Thus $W_{ij}\cap W_{kl}$ is the intersection of two affines in the quasi-separated space $f^{-1}(V_{g_ig_k})$ and is thus quasi-compact.
+    \end{enumerate}
+    The result follows from the affine communication lemma.
+\end{proof}
+\begin{remark}
+    If $\phi:A\to B$ is ring homomorphism, then $\Spec(\phi)$ is always quasi-separated (choose the trivial covers for both spaces).
+\end{remark}
 \subsection{Locally of finite type}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
     We say $(f,f^\#)$ is locally of finite type if there is an affine covering $\{V_i\}_i$ of $Y$, and for each $i$, and affine covering $\{U_{ij}\}_j$ of $f^{-1}(V_i)$ such that $\shf{O}_X(U_{ij})$ is as finitely generated $\shf{O}_Y(V_i)$-algebra.
 \end{definition}
 \begin{proposition}
+    \label{prop:fg_aff_local}
+    Let $\phi:B\to A$ be a ring homomorphism and $(f_1,\dots,f_n) = A$.
+    Then $A$ is a finitely generated $B$-algebra iff $A_{f_i}$ is a finitely generated $B$-algebra for all $i$.
+\end{proposition}
+\begin{thm}
     Let $(f,f^\#):X\to Y$ be locally of finite type.
     Then for any affine $V\subseteq Y$ and affine $U\subseteq f^{-1}(V)$, $\shf{O}_X(U)$ is a finitely generated $\shf{O}_Y(V)$-algebra.
-\end{proposition}
+\end{thm}
 \begin{proof}
-    Affine schemes are quasi-compact and so $V$ can be covered by finitely many $V\cap V_i$.
-    But.
+    Let us say that an open affine subset $V\subseteq Y$ has the property $(P)$ if for all open affine $U\subseteq f^{-1}(V)$, $\shf{O}_X(U)$ is finitely generated as a $\shf{O}_Y(V)$-algebra.
+    We show that $(P)$ is an affine-local property.
+    \begin{enumerate}
+        \item It is clear that if $V$ has property $(P)$ then so does $V_g$ for $g\in \shf{O}_Y(V)$.
+        \item Suppose that $(g_1,\dots,g_k) = \shf{O}_Y(V)$ and that $V_{g_i}$ has property $(P)$ for all $i$.
+    Let $U\subseteq f^{-1}(V)$ be affine and open and let $\psi:A\to C$ denote the corresponding morphism where $A = \shf{O}_Y(V)$ and $C = \shf{O}_X(U)$.
+    We have that $f$ restricts to a morphism $U_{\psi(g_i)}\to V_{f_i}$ for all $i$.
+    Since $U_{\psi(g_i)}$ is affine, $C_{\psi(g_i)}$ is a finitely generated $A_{g_i}$-algebra and hence a finitely generated $A$-algebra.
+    Since $(g_1,\dots,g_k) = A$ it follows that $(\psi(g_1),\dots,\psi(g_k)) = C$ and so $C$ is a finitely generated $A$-algebra.
+    \end{enumerate}
+    It follows that the property $(P)$ is an affine-local property.
+    But by proposition \ref{prop:fg_aff_local} and the affine communication lemma, each of the $V_i$ have property $(P)$.
+    Since the $V_i$ cover $Y$, the result follows from the affine communication lemma.
 \end{proof}
+\begin{remark}
+    If $\phi:A\to B$ is ring homomorphism, then $\Spec(\phi)$ is locally of finite type iff $B$ is a finitely generated $A$-algebra via $\phi$.
+\end{remark}
 \subsection{Finite type}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
     We say $(f,f^\#)$ is of finite type if it is quasi-compact and locally of finite type.
 \end{definition}
+\begin{remark}
+    If $\phi:A\to B$ is ring homomorphism, then $\Spec(\phi)$ is of finite type iff $B$ is a finitely generated $A$-algebra via $\phi$.
+\end{remark}
 \subsection{Closed immersion}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
     We say $(f,f^\#)$ is a closed immersion if $f(X)$ is closed in $Y$, $f$ is a homeomorphism onto its image, and the morphism $f^\#$ is surjective.
 \end{definition}
+\begin{remark}
+    If $\phi:A\to B$ is ring homomorphism, then $\Spec(\phi)$ is a closed immersion iff $\phi$ is a surjection.
+\end{remark}
+\begin{proposition}
+    Let $f:X\to Y$ be a morphism and suppose there is an open cover $\set{U_i}_i$ of $Y$ such that $f|_{f^{-1}(U_i)}:f^{-1}(U_i)\to U_i$ is a closed immersion for all $i$.
+    Then $f$ is a closed immersion.
+\end{proposition}
 \subsection{Open immersion}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
@@ -977,13 +1094,26 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
     We say $(f,f^\#)$ is affine if there is an affine covering $\{V_i\}_i$ of $Y$ such that $f^{-1}(V_i)$ is affine for all $i$.
 \end{definition}
-\begin{proposition}
+\begin{thm}
     Let $(f,f^\#):X\to Y$ be affine.
     Then for any affine $V\subseteq Y$, $f^{-1}(V)$ is affine.
-\end{proposition}
+\end{thm}
 \begin{proof}
-
+    Let us say that an open affine subset $V\subseteq Y$ has the property $(P)$ if $f^{-1}(V)$ is affine.
+    We show that $(P)$ is an affine-local property.
+    \begin{enumerate}
+        \item If $V$ has property $(P)$, then clearly $V_g$ for $g\in\shf{O}_Y(V)$ does too.
+        \item Suppose that $(g_1,\dots,g_k) = \shf{O}_Y(V)$ and that $V_{g_i}$ has property $(P)$ for all $i$.
+            Then $f$ restricted to $f^{-1}(V)\to V$ is quasi-compact and quasi-separated.
+            It follows that $f^{-1}(V)$ is quasi-compact and quasi-separated.
+            Moreover, $f^{-1}(V)_{f^\#(V)(g_i)}$ is affine for all $i$, and $(f^\#(V)(g_1),\dots,f^\#(V)(g_k)) = \Gamma(f^{-1}(V),\shf{O}_X)$.
+            It follows from proposition \ref{prop:aff_cover_aff} that $f^{-1}(V)$ is affine.
+    \end{enumerate}
+    The result follows from the affine communication lemma.
 \end{proof}
+\begin{remark}
+    If $\phi:A\to B$ is a ring homomorphism, then $\Spec(\phi)$ is always affine (choose the trivial cover for both spaces).
+\end{remark}
 \section{\texorpdfstring{$\shf{O}_X$}{OX}-Modules}
 \begin{definition}
     Let $(X,\shf{O}_X)$ be a locally ringed space.
@@ -1002,7 +1132,7 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{definition}
     (Tensor product).
     Let $\shf{F}$ and $\shf{G}$ be $\shf{O}_X$-modules.
-    Define the tensor product of $\shf{F}$ and $\shf{G}$, $\shf{F}\otimes_{\shf{O}_X}\shf{G}$ to be the sheafification of the presheaf tensor product.
+    Define the tensor product of $\shf{F}$ and $\shf{G}$, $\shf{F}\otimes_{\shf{O}_X}\shf{G}$ to be the sheafification of the presheaf tensor product with the obvious $\shf{O}_X$-module structure.
 \end{definition}
 \begin{definition}
     (Pullback).
@@ -1012,6 +1142,30 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     We can thus form the sheaf $f^{-1}\shf{F}\otimes_{f^{-1}\shf{O}_Y}\shf{O}_X$.
     This sheaf is naturally an $\shf{O}_X$-module and we call it $f^*\shf{F}$.
 \end{definition}
+\begin{proposition}
+    The maps $X\mapsto \Mod(X)$, $f\mapsto f^*$ give rise to a functor $\Sch^{op}\to \Mod$.
+\end{proposition}
+\begin{proof}
+    Clear that the identity maps to the identity.
+    Now suppose we have maps $f:X\to Y,g:Y\to Z$ and let $\shf{F}\in \Mod(Z)$.
+    Then
+    \begin{align}
+        f^*(g^*(\shf F)) &= f^*(g^{-1}\shf F\otimes_{g^{-1}\shf O_Z}\shf O_Y) \nonumber \\
+                         &= f^{-1}\left(g^{-1}\shf F\otimes_{g^{-1}\shf O_Z}\shf O_Y\right)\otimes_{f^{-1}\shf O_Y}\shf O_X \nonumber \\
+                         &\cong (g\circ f)^{-1}\shf{F}\otimes_{(g\circ f)^{-1}\shf O_Z}\shf O_X \nonumber \\
+                         &= (g\circ f)^*(\shf F).
+    \end{align}
+\end{proof}
+\begin{thm}
+    Let $\shf F,\shf G\in \Mod(Y)$ and $f:X\to Y$.
+    Then 
+    \begin{equation}
+        f^*(\shf F\otimes_{\shf O_Y}\shf G) \cong f^*\shf F\otimes_{\shf O_X}f^*\shf G.
+    \end{equation}
+\end{thm}
+\begin{remark}
+    If $i:U\hookrightarrow X$ is the inclusion map for an open subset $U\subseteq X$, then $i^* = i^{-1}$.
+\end{remark}
 \begin{definition}
     (Direct image).
     Let $f:X\to Y$ be a continuous map, and $\shf{F}$ an $\shf{O}_X$.
@@ -1048,6 +1202,35 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     \end{align}
     where the last bijection follows from the lemma.
 \end{proof}
+\begin{remark}
+    Given an $\shf{O}_Y$-module $\shf{F}$ we have a morphism 
+    \begin{equation}
+        f^{-1}\shf{F}\to f^{-1}\shf{F}\otimes_{f^{-1}\shf{O}_Y}\shf{O}_X = f^*\shf{F}.
+    \end{equation}
+    Thus we have a morphism $\shf{F}\to f_*f^{-1}\shf{F} \to f_*f^*\shf{F}$.
+    This morphism is the same as the one arising from the $f^*\dashv f_*$ adjunction.
+\end{remark}
+\begin{definition}
+    Let $\shf{F}$ be an $\shf{O}_Y$-moudle, and $\sigma\in \shf{F}(U)$.
+    Write $f^*\sigma$ for the element in $(f^*\shf{F})(f^{-1}(U))$ under the morphism $\shf{F}\to f_*f^*\shf{F}$.
+\end{definition}
+\begin{remark}
+    When $\shf{F} = \shf{O}_Y$, $f^* = f^\#$.
+\end{remark}
+\begin{proposition}
+    Let $\shf{F}$ be an $\shf{O}_Y$-module, $\sigma\in \shf{F}(Y)$ and $\phi:\shf{O}_Y\to \shf{F}$ the corresponding map.
+    Then $f^*\phi:\shf{O}_X\to f^*\shf{F}$ is mulitplication by $f^*\sigma$.
+\end{proposition}
+\begin{proof}
+    $\id\to f_*f^*$ a natural transformation and so
+    \begin{equation}
+        \begin{tikzcd}
+            \shf{O}_Y \arrow[r] \arrow[d] & \shf{F} \arrow[d] \\
+            f_*\shf{O}_X \arrow[r] & f_*f^*\shf{F}
+        \end{tikzcd}
+    \end{equation}
+    commutes.
+\end{proof}
 \begin{definition}
     Let $R$ be a ring and $M$ an $R$-module. 
     Define $\tilde M$ to be the $\shf{O}_{\Spec(R)}$-module which is locally $M_r$.
@@ -1061,6 +1244,918 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{corollary}
     $\tilde \bullet$ and $\Gamma$ form part of an adjoint equivalence of categories between $\Mod_R$ and $\Mod(\Spec(R))$.
 \end{corollary}
+\section{Locally free \texorpdfstring{$\shf{O}_X$}{OX}-modules}
+\begin{definition}
+    Let $(X,\shf{O}_X)$ be a scheme and $\shf{F}$ an $\shf{O}_X$-module.
+    We say $\shf{F}$ is locally free of rank $n$ if there exists an open cover $\set{U_i}_i$ of $X$ such that $\shf{F}|_{U_i} \cong \shf{O}_{U_i}^{\oplus n}$ for all $i$.
+\end{definition}
+\begin{remark}
+    Given a locally free sheaf $\shf{F}$ and an open cover we obtain transition functions $\psi_{ji}\in \GL_n(\shf{O}_{U_{ij}})$.
+    Conversely, given such data we obtain a sheaf isomorphic to the original one.
+\end{remark}
+\begin{lemma}
+    \label{lem:pullback}
+    Let $f:X\to Y$ be a morphism of schemes and $\phi:\shf O_Y\to \shf O_Y$ the $\shf O_Y$-module homomorphism given by multiplication by $\alpha\in\shf O_Y(Y)$.
+    Then $f^*\phi:\shf O_X\to \shf O_X$ is given by multiplication by $f^\#(Y)(\alpha)$.
+\end{lemma}
+\begin{proof}
+    We check that they are equal on stalks.
+    \begin{equation}
+        \begin{tikzcd}
+            \shf O_{Y,f(p)}\otimes_{\shf O_{Y,f(p)}}\shf O_{X,p} \arrow[r] & \shf O_{Y,f(p)}\otimes_{\shf O_{Y,f(p)}}\shf O_{X,p} \arrow[d] \\
+            \shf O_{X,p} \arrow[r,"f^*\phi"] \arrow[u] & \shf O_{X,p}.
+        \end{tikzcd}
+    \end{equation}
+    Following this diagram we get that 
+    \begin{equation}
+        1\mapsto 1\otimes 1\mapsto \alpha_p\otimes 1 = 1\otimes f_p^\#(\alpha_p)\mapsto f_p^\#(\alpha_p).
+    \end{equation}
+    Thus $f^*\phi$ is given by multiplication by $f^\#(Y)(\alpha)$.
+\end{proof}
+\begin{thm}
+    Let $f:X\to Y$ be a morphism of schemes, and $\shf{F}$ a locally free $\shf{O}_Y$-module.
+    Then $f^*\shf{F}$ is locally free of the same rank.
+    Moreover, if $\set{\psi_{ji}}$ denote the transition functions for an open cover $\set{U_i}_i$ for $Y$, then $f^\#(\psi_{ji})$ are transition functions for $f^*\shf{F}$ on the open cover $\set{f^{-1}(U_i)}_i$.
+\end{thm}
+\begin{proof}
+    There is an isomorphism $\shf{F}|_{U_i}\to \shf{O}_{U_i}^{\oplus n}$.
+    Thus 
+    \begin{equation}
+        (f^*\shf{F})|_{f^{-1}(U_i)}\cong \left(f|_{f^{-1}(U_i)}\right)^* (\shf F|_{U_i}) \cong \shf O_{f^{-1}(U_i)}^{\oplus n}
+    \end{equation}
+    and so $f^*\shf F$ is also locally free of rank $n$.
+    The result on the transition functions follows from lemma \ref{lem:pullback}
+\end{proof}
+\begin{proposition}
+    Let $\shf F$ be a locally free $\shf O_X$-module.
+    Then $-\otimes_{\shf O_X}\shf F$ is exact.
+\end{proposition}
+\section{Line bundles}
+\begin{definition}
+    Let $S$ be a scheme and $\shf{L}, \shf{L}'$ be locally free sheaves on $S$.
+    We say the morphisms $\phi:\bigoplus\shf{O}_S\to \shf{L}$, $\psi:\bigoplus\shf{O}_S\to \shf{L}'$ are isomorphic if there is an isomorphism $i:\shf{L} \to \shf{L}'$ such that $\psi = i \circ \phi$.
+\end{definition}
+\begin{definition}
+    Let $r\ge0$.
+    Define $\underline \P^r$ to be the functor from $\Sch^{op}$ to $\Set$ which associates with the scheme $S$ the set of isomorphism classes of sujective morphisms $\phi:\bigoplus_{k=0}^r\shf{O}_S\to \shf{L}$ where $\shf{L}$ is a locally free sheaf of rank $1$. 
+    Given $f:T\to S$, $\underline \P^r(f)$ sends $\phi$ to $f^*\phi$.
+\end{definition}
+\begin{definition}
+    $\P^r_\Z := \Proj(\Z[x_0,\dots,x_r])$.
+\end{definition}
+\begin{lemma}
+    Let $\shf{L}$ be a locally free sheaf of rank $1$ on a scheme $S$ and $\sigma\in \shf{L}(S)$.
+    Then $S_\sigma := \set{s\in S: \sigma\not\in \mf m_s\shf{L}_s}$ is an open subset of $S$ and trivialises $\shf{L}$.
+    Moreover, if $\xi:T\to S$ is a morphism of schemes then $T_{\xi^*\sigma} = \xi^{-1}(S_\sigma)$.
+\end{lemma}
+\begin{proof}
+    Let $\set{U_i}_i$ be a trivialising open cover for $\shf{L}$.
+    Then $\psi_i:\shf{L}|_{U_i}\xrightarrow{\sim}\shf{O}_S|_{U_i}$ and under this isomorphism $\mf m_s\shf{L}_s$ corresponds to $\mf m_s$.
+    Thus $S_\sigma\cap U_i$ is open for all $i$ and so $S_\sigma$ is open.
+    Now define the map $\phi:\shf{O}_X\to \shf{L}$ by $1\mapsto \sigma$.
+    On $S_\sigma \cap U_i$ the composition $\shf{O}_X|_{S_\sigma \cap U_i}\xrightarrow{\phi}\shf{L}|_{S_\sigma \cap U_i}\xrightarrow{\psi_i}\shf{O}_X|_{S_\sigma \cap U_i}$ must be multiplication by some $\alpha\in \Gamma(S_\sigma \cap U_i,\shf{O}_X)$.
+    But looking at stalks, this $\alpha$ must be invertible and so the composition must be an isomorphism.
+    But then $\phi|_{S_\sigma\cap U_i}$ must be too and hence $\phi|_{S_\sigma}$ is an isomorphism.
+
+    For the last part note that we have the following commutative diagram
+    \begin{equation}
+        \begin{tikzcd}
+            \shf{L}|_{U_i} \arrow[d] \arrow[r] & \shf{O}_S|_{U_i} \arrow[d] \\
+            (\xi|_{\xi^{-1}(U_i)})_*((\xi^*\shf{L})|_{\xi^{-1}(U_i)}) \arrow[r] & (\xi|_{\xi^{-1}(U_i)})_*(\shf{O}_T|_{\xi^{-1}(U_i)}).
+        \end{tikzcd}
+    \end{equation}
+    It follows that $\xi^*(\sigma|_{U_i})$ maps to $\xi^\#(\psi_i(\sigma|_{U_i}))$ under $\xi^*\psi_i$.
+    Thus 
+    \begin{equation}
+        T_{\xi^*\sigma} \cap \xi^{-1}(U_i) = \xi^{-1}(U_i)_{\xi^\#(\psi_i(\sigma|_{U_i}))} = \xi^{-1}\left((U_i)_{\psi_i(\sigma|_{U_i})}\right) = \xi^{-1}(U_i\cap S_{\sigma})
+    \end{equation}
+    and so the result follows.
+\end{proof}
+\begin{lemma}
+    Let $S$ be a scheme, $\shf{L}$ a locally free sheaf of rank 1 and 
+    \begin{equation}
+        \phi:\bigoplus_{k=0}^r\shf{O}_S\to \shf{L}
+    \end{equation}
+    a surjective morphism of $\shf{O}_S$-modules.
+    Then there is a morphism $\eta_\phi:S\to \P^r_\Z$.
+    Moreover, this construction only depends on the isomorphism class of $\phi$ and is functorial in $S$ i.e. given $\gamma:T\to S$ we have $\eta_{\gamma^*(\phi)} = \eta_\phi\circ \gamma$.
+\end{lemma}
+\begin{remark}
+    Morally such a morphism gives $r+1$ sections $\sigma_0,\dots,\sigma_r$. 
+    We then obtain the morphism $S\to \P^r_\Z$ by $s\mapsto (\sigma_0:\cdots:\sigma_r)$.
+\end{remark}
+\begin{proof}
+    Let $e_i = \delta_{ij}$ and let $\sigma_0,\dots,\sigma_r$ be the images of $e_0,\dots,e_r$ respectively.
+    Since $\phi$ is surjective, $S = \cup_iS_{\sigma_i}$.
+    Let $\psi_i:\shf{O}_S|_{S_{\sigma_i}}\to \shf{L}|_{S_{\sigma_i}}$ denote the trivialising isomorphisms from the previous lemma and let $\xi_i$ be the inverse of $\psi_i$.
+    Restricting $\phi$ to $S_{\sigma_i}$ we obtain the composition
+    \begin{equation}
+        \label{eq:aff}
+        \bigoplus_{k=0}^r\shf{O}_{S_{\sigma_i}} \xrightarrow{\phi|_{S_{\sigma_i}}} \shf{L}|_{S_{\sigma_i}} \xrightarrow{\xi_i} \shf{O}_{S_{\sigma_i}}.
+    \end{equation}
+    Let $f_{ji}$ denote the image of $e_j$ under this composition.
+    Then $f_{ji}\cdot\sigma_i|_{S_{\sigma_i}} = \sigma_j|_{S_{\sigma_i}}$.
+    It follows that 
+    \begin{equation}
+        f_{ji}|_{S_{\sigma_i}\cap S_{\sigma_j}} \cdot f_{ij}|_{S_{\sigma_i}\cap S_{\sigma_j}} \cdot \sigma_j|_{S_{\sigma_i}\cap S_{\sigma_j}} = \sigma_j|_{S_{\sigma_i}\cap S_{\sigma_j}}.
+    \end{equation}
+    Applying $\xi_i|_{S_{\sigma_i}\cap S_{\sigma_j}}$ to both sides yields that 
+    \begin{equation}
+        f_{ji}|_{S_{\sigma_i}\cap S_{\sigma_j}}  = f_{ij}|_{S_{\sigma_i}\cap S_{\sigma_j}}^{-1}.
+    \end{equation}
+    Similarly we get 
+    \begin{equation}
+        f_{kj}|_{S_{\sigma_i}\cap S_{\sigma_j}}f_{ji}|_{S_{\sigma_i}\cap S_{\sigma_j}} = f_{ki}|_{S_{\sigma_i}\cap S_{\sigma_j}}, \quad f_{ii} = 1.
+    \end{equation}
+
+    Now, equation \ref{eq:aff} gives rise to a morphism $(\eta_{\phi})_i:S_{\sigma_i}\to U_i$ where $U_i$ is the standard affine patch $D_+(x_i)\subseteq \P^r_\Z$.
+    This morphism sends $x_j/x_i\in \shf{O}_{\P^r_\Z}(U_i)$ to $f_{ji}$ (and is uniquely defined by this fact).
+    It follows that
+    \begin{equation}
+        (\eta_{\phi})_i^{-1}(U_i\cap U_j) = (S_{\sigma_i})_{f_{ji}} = S_{\sigma_i} \cap S_{\sigma_j}.
+    \end{equation}
+    Thus the map $(\eta_\phi)_i|_{S_{\sigma_i}\cap S_{\sigma_j}}$ factors 
+    \begin{equation}
+        \begin{tikzcd}
+            S_{\sigma_i}\cap S_{\sigma_j} \arrow[r] \arrow[dr] & \Spec(\Z[x_0/x_i,\dots,x_n/x_i]) \\
+                                                               & \Spec(\Z[x_0/x_i,\dots,x_n/x_i]_{x_j/x_i}) \arrow[u]
+        \end{tikzcd}
+    \end{equation}
+    and similarly for $(\eta_\phi)_j|_{S_{\sigma_i}\cap S_{\sigma_j}}$.
+    We thus have maps
+    \begin{equation}
+        \begin{tikzcd}
+                                              & \Spec(\Z[x_0/x_i,\dots,x_0/x_i]_{x_j/x_i}) \\
+            S_{\sigma_i}\cap S_{\sigma_j}\arrow[ur,"(\eta_\phi)_{ji}"] \arrow[dr,"(\eta_\phi)_{ij}"] & \\
+                                                               & \Spec(\Z[x_0/x_j,\dots,x_0/x_j]_{x_i/x_j}) \arrow[uu,"\zeta"]
+        \end{tikzcd}
+    \end{equation}
+    where the vertical map is induced from $x_k/x_i\mapsto (x_k/x_j)\cdot (x_i/x_j)^{-1}$.
+    To see that this diagram commutes note that $(\eta_\phi)_{ji}(x_k/x_i) = f_{ki}|_{S_{\sigma_i}\cap S_{\sigma_j}}$ while
+    \begin{align}
+        (\eta_\phi)_{ij}\circ \zeta(x_k/x_i) &= (\eta_\phi)_{ij}\left((x_k/x_j)\cdot (x_i/x_j)^{-1}\right) \nonumber \\
+                                             &= f_{kj}|_{S_{\sigma_i}\cap S_{\sigma_j}} \cdot f_{ij}|_{S_{\sigma_i}\cap S_{\sigma_j}}^{-1} \nonumber \\
+                                             &= f_{kj}|_{S_{\sigma_i}\cap S_{\sigma_j}} \cdot f_{ji}|_{S_{\sigma_i}\cap S_{\sigma_j}} = f_{ki}|_{S_{\sigma_i}\cap S_{\sigma_j}}.
+    \end{align}
+    It follows that $(\eta_\phi)_i|_{S_{\sigma_i} \cap S_{\sigma_j}} = (\eta_\phi)_j|_{S_{\sigma_i} \cap S_{\sigma_j}}$ and hence we obatin a map $\eta_\phi:S\to \P^r_\Z$.
+    This construction clearly only depends on the isomorphism class of $\phi$ (the $f_{ji}$'s are independent of isomorphism class).
+
+    Finally we show functoriality.
+    Let $\gamma:T\to S$ be a morphism of schemes.
+    Then $e_1,\dots,e_r$ get sent to $\gamma^*\sigma_1,\dots,\gamma^*\sigma_r$ under $\gamma^*(\phi)$.
+    The corresponding open sets are $T_{\gamma^*\sigma_i} = \gamma^{-1}(S_{\sigma_i})$ and the corresponding $f_{ji}$'s are $\gamma^*f_{ji} = \gamma^\#f_{ji}$.
+    It follows that for each $i$, $(\eta_{\gamma^*(\phi)})_i = (\eta_\phi)_i\circ \gamma|_{T_{\gamma^*\sigma_i}}$.
+    Therefore we get that $\eta_{\gamma^*(\phi)} = \eta_\phi\circ \gamma$.
+\end{proof}
+\begin{remark}
+    \label{rem:trans_fn}
+    The $f_{ji}|_{S_{\sigma_i}\cap S_{\sigma_j}}$ are the transition functions with respect to the open cover $S_{\sigma_i}$.
+\end{remark}
+\begin{definition}
+    Let $\shf{O}(1)$ denote the sheaf on $\P^r_\Z$ with transition functions $\psi_{ji} = x_i/x_j$.
+    Write $\chi_k$ for the section corresponding to $x_k/x_i$ on $U_i$ for $i=0,\dots,r$.
+    Then we obtain a surjective morphism $\phi_{\P^r_\Z}:\bigoplus_{k=0}^r\shf{O}_{\P^r_\Z} \to \shf{O}(1)$.
+    Note that $\eta_{\phi_{\P^r_\Z}} = \id_{\P^r_\Z}$.
+\end{definition}
+\begin{thm}
+    $\underline \P^r$ is a representable functor with representative $\P^r_\Z$.
+\end{thm}
+\begin{proof}
+    From the lemma we have a natural transformation $\underline \P^r \Rightarrow \Hom(-,\P^r_\Z)$.
+    Now consider that map $\Hom(S,\P^r_\Z) \to \underline \P^r(S)$ given by $\xi \to \xi^*(\phi_{\P^r_\Z})$.
+    Then 
+    \begin{equation}
+        \eta_{\xi^*(\phi_{\P^r_\Z})} = \eta_{\phi_{\P^r_\Z}} \circ \xi = \xi
+    \end{equation}
+    so the composition one way is the identity.
+    Conversely, consider a $\phi: \bigoplus_{k=0}^r\shf{O}_S\to \shf L\in \underline \P^r(S)$.
+    We wish to show that $(\eta_\phi)^*\shf{O}(1) \cong \shf L$ and under this isomorphism, $(\eta_\phi)^*(\phi_{\P^r_\Z})) = \phi$.
+    First note that $(\eta_\phi)^{-1}(U_i) = S_{\sigma_i}$.
+    Moreover, the corresponding transition functions for $(\eta_\phi)^*\shf{O}(1)$ are $(\eta_\phi)^\#(x_i/x_j) = f_{ij}|_{S_{\sigma_i} \cap S_{\sigma_j}}$.
+    It follows from remark \ref{rem:trans_fn} that $(\eta_\phi)^*\shf{O}(1) \cong \shf L$.
+    Finally $(\eta_\phi)^*(\chi_k)$ maps to $f_{ki}$ on the trivialisation on $S_{\sigma_i}$.
+    The result follows.
+\end{proof}
+\section{Ample line bundles}
+\begin{lemma}
+    \label{lem:ext}
+    Let $X$ be a scheme, $\shf{F}$ a quasi-coherent $\shf{O}_X$-module, $\shf{L}$ a line bundle and $f\in \Gamma(X,\shf{L})$.
+    \begin{enumerate}
+        \item If $X$ is quasi-compact, $s\in \shf{F}(X)$ and $s|_{X_f} = 0$ then there is an $n\ge1$ such that $s\otimes f^{\otimes n} = 0$ in $\shf{F} \otimes \shf{L}^{\otimes n}$.
+        \item If $X$ is qsqc and $s\in \shf{F}(X_f)$ then there is an $n\ge1$ such that $s\otimes f^{\otimes n} = t|_{X_f}$ for some $t\in \left(\shf{F}\otimes \shf L^{\otimes n}\right)(X)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    $(1)$ Let $\set{U_i}$ be a finite trivialising cover for $\shf L$ consisting of affines and let $g_i\in \shf{O}_X(U_i)$ be the section corresponding to $f|_{U_i}$ under $\shf L|_{U_i} \cong \shf O_X|_{U_i}$.
+    Then $U_i\cap X_f = (U_i)_{g_i}$ so there is an $n\ge1$ (independent of $i$) such that $g_i^ns|_{U_i} = 0$.
+    But under the isomorphism $\shf F|_{U_i} \cong \shf F|_{U_i}\otimes \shf O_X|_{U_i}^{\otimes n}\cong \shf F|_{U_i}\otimes \shf L|_{U_i}^{\otimes n}$, $g_i^ns|_{U_i}$ maps to $s|_{U_i}\otimes f|_{U_i}^{\otimes n}$.
+    It follows that $s\otimes f^{\otimes n} = 0$.
+    $(2)$ Let $\set{U_i}$ and $\set{g_i}$ be as before and let $\set{\psi_{ji}}$ be the transition functions.
+    There exists an $n$ (independent of the $i$) such that $g_i^ns|_{(U_i)_{g_i}} = t_i|_{(U_i)_{g_i}}$ for some $t_i\in \shf F(U_i)$.
+    Let $\shf G = \shf F\otimes \shf L^{\otimes n}$ and $t_i'$ be the element in $\shf G(U_i)$ corresponding to $t_i$. 
+    Then $t_i'|_{U_i\cap X_f} = s\otimes f^{\otimes n}|_{U_i\cap X_f}$.
+    Thus we have $t_i'|_{U_i\cap U_j\cap X_f} = t_j'|_{U_i\cap U_j\cap X_f}$.
+    But $U_i\cap U_j$ is quasi-compact since $X$ is quasi-serparated and so by $(1)$ there is a $m$ (independent of $i,j$) such that $t_i'\otimes f^{\otimes m}|_{U_i\cap U_j} = t_j'\otimes f^{\otimes m}|_{U_i\cap U_j}$.
+    It follows that there is a $t\in \shf G\otimes \shf L^{\otimes m}(X)$ that restricts to the $t_i'\otimes f^{\otimes m}$ and hence to $s\otimes f^{\otimes(m+n)}$ on $X_f$.
+\end{proof}
+\begin{definition}
+    A line bundle $\shf L$ is ample if for any coherent sheaf $\shf F$ on $S$, there is a $n_0\in \N$ such that $\shf F\otimes \shf L^{\otimes n}$ is generated by global sections for all $n\ge n_0$.
+\end{definition}
+\begin{thm}
+    Let $S$ be a noetherian scheme.
+    The line bundle $\shf L$ is very ample iff there is $n\in N$ and $\sigma_1,\dots,\sigma_k\in\Gamma(S,\shf L^{\otimes n})$ such that $S_{\sigma_i}$ is affine for all $i$ and $S = \cup_iS_{\sigma_i}$.
+\end{thm}
+\begin{proof}
+    $(\Leftarrow)$ Let $\shf F$ be a coherent sheaf on $S$.
+    Then $\shf F|_{S_{\sigma_i}}$ is globally generated, say by $t_{ji}\in \shf F(S_{\sigma_i})$, since $S_{\sigma_i}$ is affine.
+    By lemma \ref{lem:ext}, there is an $n\ge 1$ independent of $i$, and $\lambda_{ji}\in (\shf F\otimes \shf L^{\otimes n})(X)$ such that $\lambda_{ji}|_{S_{\sigma_i}} = t_{ji}\otimes \sigma_i^{\otimes n}$.
+    It is clear that these $\lambda_{ji}$ globally generate $\shf F\otimes \shf L^{\otimes n}$.
+    It is straighfroward to see that $\shf F\otimes \shf L^{\otimes m}$ is also globally generated for $m\ge n$.
+
+    $(\Rightarrow)$ Let $\set{U_i}_i$ be an open cover of $S$ consisting of affines which trivialise $\shf L$.
+    Let $Y_i = S\backslash U_i$ and $\shf J_{Y_i}$ be the ideal sheaf associated to $Y_i$.
+    Since $\shf L$ is ample there is an $n$ independent of $i$, such that $\shf J_{Y_i}\otimes \shf L^{\otimes n}$ is globally generated for all $i$.
+    Let $\tilde\sigma_{ji}\in \shf J_{Y_i}\otimes \shf L^{\otimes n}$ be such that for all $x\in U$ there is a $j$ such that $\tilde\sigma_{ji}\not\in \mf m_x$ (note that $\shf J|_{U_i}\cong \shf O_S|_{U_i}$).
+    We have the exact sequence $0\to \shf J_{U_i} \to \shf O_S$ and hence the exact sequence $0\to \shf J|_{U_i}\otimes \shf L^{\otimes n} \to \shf L^{\otimes n}$.
+    Let $\sigma_{ji}$ be the image of $\tilde\sigma_{ji}$ in $\shf L^{\otimes n}$.
+    Then by construction we have $S_{\sigma_{ji}}\subseteq U_i$ and in fact $U_i = \cup_{j}S_{\sigma_{ji}}$.
+    Since $U_i$ is affine and trivialises $\shf L$ we also have that $S_{\sigma_{ji}}$ is also affine.
+    The result follows.
+\end{proof}
+\begin{corollary}
+    $\shf O(1)$ is ample.
+\end{corollary}
+\begin{lemma}
+    Let $S$ be a Noetherian scheme, $\shf L$ a line bundle on $S$, $\phi:\bigoplus_{k=0}^r\shf O_S\to \shf L$ a surjective $\shf O_S$-module homomorphism and $\sigma_0,\dots,\sigma_r$ the distinguished images of $\phi$ in $\shf L$.
+    If $S_{\sigma_i}$ is affine for all $i$, then the resulting morphism $S\to \P^r_\Z$ is a closed immersion.
+\end{lemma}
+\begin{thm}
+    Let $f:S\to \Spec(R)$ be a morphism of finite type, $R$ a Noetherian ring and $\shf L$ an ample line bundle on $S$.
+    Then there is an $n\ge 1$ and $\sigma_0,\dots,\sigma_r\in \Gamma(S,\shf L^{\otimes n})$ such that the corresponding morphism $S\to \P^r_R$ is a closed immersion into an open subset of $\P^r_R$.
+\end{thm}
+\begin{proof}
+    Since $f$ is finite, $S$ is Noetherian.
+    Replacing $\shf L^{\otimes n}$ with $\shf L$, we get that there are $\sigma_1,\dots,\sigma_k\in \Gamma(S,\shf L)$ such that $S = \cup_iS_{\sigma_i}$ and the $S_{\sigma_i}$ are affine.
+    Each $\Gamma(S_{\sigma_i},\shf O_S)$ is a finitely generated $R$-algebra.
+    Let $\set{\sigma_{ji}}$ be the image of a generating set in $\Gamma(S_{\sigma_i},\shf L)$.
+    There exists an $n$ independent of $i$ and $t_{ji}\in \Gamma(S,\shf L^{\otimes n})$ such that $\sigma_{ji}\otimes \sigma_i^{\otimes n} = t_{ji}|_{S_{\sigma_i}}$.
+    Let $\Sigma$ be the set of $t_{ji}$'s and $\sigma_i$'s and $\psi:\set{0,\dots,r}\to \Sigma$ an arbitrary enumeration of $\Sigma$.
+    The resulting morphism $S\to \P^r_R$ is obtained by gluing together the morphisms
+    \begin{equation}
+        S_{\sigma_i} \to \Spec(R[x_0/x_{\psi^{-1}(\sigma_i)},\dots,x_r/x_{\psi^{-1}(\sigma_i)}]).
+    \end{equation}
+    These maps are closed immersions (the corresponding maps on global sections are surjective) and so the result follows.
+\end{proof}
+\section{Cohomological results}
+\begin{lemma}
+    Let $f:X\to Y$ be an affine morphism of schemes and suppose that $X$ is noetherian.
+    Then for all quasi-coherent $\shf O_X$-modules $\shf F$, we have $R^kf_*(\shf F) = 0$ for all $k>0$.
+\end{lemma}
+\begin{lemma}
+    Let $X$ be a Noetherian scheme and $i:X\to Y$ be a closed immersion.
+    Then $i$ is an affine morphism.
+\end{lemma}
+\begin{proof}
+    WLOG $Y$ is affine.
+    Note that $i_*:\Ab(X)\to \Ab(Y)$ is an exact functor.
+    Let $\shf F$ be a quasi-coherent $\shf O_X$-module and $0\to \shf F\to \shf I^\bullet$ a flasque quasi-coherent resolution.
+    Then $0 \to i_*\shf F\to i_*\shf I^\bullet$ is a flasque quasi-coherent resolution of $i_*\shf F$.
+    Thus, as $Y$ is affine,
+    \begin{equation}
+        0 = H^k(\Gamma(Y,i_*\shf I^\bullet)) = H^k(\Gamma(X,\shf I^\bullet)) = H^k(X,\shf F)
+    \end{equation}
+    for $k>0$.
+    Thus $X$ must be affine.
+\end{proof}
+\chapter{Spectral sequences}
+\section{Grothendieck spectral sequence}
+\begin{thm}
+    (Grothendieck spectral sequence).
+    Let $F:\mathcal A \to \mathcal B$ and $G:\mathcal B \to \mathcal C$ be left exact functors and suppose that $F$ sends injective objects to $G$-acylic objects.
+    Then for $A$ an object in $\mathcal A$ there is a spectral sequence $\{E_r(A)\}$ such that 
+    \begin{equation}
+        E_2^{p,q}(A) = R^pG(R^qF(A)) \Rightarrow R^{p+q}(GF)(A).
+    \end{equation}
+\end{thm}
+\begin{corollary}
+    (Leray spectral sequence).
+    Let $f:X\to Y, g:Y\to Z$ be continuous maps.
+    Then for a sheaf $\shf{F}$, there is a $E_2$ cohomological spectral sequence
+    \begin{equation}
+        R^pg_*(R^qf_*(\shf{F})) \Rightarrow R^{p+q}(g\circ f)_*(\shf{F})
+    \end{equation}
+    which is functorial in $\shf{F}$.
+\end{corollary}
+\begin{proof}
+    $f_*$ sends injective sheaves to flabby sheaves, which are $g_*$-acyclic.
+\end{proof}
+\chapter{Group cohomology}
+
+\chapter{Appendix - Categorical results}
+\section{Category theory results}
+\begin{proposition}
+    \label{prop:cat_factor}
+    Let $F\dashv G$ and $G$ be full.
+    Let $e$ be the unit of the adjunction.
+    Then every morphism $x\to Gy$ factors uniquely through $e_x:x\to GFx$.
+\end{proposition}
+\begin{proof}
+    Let $\alpha$ and $\beta$ denote the forward and backward maps in
+    \begin{equation}
+        \Hom(Fx,y) \leftrightarrow \Hom(x,Gy)
+    \end{equation}
+    respectively.
+    Let $f:x\to Gy$.
+    Then $f = \alpha(\beta(f))$.
+    But $\alpha(\beta(f)) = G\beta(f)\circ e_x$ so we get existence of a factorisation.
+    For uniqueness, suppose $f = h\circ e_x$.
+    Since $G$ is full there is a $l:Fx\to y$ such that $h = Gl$.
+    So $\alpha(l) = \alpha(\beta(f))$.
+    But $\alpha$ is a bijection so $l = \beta(f)$ and hence $h = G\beta(f)$ which gives uniqueness.
+\end{proof}
+\chapter{Appendix - Sheaf theoretic results}
+\section{Properties of sheaves of rings}
+\begin{thm}
+    Let $\shf{F}$ be a sheaf of rings on X and $s\in \shf{F}(X)$.
+    The following are equivalent:
+    \begin{enumerate}
+        \item $s$ is invertible,
+        \item There exists an open cover $\set{U_i}_i$ of $X$ such that $s|_{U_i}$ is invertible for all $i$,
+        \item $s_x$ is invertible for all $x\in X$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    $(1)\Rightarrow(2)$ Trivial. 
+    $(2)\Rightarrow (1)$ Suppose $s|_{U_i}$ is invertible for all $i$.
+    Then there are $t_i\in\shf{F}(U_i)$ such that $t_is|_{U_i} = 1$.
+    But then, since inverses are unique we must have $t_i|_{U_i\cap U_j} = t_j|_{U_i\cap U_j}$ since they are both the inverse of $s|_{U_i\cap U_j}$.
+    Thus there is a section $t\in \shf{F}(U)$ that restricts to the $t_i$.
+    Checking locally it follows that $ts = 1$ and so $s$ is invertible.
+    $(2)\Leftrightarrow(3)$ Trivial.
+\end{proof}
+\section{Locally ringed spaces}
+\begin{lemma}
+    Let $(f,f^\#),(g,g^\#):(X,\shf{O}_X)\to (Y,\shf{O}_Y)$ be morphisms of locally ringed spaces.
+    Let $\mathcal U = \{U_i\}$ be an open covering of $X$.
+    If the morphisms agree on the restrictions to the $U_i$ then they are equal.
+\end{lemma}
+\begin{proof}
+    We certainly have $f = g$.
+    The result then follows from sheaf condition (A).
+\end{proof}
+\begin{proposition}
+    Let $X, Y$ and $\{Z_i\}_i$ be locally ringed spaces together with open immersions $f_i:Z_i\to X, g_i:Z_i\to Y$.
+    Let $\alpha:X\to Y$ be a morphism such that $\alpha\circ f_i = g_i$ for all $i$ and $\alpha:f_i(Z_i)\cap f_j(Z_j) \to g_i(Z_i)\cap g_j(Z_j)$ is an isomorphism for all $i,j$.
+    Then $\alpha$ is an isomorphism.
+\end{proposition}
+\begin{proof}
+    We have that $\alpha:f_i(Z_i)\to g_i(Z_i)$ is an isomorphism for all $i$.
+    So we can define inverses $\beta_i:g_i(Z_i)\to f_i(Z_i)$.
+    They agree on overlaps and so they glue to give a global inverse $\beta$.
+\end{proof}
+\begin{proposition}
+    Let $f:X\to Y$ be a morphism of schemes and let $\set{U_i}$ be an open cover of $Y$ such that the restriction of $f$ to a morphism $f^{-1}(U_i) \to U_i$ is an isomorphism for all $i$.
+    Then $f$ is an isomorphism.
+\end{proposition}
+\section{Restriction}
+\begin{remark}
+    Recall from chapter \ref{ch:sheafs} that given $f:X\to Y$ we obtain functors $f_*,\lim_f,f^{-1}$ between $\Sh(X)$ and $\Sh(Y)$.
+    These constructions were themselves functorial and give rise to contra/co-variant functors $\Top\to \Set$.
+    The same also holds for $f_*,f^*$ as functors between $\Mod(X)$ and $\Mod(Y)$.
+\end{remark}
+\begin{thm}
+    Let $f:X\to Y$ be a continuous map and $U\subseteq X$, $V\subseteq Y$ be open subsets such that $f(U)\subseteq V$.
+    Moreover, let $f|_{U,V}$ denote the map $U\to V$ arising from $f|_U$.
+    Then for $\shf{F}\in \Sh(X)$ and $\shf{G}\in \Sh(Y)$ we have
+    \begin{enumerate}
+        \item $(f^{-1}\shf{G})|_U \cong f|_U^{-1}\shf{G} \cong f|_{U,V}^{-1}(\shf{G}|_V)$
+        \item $(f_*\shf{F})|_V \cong (f|_{U,V})_*(\shf{F}|_U)$ when $U = f^{-1}(V)$
+    \end{enumerate}
+    where are isomorphisms are natural.
+\end{thm}
+\begin{proof}
+    \begin{enumerate}
+        \item $f|_U = f \circ i_U$ and so we obtain the first isomorphism.
+            $f|_U = i_V \circ f|_{U,V}$ and so we obtain the second isomorphism.
+        \item Straightforward calculation.
+    \end{enumerate}
+\end{proof}
+\section{Miscellaneous}
+\begin{proposition}
+    Let $X$ be a topological space and $\shf{F}$ a sheaf on $X$.
+    If $U,V$ are disjoint open subsets of $X$, the $\shf{F}(U\cup V) \cong \shf{F}(U)\times \shf{F}(V)$.
+\end{proposition}
+\begin{proof}
+    Obvious.
+\end{proof}
+\chapter{Appendix - Graded rings and Proj}
+\section{Graded rings}
+\subsection{General results}
+\begin{definition}
+    A ($\Z$-)graded ring is a ring $S$ together with a decomposition $S = \bigoplus_{d\in\Z}S_d$ as abelian groups, such that $S_d\cdot S_e\subseteq S_{d+e}$.
+    An ideal $\mf a$ of $S$ is called homogeneous if $\mf a = \bigoplus_{d\in\Z}\mf a\cap S_d$.
+    A map $\phi:S\to T$ between graded rings is called a graded morphism if it is a ring homomorphism and $\phi(S_d)\subseteq T_d$ for all $d$.
+\end{definition}
+\begin{proposition}
+    Let $S$ be a graded ring and $\mf a$ an ideal of $R$.
+    The following are equivalent:
+    \begin{enumerate}
+        \item $\mf a$ is a homogeneous ideal
+        \item $\mf a$ is generated by homogeneous elements
+        \item $a\in\mf a\Rightarrow$ the homogeneous parts of $a$ lie in $\mf a$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(1)\Rightarrow(2)$ $\mf a$ is generated by $\cup_{d\in\Z}\mf a\cap S_d$. 
+    $(2)\Rightarrow(3)$ Trivial. 
+    $(3)\Rightarrow(1)$ We always have $\mf a \supseteq \bigoplus_{d\in\Z}\mf a\cap S_d$.
+    Now suppose $a\in \mf a$.
+    Then clearly $a$ lies in $\bigoplus_{d\in\Z}\mf a\cap S_d$.
+\end{proof}
+\begin{proposition}
+    Let $\phi:S\to T$ be a graded homomorphism and $\mf a$ a homogeneous ideal of $T$.
+    Then $\phi^{-1}(\mf a)$ is a homogeneous ideal of $S$.
+\end{proposition}
+\begin{proof}
+    Suppose $\phi(s) \in \mf a$.
+    Then $\sum_n\phi(s_n) \in \mf a$.
+    But $\mf a$ is homogeneous and so $\phi(s_n)\in \mf a$ for all $n$.
+    Thus $s_n\in \phi^{-1}(\mf a)$ for all $n$ and so $\phi^{-1}(\mf a)$ is a homogeneous ideal.
+\end{proof}
+\begin{proposition}
+    The sum, product, intersection and radical of homogeneous ideals are homogeneous.
+\end{proposition}
+\begin{proof}
+    The only nontrivial case is showing that if $\mf a$ is homogeneous then so is $\rad(\mf a)$.
+    Let $r = \sum_{d} r_d \in \rad(\mf a)$.
+    Then there exists an $n\ge1$ such that $r^n\in \mf a$.
+    Let $d_0$ be minimal such that $r_{d_0}\ne 0$.
+    Then $r_{d_0}^n$ is the degree $nd_0$ homogeneous part of $r^d$.
+    Since $\mf a$ is homogeneous, we must have $r_{d_0}^n\in \mf a$ and so $r_{d_0}\in \rad(\mf a)$.
+    Now repeat with $r-r_{d_0}$ to get that the homogeneous parts of $r$ must lie in $\rad(\mf a)$.
+\end{proof}
+\begin{proposition}
+    Let $S$ be a graded ring and $\mf a$ a homogeneous ideal of $S$.
+    Then $\mf a$ is prime iff $fg\in \mf a \Rightarrow f\in\mf a$ or $g\in\mf a$ for all homogeneous $f,g\in S$.
+\end{proposition}
+\begin{proof}
+    $(\Rightarrow)$ Trivial. 
+    $(\Leftarrow)$ Let $f = \sum_{d}f_d,g = \sum_{d}g_d\in S$ and suppose $fg\in \mf a$.
+    Let $d_0$ be the minimal $d$ such that $f_d\ne 0$, and similarly define $d_0'$ in terms of $g$.
+    Then $f_{d_0}g_{d_0'}$ is the $d_0+d_0'$ homogeneous part of $fg$ and so must lie in $\mf a$.
+    Thus either $f_{d_0}\in \mf a$ or $g_{d_0'}\in \mf a$.
+    If both are in $\mf a$, then repeat to $(f-f_{d_0})(g-g_{d_0'})\in \mf a$.
+    Otherwise, one must lie in $\mf a$ and the other does not.
+    If $f_{d_0}\in \mf a$ and $g_{d_0'}\not\in \mf a$ then $(f-f_{d_0})g\in \mf a$.
+    Let $d_1$ denote the degree of the homogeneous part of $f-f_{d_0}$ of minimal degree.
+    Then $f_{d_1}g_{d_0'}\in\mf a$.
+    But $g_{d_0'}\not\in\mf a$ and so $f_{d_1}\in\mf a$.
+    In the other case argue similarly.
+    Repeating in the manner we obtain that either $f$ of $g$ must lie in $\mf a$.
+\end{proof}
+\begin{proposition}
+    Let $S$ be a graded ring and $\mf a$ a homogeneous ideal of $S$.
+    Then $\mf a$ is a radical ideal iff $f^n\in \mf a \Rightarrow f\in \mf a$ for all homogeneous $f\in S$.
+\end{proposition}
+\begin{proof}
+    $(\Rightarrow)$ Trivial. 
+    $(\Leftarrow)$ Let $f\in S$ be such that $f^n\in \mf a$.
+    Let $d_0$ be the minimal $d$ such that $f_d\ne 0$.
+    Then $(f^n)_{dn} = f_{d_0}^n$.
+    Since $\mf a$ is homogeneous, this implies that $f_{d_0}^n\in \mf a$ and so $f_{d_0}\in \mf a$.
+    Repeat to $f-f_{d_0}$.
+\end{proof}
+\begin{thm}
+    (Graded localisation).
+    Let $S$ be a $\Z$-graded ring and $T$ a multiplicative subset of $S$ consisting of homogeneous elements.
+    Then $T^{-1}S$ is a $\Z$-graded ring and the canonical morphism $\phi:S\to T^{-1}S$ is a graded morphism.
+\end{thm}
+\begin{proof}
+    $T^{-1}S$ is a certainly a ring so we only need to define a grading on it.
+    Let $T_k$ denote the elements of $T$ with grading $k$ and define $(T^{-1}S)_n$ to be the set of elements in $T^{-1}S$ that can be written as $s/t$ for some $s\in S_i, t\in T_j$ with $i-j = n$.
+    We claim that $T^{-1}S = \bigoplus_{n\in\Z}(T^{-1}S)_n$.
+    It is clear that $\sum_n(T^{-1}S)_n = T^{-1}S$.
+    Now suppose there are distinct $n_1,\dots,n_k\in\Z$ and $x_1\in(T^{-1}S)_{n_1},\dots,x_k\in(T^{-1}S)_{n_k}$ such that $\sum_ix_i = 0$.
+    We can write each $x_i$ as $s_i/t_i$ where $s_i\in S, t_i\in T$ are both homogeneous and $\deg(s_i)-\deg(t_i)=n_i$.
+    WLOG all the $t_i$ are equal to some $t\in T$.
+    Then there is some $u\in T$ such that $u\sum_is_i = 0$.
+    But each $s_i$ has a different degree and so $us_i = 0$ for all $i$.
+    It follows that each $x_i = 0$ too.
+    Thus $T^{-1}S = \bigoplus_{n\in\Z}(T^{-1}S)_n$.
+    Finally, the fact that $(T^{-1}S)_n(T^{-1}S)_m\subseteq(T^{-1}S)_{n+m}$ is obvious, and so is the fact that $\phi$ is a graded morphism.
+\end{proof}
+\begin{proposition}
+    Let $\phi:S\to T^{-1}S$ be the canonical homomorphism.
+    \begin{enumerate}
+        \item Let $I$ be a homogeneous ideal of $S$.
+            Then $T^{-1}I$ is a homogeneous ideal of $T^{-1}S$.
+        \item Let $J$ be a homogeneous ideal of $T^{-1}S$.
+            Then $\phi^{-1}(J)$ is a homogeneous ideal of $S$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(1)$ $T^{-1}I$ is generated by the homogeneous elements of $I$.
+    $(2)$ $\phi$ is a graded morphism.
+\end{proof}
+\begin{definition}
+    We say a $\Z$-graded ring $S$ is $\Z_{\ge0}$-graded if $S_d = 0$ for all $d<0$.
+    For an element $s\in S$ we write $\deg(s)$ for the grading of the homogeneous part of largest grading amongst the non-zero homogeneous parts of $s$.
+    We write $S_+$ for the ideal $\bigoplus_{d>0}S_d$.
+    We call $S_+$ the irrelevant ideal.
+\end{definition}
+\begin{remark}
+    From now on graded ring will refer to a $\Z_{\ge 0}$-graded ring.
+\end{remark}
+\begin{definition}
+    Fix a ring $A$ and let $S$ be a graded ring.
+    If $S_0 = A$ we say that $S$ is a \textit{graded ring over $A$}.
+    If $S_+$ is a finitely generated ideal of $S$, we say that $S$ is a \textit{finitely generated graded ring over A}.
+    If $S$ is generated by $S_1$ as an $A$-algebra, we say that $S$ is \textit{generated in degree 1}.
+\end{definition}
+\begin{proposition}
+    $S$ is a finitely generated graded ring over $A$ iff $S$ is a finitely generated graded $A$-algebra.
+\end{proposition}
+\begin{proof}
+    $(\Rightarrow)$ Suppose $S_+ = (r_1,\dots,r_k)$.
+    WLOG the $r_i$ are all homogeneous.
+    We prove by induction on $\deg(r)$ that $r$ lies in $A[r_1,\dots,r_n]$.
+    If $\deg(r) = 0$ the result is clear.
+    Now suppose $r$ has $\deg(r)>0$.
+    Write $r = r_a+r_+$ where $r_a\in A$ and $r_+\in S_+$.
+    Since $r_+\in S_+$, we can write $r_+ = \sum_is_ir_i$ for some $s_i\in S$.
+    Since $\deg(r_i)>0$, $\deg(s_i)<\deg(r_+)$ for all $i$.
+    But then each $s_i\in A[r_1,\dots,r_n]$ by the induction hypothesis.
+    It is then clear that $r\in A[r_1,\dots,r_n]$.
+
+    $(\Leftarrow)$ Suppose $S = A[r_1,\dots,r_n]$.
+    WLOG $r_i\in S_+$ for all $i$.
+    Then $(r_1,\dots,r_n)\subseteq S_+$.
+    But $S = A \oplus (r_1,\dots,r_n)$.
+    Thus $(r_1,\dots,r_n)=S_+$.
+\end{proof}
+\begin{corollary}
+    $S$ is Noetherian iff $A$ is Noetherian and $S$ is a finitely generated graded ring.
+\end{corollary}
+\begin{proof}
+    $(\Rightarrow)$ If $S$ is Noetherian, then $S_+$ is finitely generated, so $S$ is a finitely generated graded ring.
+    To see that $A$ must be Noetherian note that $A \cong S/S_+$ is a quotient of a Noetherian ring and so must be Noetherian itself.
+    $(\Leftarrow)$ If $A$ is Noetherian and $S$ is a finitely generated graded ring, then $S$ is a finitely generated $A$-algebra and so must be Noetherian too (by Hilbert's basis theorem + quotients).
+\end{proof}
+\subsection{Graded localisation}
+\begin{definition}
+    Let $S$ be a graded ring and $\mf p$ a homogeneous prime ideal of $S$.
+    Write $S_{(\mf p)}$ for the $0^{th}$ graded component of $T^{-1}S$ where $T$ is the set of homogeneous elements in $S$ not in $\mf p$.
+
+    For $f\in S_+$ homogeneous write $S_{(f)}$ for the $0^{th}$ graded component of $S_f$.
+\end{definition}
+\begin{proposition}
+    Let $S$ be a graded ring and write $S^{(d)}$ for the subring $\bigoplus_{k\ge0}S_{kd}$.
+    If $f\in S$ is a homogeneous element of degree $d$ then $S_{(f)} \cong S^{(d)}/(1-f)$.
+\end{proposition}
+%\begin{proof}
+    %Define the map $\alpha: S^{(d)}\to S_{(f)}$ by sending $s\in S_{kd}$ to $s/f^k$ and extending linearly to the whole of $S^{(d)}$.
+    %This clearly defines a ring homomorphism with $(f-1)$ in its kernel so we obtain a map $\bar \alpha:S^{(d)}/(f-1)\to S_{(f)}$.
+%
+    %To construct the inverse we define the map $\beta:S_{(f)}\to S^{(d)}/(f-1)$ as follows: let $x\in S_{(f)}$. 
+    %Then there exists an $k\ge 0$ and $s\in S_{dk}$ such that $x = s/f^k$.
+    %Define $\beta(x)$ to be the image of $s$ in $R^{(d)}/(f-1)$.
+    %To see that this is well defined, suppose $k'\ge0,s'\in S_{dk'}$ are also such that $x = s'/f^{k'}$.
+    %Then there is a $l\ge 0$ such that $f^l(f^{k'}s-f^ks') = 0$.
+    %It follows that $s=s'$ in $R^{(d)}/(f-1)$.
+    %It is clear that $\beta$ is a ring homomorphism and that $\bar\alpha$ and $\beta$ are inverse.
+%\end{proof}
+\begin{definition}
+    Let $\mf a\normal S_{(f)}$ be a radical ideal.
+    Define $\Psi(\mf a)_n = \set{x\in S_n:x^d/f^n \in \mf a}$ and $\Psi(\mf a) = \bigoplus_{n\ge0}\Psi(\mf a)_n$.
+\end{definition}
+\begin{lemma}
+    $\Psi(\mf a)$ is a homogeneous radical ideal of $S$.
+    If $\mf a$ is additionally prime, then so is $\Psi(\mf a)$.
+\end{lemma}
+\begin{proof}
+    We first check that $\Psi(\mf a)$ is an ideal.
+    Let $x,y\in \Psi(\mf a)_n$.
+    Then $x^d/f^n$ and $y^d/f^n$ lie in $\mf a$.
+    Thus $((x+y)^d/f^n)^2\in \mf a$ and so $(x+y)^d/f^n\in \mf a$.
+    Let $x\in\Psi(\mf a)_n$ and $s\in S_k$.
+    Then $x^d/f^n\in \mf a$ and so $(sx)^d/f^{k+n}\in \mf a$.
+    Thus $\mf a$ is an ideal.
+    By definition it must be homogeneous.
+    To check that $\Psi(\mf a)$ is a radical ideal suppose $x\in S_k$ and $x^n\in \Psi(\mf a)_{kn}$ for some $n$.
+    Then $x^{dn}/f^{kn} = (x^d/f^k)^n\in \mf a$.
+    But $\mf a$ is a radical ideal and so $x^d/f^k\in \mf a$ as required.
+
+    Finally, suppose $\mf a$ is prime.
+    Let $x\in S_m,y\in S_n$ be such that $xy\in \Psi(\mf a)_{m+n}$.
+    Then $(xy)^d/f^{m+n} = (x^d/f^m)(y^d/f^n)\in \mf a$.
+    Thus either $x\in \Psi(\mf a)_m$ of $y\in \Psi(\mf a)_n$.
+\end{proof}
+\begin{thm}
+    \label{thm:f_loc}
+    Let $S$ be a graded ring and let $f\in S_+$ be a homogeneous element of degree $d$.
+    Then there are maps $\Phi$ and $\Psi$,
+    \begin{equation}
+        \begin{tikzcd}
+            \left\{\mf b \normal S : \begin{array}{c} \mf b \text{ is homog. and radical}\end{array}\right\} \arrow[r,shift right,swap,"\Phi"] & \set{\mf a \normal S_{(f)}: \mf a\text{ radical}} \arrow[l,shift right,swap,"\Psi"]
+        \end{tikzcd}
+    \end{equation}
+    such that $\Phi\circ \Psi = \id$ and $\mf b\subseteq \Psi\circ\Phi(\mf b)$.
+    Moreover, these maps restict to a bijection
+    \begin{equation}
+        \begin{tikzcd}
+            \left\{\mf q \normal S : \begin{array}{c} \mf q \text{ is homog. and} \\ \text{prime and } \mf q\not\ni f \end{array}\right\} \arrow[r,shift right,swap,"\Phi"] & \set{\mf p \normal S_{(f)}: \mf p\text{ prime}} \arrow[l,shift right,swap,"\Psi"].
+        \end{tikzcd}
+    \end{equation}
+\end{thm}
+\begin{proof}
+    Define $\Phi$ by $\mf b\mapsto \mf bS_f\cap S_{(f)}$.
+    It is clear that $\Phi(\mf b)$ is radical (resp. prime) if $\mf b$ is radical (resp. prime not containing $f$).
+    Moreover we have the explicit description
+    \begin{equation}
+        \Phi(\mf b) = \set{x\in S_f: x = b/f^k, b\in \mf b_{kd}}
+    \end{equation}
+    (this holds for any ideal $\mf b$).
+    Let $\Psi$ be as defined earlier.
+    By the lemma it sends radical (resp. prime) ideals to radical (resp. prime not containing $f$) ideals.
+
+    It is straightforward to check that $\Phi(\Psi(\mf a)) = \mf a$ whenever $\mf a$ is a radical ideal.
+    It is also easy to see that $\mf b \subseteq \Psi(\Phi(\mf b))$ for any ideal $\mf b$.
+    It remains to check that $\mf q \supseteq \Psi(\Phi(\mf q))$ when $\mf q$ is a homogeneous prime not containing $f$.
+    But this is obvious.
+\end{proof}
+\begin{corollary}
+    We have a bijection 
+    \begin{equation}
+        \set{\mf p \normal S_{(f)}: \mf p\text{ prime}} \leftrightarrow \left\{\mf q \normal S_f : \mf q \text{ homog. and prime} \right\}.
+    \end{equation}
+\end{corollary}
+\begin{proposition}
+    Let $S$ be a graded ring, $f\in S_+$ be a homogeneous element of degree $d$ and $\Phi$ be as in the theorem.
+    Then for $\mf q\normal S$ a homogeneous prime not containing $f$ we have 
+    \begin{equation}
+        S_{(\mf q)} \cong \left(S_{(f)}\right)_{\Phi(\mf q)}.
+    \end{equation}
+\end{proposition}
+\begin{proof}
+    Let $T$ be the multiplicative set of homogeneous elements in $S$ not in $\mf q$.
+    There is a canonical homomorphism $S\to T^{-1}S$.
+    Since $f\in T$, this induces a homomorphism $S_f\to T^{-1}S$ which preserves the grading.
+    We thus obtain a map $\phi:S_{(f)}\to S_{(\mf q)}$.
+    Moreover,
+    \begin{align}
+        S_{(f)}\backslash \Phi(\mf q) &= \set{x\in S_f: \exists a\in S_{dk}\backslash q_{dk} \text{ s.t. } x=a/f^k} \nonumber \\
+                                      &= \set{x\in S_{(f)}: x=a/f^k, a\in S_{dk} \Rightarrow a\not\in \mf q_{dk}}.
+    \end{align}
+    and so it follows that $S_{(f)}\backslash \Phi(\mf q)$ maps into $(S_{\mf q})^\times$ under $\phi$.
+    We now wish to show that $S_{(\mf q)}$ has the required universal property.
+    Let $\psi:S_{(f)}\to R$ be any ring homomorphism such that $S_{(f)}\backslash\Phi(\mf q)$ gets sent into $R^\times$ and let $x\in S_{(\mf q)}$.
+    We can write $x = a/t$ where $a\in S_m, t\in T$ where $m:= \deg(t)$.
+    Since $T\cap \mf q = \emptyset$, $t^d\not\in \mf q$ and so $t^d/f^m\in S_{(f)}\backslash\Phi(\mf q)$.
+    We thus define $\eta:S_{(\mf q)}\to R$ by
+    \begin{equation}
+         \eta(x) = \phi(at^{d-1}/f^m)\cdot\phi(t^d/f^m)^{-1}.
+    \end{equation}
+    This is well defined: if $x = a'/t'$ write $m'$ for the degree of $t'$.
+    There exists $u\in T$ such that $u(t'a-ta') = 0$.
+    Write $k$ for the degree of $u$.
+    Then
+    \begin{equation}
+        \frac{u^dt^{d-1}t'^da}{f^{k+m+m'}} = \frac{u^dt'^{d-1}t^da'}{f^{k+m+m'}}
+    \end{equation}
+    and so since $u^d/f^k\in S_{(f)}\backslash \Phi(\mf q)$,
+    \begin{equation}
+        \phi\left(\frac{t^{d-1}a}{f^{m}}\right)\phi\left(\frac{t^d}{f^{m}}\right)^{-1} = \phi\left(\frac{t^{d'-1}a'}{f^{m'}}\right)\phi\left(\frac{t'^d}{f^{m'}}\right)^{-1}
+    \end{equation}
+    as required.
+    It is then straightforward to check that $\eta$ is a ring homomorphism and that $\phi = \eta\circ\psi$.
+    Uniqueness follows from that fact that $x = (at^{d-1}/f^m)\cdot(t^d/f^m)^{-1}$ in $S_{(\mf q)}$.
+\end{proof}
+\begin{corollary}
+    $S_{(\mf p)}$ is a local ring with maximal ideal $\mf q \cdot (T^{-1}S)\cap S_{(\mf q)}$.
+\end{corollary}
+\subsection{Miscellaneous}
+\begin{definition}
+    Let $S$ be a graded ring and let $I$ be an ideal of $S$.
+    Write $I^h$ for the ideal generated by the homogeneous elements of $I$.
+\end{definition}
+\begin{proposition}
+    If $\mf p$ is a prime ideal of $S$. 
+    Then $\mf p^h$ is also prime.
+\end{proposition}
+\begin{proof}
+    Let $a,b\in S$ be homogeneous.
+    If $ab\in \mf p^h\subseteq \mf p$ then either $a\in\mf p$ or $b\in\mf p$.
+    But since $a,b$ are homogeneous either $a\in\mf p^h$ or $b\in\mf p^h$.
+\end{proof}
+\begin{corollary}
+    Let $S$ be a graded ring.
+    Then for a homogeneous ideal $I$, we have 
+    \begin{equation}
+        \rad(I) = \bigcap_{\substack{\mf p\supseteq I, \\\text{ homog}}} \mf p.
+    \end{equation}
+\end{corollary}
+\begin{proof}
+    We certainly have $(\subseteq)$.
+    $(\supseteq)$ follows from the fact that if $\mf a\subseteq \mf p$ then $\mf a \subseteq \mf p^h\subseteq \mf p$.
+\end{proof}
+\section{The Proj construction}
+\begin{definition}
+    Let $S$ be a graded ring.
+    Define $\Proj(S)$ to be the set of all homogeneous prime ideals of $S$ which do not contain $S_+$.
+    If $\mf a$ is a homogeneous ideal of $S$ we define $V(\mf a) = \set{\mf p\in \Proj(S):\mf p\supseteq \mf a}$.
+    As before these sets define a topology on $\Proj(S)$.
+\end{definition}
+\begin{remark}
+    Note that we still have $V(I) = V(\rad(I))$.
+\end{remark}
+\begin{definition}
+    (Basic open sets).
+    Let $f\in S_+$ be a homogeneous element of $S$.
+    Define $D_+(f) = \Proj(S)\backslash V((f))$.
+\end{definition}
+\begin{proposition}
+    The basic open sets form a base of the topology on $\Proj(S)$.
+\end{proposition}
+\begin{proof}
+    Clearly $D_+(f)\cap D_+(g) = D_+(fg)$.
+    Finally note that 
+    \begin{equation}
+        V(I) = V(I\cap S_+) = \bigcap_{\substack{f\in I\cap S_+ \\ \text{homog}}}V((f))
+    \end{equation}
+    and so $\Proj(S)\backslash V(I) = \bigcup_{\substack{f\in I\cap S_+ \\ \text{homog}}}D_+(f)$.
+\end{proof}
+\begin{proposition}
+    Let $S$ be a graded ring and $I$ a homogeneous ideal of $S$.
+    Then $V(I) = \emptyset$ iff $\rad(I) \supseteq S_+$.
+\end{proposition}
+\begin{proof}
+    $(\Leftarrow)$ Follows from $V(I) = V(\rad(I))$.
+    $(\Rightarrow)$ $V(I) = \emptyset$. Thus $I\subseteq \mf p$ implies $S_+ \subseteq \mf p$. 
+    But then $S_+ \subseteq \rad(I)$.
+\end{proof}
+\begin{lemma}
+    Let $f\in S_+$ be a homogeneous element and let $\Phi:D_+(f)\to \Spec(S_{(f)})$ be the map from theorem \ref{thm:f_loc}.
+    Then $\Phi$ is a homeomorphism.
+\end{lemma}
+\begin{proof}
+    Let $C$ be a closed subset of $\Spec(S_{(f)})$. 
+    Then $C = V(\mf a)$ for some radical ideal $\mf a\normal S_{(f)}$.
+    It is easy to see from theorem \ref{thm:f_loc} that $\Phi^{-1}(C) = V(\Psi(\mf a))\cap D_+(f)$.
+    Similarly, any closed subset of $D_+(f)$ is of the form $D_+(f)\cap V(\mf b)$ for some homogeneous radical ideal $\mf b$ and $\Phi(D_+(f)\cap V(\mf b)) = V(\Phi(\mf b))$.
+\end{proof}
+\begin{remark}
+    Let $g = s/f^k\in S_{(f)}$.
+    Then $\mf q\in \Phi^{-1}(V(g))$ iff $\Phi(\mf q)\supseteq (g)$ iff $s\in \mf q$ iff $\mf q\in D_+(f)\cap V((s))$.
+    Thus $\Phi^{-1}(D(g)) = D_+(fs)$.
+\end{remark}
+\begin{definition}
+    We can turn $\Proj(S)$ into a locally ringed space by defining the structure sheaf to be
+    \begin{equation}
+        \shf{O}_{\Proj(S)}(U) = \left\{s:U\to\coprod_{\mf p\in \Proj(S)}S_{(\mf p)}:\begin{array}{c} \text{for each $\mf p\in U$ there exists an} \\ \text{open neighbourhood $V$ of $\mf p$ in $U$, }\\ \text{and homogeneous elements $a,f\in S$} \\ \text{of the same degree such that for all} \\ \text{$\mf q\in V$, $f\not\in \mf q$ and $s(\mf q) = a/f$ in $S_{(\mf q)}$.}\end{array}\right\}.
+    \end{equation}
+\end{definition}
+\begin{thm}
+    Let $S$ be a graded ring.
+    \begin{enumerate}
+        \item For any $\mf p\in \Proj(S)$, $\shf{O}_{\mf p}\cong S_{(\mf p)}$.
+        \item For any homogeneous $f\in S_+$, $(D_+(f),\shf{O}|_{D_+(f)}) \cong \Spec(S_{(f)})$.
+        \item $\Proj(S)$ is a scheme.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    $(1)$ Trivial. Note that this means that $\Proj(S)$ is a locally ringed space.
+    $(2)$ We have from the previous lemma that the underlying topological spaces are homeomorphic.
+    We have also established that $S_{(\mf q)}\cong (S_{(f)})_{\Phi(\mf q)}$.
+    Using this isomorphism we can construct a map $D_+(f)\to \Spec(S_{(f)})$ which is an isomorphism on stalks.
+    It follows that they must be isomorphisms as locally ringed spaces.
+    $(3)$ then follows.
+\end{proof}
+\chapter{Appendix - Scheme theoretic results}
+\section{Basic open sets}
+\begin{proposition}
+    Let $X$ be a scheme and $f\in \Gamma(X,\shf{O}_X)$.
+    Then for affine $U\subseteq X$, $X_f\cap U = U_{f|_U}$ is a basic open set.
+\end{proposition}
+\begin{proof}
+    It suffice to prove that for $X=\Spec(R)$ and $r\in R$, $X_r = D_r(R)$.
+    But
+    \begin{equation}
+        X_r = \set{\mathfrak p \normal R : r/1 \not\in \mathfrak p_{\mathfrak p}} = \set{\mathfrak p \normal R : r\not\in \mathfrak p} = D_r(R).
+    \end{equation}
+\end{proof}
+\begin{proposition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes and $r\in \Gamma(Y,\shf{O}_Y)$.
+    Then $f^{-1}(Y_r) = X_{f^\#(Y)(r)}$.
+\end{proposition}
+\begin{proof}
+    Recall that $f^\#_x:\shf{O}_{Y,f(x)}\to \shf{O}_{X,x}$ is a morphism of local rings.
+    Thus $r_{f(x)}\in \mathfrak m_{f(x)}$ iff $f^\#_x(r_{f(x)}) \in \mathfrak m_x$.
+    But $f^\#_x(r_{f(x)}) = f^\#(Y)(r)_x$ and so
+    \begin{align}
+        f^{-1}(Y_r) &= \set{x\in X: r_{f(x)} \not\in \mathfrak m_{f(x)}} \nonumber \\
+                    &= \set{x\in X: f^\#(Y)(r)_x \not\in \mathfrak m_x} = X_{f^\#(Y)(r)}.
+    \end{align}
+\end{proof}
+\begin{proposition}
+    Let $X$ be a scheme and $U,V$ be open affine subsets.
+    Then there exists a cover of $U\cap V$ consisting of sets which are basic with respect to both $U$ and $V$.
+\end{proposition}
+\begin{proof}
+    Let $x\in U\cap V$.
+    Then there is a $f\in \shf{O}_X(U)$ such that $x\in U_f\subseteq U\cap V$.
+    Let $g\in \shf{O}_X(V)$ be such that $x\in V_g\subseteq U_f$.
+    Then $(U_f)_{g|_{U_f}} = V_g$, both of which are basic with respect to $U$ and $V$ respectively.
+\end{proof}
+\begin{lemma}
+    (The Affine Communication Lemma).
+    Let $P$ be some property enjoyed by some affine open subsets of a scheme $X$ such that
+    \begin{enumerate}
+        \item if an affine open subset $\Spec(A)\hookrightarrow X$ has property $P$, then for any $f\in A$, $\Spec(A_f)\hookrightarrow X$ does too
+        \item if $(f_1,\dots,f_n) = A$ and $\Spec(A_{f_i})\hookrightarrow X$ has $P$ for all $i$, then so does $\Spec(A)\hookrightarrow X$.
+    \end{enumerate}
+    Suppose that $X = \cup_{i\in I}\Spec(A_i)$ where $\Spec(A_i)$ has property $P$. 
+    Then every affine open subset of $X$ has $P$ too.
+\end{lemma}
+\begin{definition}
+    We call such a property an affine-local property.
+\end{definition}
+\section{Quasi-separated schemes}
+\begin{definition}
+    We say a topological space $X$ is quasi-separated if the intersection of any two quasi-compact open subsets is quasi-compact.
+\end{definition}
+\begin{thm}
+    Let $X$ be a scheme.
+    The following are equivalent:
+    \begin{enumerate}
+        \item $X$ is quasi-separated
+        \item The intersection of any two affine open subsets is a finite union of affine open subsets
+        \item There exists an open cover $\set{V_i}_i$ such that $V_i\cap V_j$ is a finite union of affine open subsets for any $i,j$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}
+    $(1)\Rightarrow(2)$ Obvious. 
+    $(2)\Rightarrow(3)$ Obvious.
+    $(3)\Rightarrow(1)$ Let $U,V$ be quasi-compact open subsets of $X$.
+    The inclusion maps $V_i\hookrightarrow X$ are all quasi-compact and so $V_i\cap U$ is quasi-compact for all $i$.
+    Thus $U\hookrightarrow X$ is quasi-compact and so $U\cap V$ is quasi-compact.
+\end{proof}
+\begin{corollary}
+    Affine schemes are quasi-separated.
+\end{corollary}
+\begin{corollary}
+    A scheme $X$ is quasi-compact and quasi-separated iff $X$ can be covered by a finite number of affine open subsets, any two of which have intersection also covered by a finite number of affine open subsets.
+\end{corollary}
+\begin{proposition}
+    \label{prop:aff_cover_aff}
+    Let $X$ be a quasi-compact and quasi-separated scheme and $f_1,\dots,f_k\in\Gamma(X,\shf{O}_X)$ be such that $(f_1,\dots,f_k) = \Gamma(X,\shf{O}_X)$. 
+    If $X_{f_i}$ is affine for all $i$, then $X$ is affine.
+\end{proposition}
+\begin{proof}
+    Identical to the noetherian case.
+\end{proof}
+\section{Spec adjunction}
+\begin{thm}
+    Let $(X,\shf{O}_X)$ be a scheme and $A$ a ring. 
+    Then there is a natural bijection
+    \begin{equation}
+        \Hom_\Sch(X,\Spec(A)) \leftrightarrow \Hom_\Ring(A,\Gamma(X,\shf{O}_X)).
+    \end{equation}
+    In other words $\Gamma \dashv \Spec$ as functors between $\Sch$ and $\Ring^{op}$.
+\end{thm}
+\begin{proof}
+    Given a morphism $(f,f^\#):(X,\shf{O}_X) \to (\Spec(A),\shf{O}_{\Spec(A)})$ we obtain map $A\to \Gamma(X,\shf{O}_X)$ from $f^\#(\Spec(A))$.
+
+    Conversely, suppose we have $\phi:A\to \Gamma(X,\shf{O}_X)$.
+    For an affine $U\subseteq X$, we have the map $A\to \Gamma(X,\shf{O}_X) \to \Gamma(U,\shf{O}_X)$, and we thus obtain a map $U\to \Spec(A)$.
+    Let $U,V\subseteq X$ be affine and $W\subseteq U\cap V$ also be affine.
+    The following diagram commutes
+    \begin{equation}
+        \begin{tikzcd}[column sep=small,row sep=small]
+            & & \Gamma(U,\shf{O}_X) \arrow[dr] & \\
+            A \arrow[r] & \Gamma(X,\shf{O}_X) \arrow[ur] \arrow[dr] \arrow[rr] & & \Gamma(W,\shf{O}_X) \\
+                        & & \Gamma(V,\shf{O}_X) \arrow[ur] &
+        \end{tikzcd}
+    \end{equation}
+    and so 
+    \begin{equation}
+        \begin{tikzcd}[column sep=small,row sep=small]
+                     & U \arrow[dl] & \\
+            \Spec(A) & & W \arrow[dl] \arrow[ul] \arrow[ll] \\
+                     & V \arrow[ul] &
+        \end{tikzcd}
+    \end{equation}
+    also commutes.
+    So the morphisms agree on overlaps and so can be glued to get a morphism $X\to \Spec(A)$.
+
+    It is straightforward to check that this defines a bijection.
+\end{proof}
+\begin{corollary}
+    Let $(X,\shf{O}_X)$ be a scheme. 
+    There is a canonical morphism $X\to \Spec(\Gamma(X,\shf{O}_X)$ such that every morphism from $X$ to an affine scheme factors through this map uniquely.
+\end{corollary}
+\begin{proof}
+    This follows from proposition \ref{prop:cat_factor}.
+\end{proof}
 \section{Sheaf of ideals}
 \begin{definition}
     Let $\shf{F}$ be a sheaf on $X$.
@@ -1196,157 +2291,11 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{remark}
     If we take $Z = X$ then $Z' = X_{red}$.
 \end{remark}
-\section{Tangent space}
-
-\chapter{Spectral sequences}
-\begin{thm}
-    (Grothendieck spectral sequence).
-    Let $F:\mathcal A \to \mathcal B$ and $G:\mathcal B \to \mathcal C$ be left exact functors and suppose that $F$ sends injective objects to $G$-acylic objects.
-    Then for $A$ an object in $\mathcal A$ there is a spectral sequence $\{E_r(A)\}$ such that 
-    \begin{equation}
-        E_2^{p,q}(A) = R^pG(R^qF(A)) \Rightarrow R^{p+q}(GF)(A).
-    \end{equation}
-\end{thm}
-\begin{corollary}
-    (Leray spectral sequence).
-    Let $f:X\to Y, g:Y\to Z$ be continuous maps.
-    Then for a sheaf $\shf{F}$, there is a $E_2$ cohomological spectral sequence
-    \begin{equation}
-        R^pg_*(R^qf_*(\shf{F})) \Rightarrow R^{p+q}(g\circ f)_*(\shf{F})
-    \end{equation}
-    which is functorial in $\shf{F}$.
-\end{corollary}
-\begin{proof}
-    $f_*$ sends injective sheaves to flabby sheaves, which are $g_*$-acyclic.
-\end{proof}
-\chapter{Group cohomology}
-
-\chapter{Appendix}
-\section{Category theory results}
-\begin{proposition}
-    \label{prop:cat_factor}
-    Let $F\dashv G$ and $G$ be full.
-    Let $e$ be the unit of the adjunction.
-    Then every morphism $x\to Gy$ factors uniquely through $e_x:x\to GFx$.
-\end{proposition}
-\begin{proof}
-    Let $\alpha$ and $\beta$ denote the forward and backward maps in
-    \begin{equation}
-        \Hom(Fx,y) \leftrightarrow \Hom(x,Gy)
-    \end{equation}
-    respectively.
-    Let $f:x\to Gy$.
-    Then $f = \alpha(\beta(f))$.
-    But $\alpha(\beta(f)) = G\beta(f)\circ e_x$ so we get existence of a factorisation.
-    For uniqueness, suppose $f = h\circ e_x$.
-    Since $G$ is full there is a $l:Fx\to y$ such that $h = Gl$.
-    So $\alpha(l) = \alpha(\beta(f))$.
-    But $\alpha$ is a bijection so $l = \beta(f)$ and hence $h = G\beta(f)$ which gives uniqueness.
-\end{proof}
-
-\section{Properties of sheaves of rings}
-\begin{thm}
-    Let $\shf{F}$ be a sheaf of rings on X, $U = \cup_iU_i$ and $s\in \shf{F}(U)$.
-    Then $s$ is invertible iff $s|_{U_i}$ is invertible for all i.
-\end{thm}
-\begin{proof}
-    The forwards direction is trivial. Now suppose $s|_{U_i}$ is invertible for all $i$.
-    Then there are $t_i\in\shf{F}(U_i)$ such that $t_is|_{U_i} = 1$.
-    But then, since inverses are unique we must have $t_i|_{U_i\cap U_j} = t_j|_{U_i\cap U_j}$ since they are both the inverse of $s|_{U_i\cap U_j}$.
-    Thus there is a section $t\in \shf{F}(U)$ that restricts to the $t_i$.
-    Checking locally it follows that $ts = 1$ and so $s$ is invertible.
-\end{proof}
-\section{Locally ringed spaces}
-\begin{lemma}
-    Let $(f,f^\#),(g,g^\#):(X,\shf{O}_X)\to (Y,\shf{O}_Y)$ be morphisms of locally ringed spaces.
-    Let $\mathcal U = \{U_i\}$ be an open covering of $X$.
-    If the morphisms agree on the restrictions to the $U_i$ then they are equal.
-\end{lemma}
-\begin{proof}
-    We certainly have $f = g$.
-    The result then follows from sheaf condition (A).
-\end{proof}
-\begin{proposition}
-    Let $X, Y$ and $\{Z_i\}_i$ be locally ringed spaces together with open immersions $f_i:Z_i\to X, g_i:Z_i\to Y$.
-    Let $\alpha:X\to Y$ be a morphism such that $\alpha\circ f_i = g_i$ for all $i$ and $\alpha:f_i(Z_i)\cap f_j(Z_j) \to g_i(Z_i)\cap g_j(Z_j)$ is an isomorphism for all $i,j$.
-    Then $\alpha$ is an isomorphism.
-\end{proposition}
-\begin{proof}
-    We have that $\alpha:f_i(Z_i)\to g_i(Z_i)$ is an isomorphism for all $i$.
-    So we can define inverses $\beta_i:g_i(Z_i)\to f_i(Z_i)$.
-    They agree on overlaps and so they glue to give a global inverse $\beta$.
-\end{proof}
-\begin{proposition}
-    Let $f:X\to Y$ be a morphism of schemes and let $\set{U_i}$ be an open cover of $Y$ such that the restriction of $f$ to a morphism $f^{-1}(U_i) \to U_i$ is an isomorphism for all $i$.
-    Then $f$ is an isomorphism.
-\end{proposition}
-\section{Restriction}
 \begin{remark}
-    Recall from chapter \ref{ch:sheafs} that given $f:X\to Y$ we obtain functors $f_*,\lim_f,f^{-1}$ between $\Sh(X)$ and $\Sh(Y)$.
-    These constructions were themselves functorial and give rise to contra/co-variant functors $\Top\to \Set$.
-    The same also holds for $f_*,f^*$ as functors between $\Mod(X)$ and $\Mod(Y)$.
+    If $X$ is a Noetherian scheme then for any affine $U = \Spec(R)$, we have that $\shf J_Z(U)$ is an ideal of $R$ and so is finitely generated.
+    It follows that all ideal sheaves on Noetherian schemes are coherent.
 \end{remark}
-\begin{thm}
-    Let $f:X\to Y$ be a continuous map and $U\subseteq X$, $V\subseteq Y$ be open subsets such that $f(U)\subseteq V$.
-    Moreover, let $f|_{U,V}$ denote the map $U\to V$ arising from $f|_U$.
-    Then for $\shf{F}\in \Sh(X)$ and $\shf{G}\in \Sh(Y)$ we have
-    \begin{enumerate}
-        \item $(f^{-1}\shf{G})|_U \cong f|_U^{-1}\shf{G} \cong f|_{U,V}^{-1}(\shf{G}|_V)$
-        \item $(f_*\shf{F})|_V \cong (f|_{U,V})_*(\shf{F}|_U)$ when $U = f^{-1}(V)$
-    \end{enumerate}
-    where are isomorphisms are natural.
-\end{thm}
-\begin{proof}
-    \begin{enumerate}
-        \item $f|_U = f \circ i_U$ and so we obtain the first isomorphism.
-            $f|_U = i_V \circ f|_{U,V}$ and so we obtain the second isomorphism.
-        \item Straightforward calculation.
-    \end{enumerate}
-\end{proof}
-\section{Results on schemes}
-\begin{thm}
-    Let $(X,\shf{O}_X)$ be a scheme and $A$ a ring. 
-    Then there is a natural bijection
-    \begin{equation}
-        \Hom_\Sch(X,\Spec(A)) \leftrightarrow \Hom_\Ring(A,\Gamma(X,\shf{O}_X)).
-    \end{equation}
-    In other words $\Gamma \dashv \Spec$ as functors between $\Sch$ and $\Ring^{op}$.
-\end{thm}
-\begin{proof}
-    Given a morphism $(f,f^\#):(X,\shf{O}_X) \to (\Spec(A),\shf{O}_{\Spec(A)})$ we obtain map $A\to \Gamma(X,\shf{O}_X)$ from $f^\#(\Spec(A))$.
-
-    Conversely, suppose we have $\phi:A\to \Gamma(X,\shf{O}_X)$.
-    For an affine $U\subseteq X$, we have the map $A\to \Gamma(X,\shf{O}_X) \to \Gamma(U,\shf{O}_X)$, and we thus obtain a map $U\to \Spec(A)$.
-    Let $U,V\subseteq X$ be affine and $W\subseteq U\cap V$ also be affine.
-    The following diagram commutes
-    \begin{equation}
-        \begin{tikzcd}[column sep=small,row sep=small]
-            & & \Gamma(U,\shf{O}_X) \arrow[dr] & \\
-            A \arrow[r] & \Gamma(X,\shf{O}_X) \arrow[ur] \arrow[dr] \arrow[rr] & & \Gamma(W,\shf{O}_X) \\
-                        & & \Gamma(V,\shf{O}_X) \arrow[ur] &
-        \end{tikzcd}
-    \end{equation}
-    and so 
-    \begin{equation}
-        \begin{tikzcd}[column sep=small,row sep=small]
-                     & U \arrow[dl] & \\
-            \Spec(A) & & W \arrow[dl] \arrow[ul] \arrow[ll] \\
-                     & V \arrow[ul] &
-        \end{tikzcd}
-    \end{equation}
-    also commutes.
-    So the morphisms agree on overlaps and so can be glued to get a morphism $X\to \Spec(A)$.
-
-    It is straightforward to check that this defines a bijection.
-\end{proof}
-\begin{corollary}
-    Let $(X,\shf{O}_X)$ be a scheme. 
-    There is a canonical morphism $X\to \Spec(\Gamma(X,\shf{O}_X)$ such that every morphism from $X$ to an affine scheme factors through this map uniquely.
-\end{corollary}
-\begin{proof}
-    This follows from proposition \ref{prop:cat_factor}.
-\end{proof}
-\subsection{Presheaves on the category of schemes}
+\section{Presheaves on the category of schemes}
 \begin{definition}
     Let $F:\Sch^{op}\to \Set$ be a functor.
     We call $F$ locally sheafy if for any scheme $X$, $F|_{\Top(X)}$ is a sheaf of sets.
@@ -1397,30 +2346,23 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{proof}
     Given $F:\Aff^{op}\to \Set$ define $\tilde F:\Sch^{op}\to \Set$ by $X\mapsto \varprojlim_{U\subseteq X}F(U)$ where $U$ ranges over affine subsets of $X$ and send morphisms to the obvious things.
 \end{proof}
-\subsection{Basic open sets}
+\chapter{Appendix - Vector Bundles}
 \begin{proposition}
-    Let $X$ be a scheme and $f\in \Gamma(X,\shf{O}_X)$.
-    Then for affine $U\subseteq X$, $X_f\cap U = U_{f|_U}$ is a basic open set.
+    Let $\pi:E\to X$ be a vector bundle of rank $n$ with trivialisation $\set{U_i}_i$ and transition functions $\set{\psi_{ji}}_{ji}$.
+    \begin{enumerate}
+        \item If $C\subseteq X$ is a closed subset of $X$ then $\pi:\pi^{-1}(C)\to C$ is a vector bundle of rank $n$ with trivialisation $\set{U_i\cap C}_i$ and transition functions $\set{\psi_{ji}|_{U_{ij}\cap C}}$.
+        \item If $Z$ is a topological space then $\pi'=\id\times\pi:Z\times E\to Z\times X$ is a vector bundle with trivialisation $\set{Z\times U_i}_i$ and transition functions $\set{\psi_{ji}'(z,u) = \psi_{ji}(u)}$.
+    \end{enumerate}
 \end{proposition}
+\begin{corollary}
+    Let $\pi:E\to Y$ be a vector bundle of rank $n$ with trivialisation $\set{U_i}$ and transition functions $\set{\psi_{ji}(u)}_{ji}$.
+    If $f:X\to Y$ is a continuous map then $\pi':f^*E\to X$ is a vector bundle of rank $n$ with trivialisation $\set{f^{-1}(U_i)}_i$ and transition functions $\set{\psi_{ji}(f(v))}_{ji}$.
+\end{corollary}
 \begin{proof}
-    It suffice to prove that for $X=\Spec(R)$ and $r\in R$, $X_r = D_r(R)$.
-    But
-    \begin{equation}
-        X_r = \set{\mathfrak p \normal R : r/1 \not\in \mathfrak p_{\mathfrak p}} = \set{\mathfrak p \normal R : r\not\in \mathfrak p} = D_r(R).
-    \end{equation}
-\end{proof}
-\begin{proposition}
-    Let $(f,f^\#):X\to Y$ be a morphism of schemes and $r\in \Gamma(Y,\shf{O}_Y)$.
-    Then $f^{-1}(Y_r) = X_{f^\#(Y)(r)}$.
-\end{proposition}
-\begin{proof}
-    Recall that $f^\#_x:\shf{O}_{Y,f(x)}\to \shf{O}_{X,x}$ is a morphism of local rings.
-    Thus $r_{f(x)}\in \mathfrak m_{f(x)}$ iff $f^\#_x(r_{f(x)}) \in \mathfrak m_x$.
-    But $f^\#_x(r_{f(x)}) = f^\#(Y)(r)_x$ and so
-    \begin{align}
-        f^{-1}(Y_r) &= \set{x\in X: r_{f(x)} \not\in \mathfrak m_{f(x)}} \nonumber \\
-                    &= \set{x\in X: f^\#(Y)(r)_x \not\in \mathfrak m_x} = X_{f^\#(Y)(r)}.
-    \end{align}
+    $f^*E$ is the vector bundle arising from the closed subset of $X\times E\to X\times Y$ given by $G = \set{(x,f(x)):x\in X}$.
+    But there is a homeomorphism $X\leftrightarrow G$ which descends to $f^{-1}(U_{i})\leftrightarrow (X\times U_{i})\cap G$.
+    This gives the required trivialisations.
+    It also follows that the transition functions are of the required form.
 \end{proof}
 \end{document}
 
