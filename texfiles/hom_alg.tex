@@ -1005,6 +1005,9 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{remark}
     If $\phi:A\to B$ is ring homomorphism, then $\Spec(\phi)$ is always quasi-compact (choose the trivial covers for both spaces).
 \end{remark}
+\begin{proposition}
+    Being quasi-compact is invariant under base change.
+\end{proposition}
 \subsection{Quasi-separated}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
@@ -1032,6 +1035,9 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{remark}
     If $\phi:A\to B$ is ring homomorphism, then $\Spec(\phi)$ is always quasi-separated (choose the trivial covers for both spaces).
 \end{remark}
+\begin{proposition}
+    Being quasi-separated is invariant under base change.
+\end{proposition}
 \subsection{Locally of finite type}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
@@ -1064,6 +1070,9 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{remark}
     If $\phi:A\to B$ is ring homomorphism, then $\Spec(\phi)$ is locally of finite type iff $B$ is a finitely generated $A$-algebra via $\phi$.
 \end{remark}
+\begin{proposition}
+    Being locally of finite type is invariant under base change.
+\end{proposition}
 \subsection{Finite type}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
@@ -1072,6 +1081,11 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{remark}
     If $\phi:A\to B$ is ring homomorphism, then $\Spec(\phi)$ is of finite type iff $B$ is a finitely generated $A$-algebra via $\phi$.
 \end{remark}
+\subsection{Finite}
+\begin{definition}
+    Let $(f,f^\#):X\to Y$ be a morphism of schemes.
+    We say $(f,f^\#)$ is finite if it is affine and locally of finite type.
+\end{definition}
 \subsection{Closed immersion}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
@@ -1084,11 +1098,41 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     Let $f:X\to Y$ be a morphism and suppose there is an open cover $\set{U_i}_i$ of $Y$ such that $f|_{f^{-1}(U_i)}:f^{-1}(U_i)\to U_i$ is a closed immersion for all $i$.
     Then $f$ is a closed immersion.
 \end{proposition}
+\begin{lemma}
+    Let $Y\to \Spec(A)$ be a closed immersion. 
+    Then $Y$ is affine.
+\end{lemma}
+\begin{proof}
+    See Hartshorne II.3.11 b).
+\end{proof}
+\begin{corollary}
+    Let $f:X\to Y$ be a closed immersion. 
+    Then $f$ is an affine morphism.
+\end{corollary}
+\begin{proof}
+    Let $U$ be an affine susbet of $Y$.
+    Then $f$ restricted to $f^{-1}(U)$ is a closed immersion.
+    The result then follows from the lemma.
+\end{proof}
+\begin{proposition}
+    Being a closed immersion is invariant under base change.
+\end{proposition}
+\begin{proof}
+    Let $f:X\to S$ be a closed immersion and $g:S'\to S$ any morphism of schemes.
+    It suffices to check for $X,S,S'$ affine.
+    But then the result follows from the fact that tensoring is right exact.
+\end{proof}
 \subsection{Open immersion}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
     We say $(f,f^\#)$ is an open immersion if $f(X)$ is open in $Y$, $f$ is a homeomorphism onto its image, and $f_p^\#$ is an isomorphism for all $p\in X$.
 \end{definition}
+\begin{proposition}
+    Being an open immersion is invariant under base change.
+\end{proposition}
+\begin{proof}
+    Clear if you view $i:U\to X$ as a subset of $X$ (then $V\times_SS'$ is an open subset of $S\times_SS' = S'$).
+\end{proof}
 \subsection{Affine}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
@@ -1114,6 +1158,20 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
 \begin{remark}
     If $\phi:A\to B$ is a ring homomorphism, then $\Spec(\phi)$ is always affine (choose the trivial cover for both spaces).
 \end{remark}
+\begin{proposition}
+    Affineness is invariant under base-change.
+\end{proposition}
+\begin{proof}
+    Let $f:X\to S$ be an affine morphism and $g:S'\to S$ any morphism of schemes.
+    We wish to show that $f':X_{S'} = X\times_{S}S'\to S'$ is affine as well.
+    Let $\set{U_i}_i$ be a cover of $S$ by affine open subsets and for each $i$ let $\set{V_{ji}}_{ji}$ be a cover of $g^{-1}(U_i)$ by affine open subsets.
+    Then 
+    \begin{equation}
+        f'^{-1}(V_{ji}) = X\times_SV_{ji} = f^{-1}(U_i)\times_{U_i}V_{ji}
+    \end{equation}
+    is affine since $f^{-1}(U_i)$ is.
+    Thus $f'$ is affine.
+\end{proof}
 \section{\texorpdfstring{$\shf{O}_X$}{OX}-Modules}
 \begin{definition}
     Let $(X,\shf{O}_X)$ be a locally ringed space.
@@ -1526,6 +1584,19 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     \end{equation}
     for $k>0$.
     Thus $X$ must be affine.
+\end{proof}
+\section{Flatness}
+\begin{definition}
+    Let $f:X\to Y$ be a morphism of schemes and $\shf F$ an $\shf O_X$-module.
+    We say that $\shf F$ is flat over $Y$ at $x\in X$ if $\shf F_x$ is flat as an $\shf O_{Y,f(x)}$-module.
+    We sat that $\shf F$ is flat over $Y$ if $\shf F$ is flat at every $x\in X$.
+\end{definition}
+\begin{proposition}
+    Let $\phi:A\to B$ be a ring homomorphism and $M$ a $B$-module.
+    $\tilde M$ is flat over $\Spec(A)$ iff $M$ is flat as an $A$-module.
+\end{proposition}
+\begin{proof}
+    $\tilde M$ is flat over $\Spec(A)$ iff $M_{\mf p}$ is flat as an $A_{\phi^{-1}(\mf p)}$ module for all $\mf p\in \Spec(B)$.
 \end{proof}
 \chapter{Spectral sequences}
 \section{Grothendieck spectral sequence}
@@ -2222,6 +2293,36 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     Since both $i_{U\cap Z}$ and $\Spec(\phi)$ are homeomorphisms onto their images, the isomorphisms in equation \ref{eq:sh_isoms} induce isomorphisms of sheaves.
     Taking stalks moreover shows that we get an isomorphism of locally ringed spaces as required.
 \end{proof}
+\begin{thm}
+    \label{thm:ideal-subsch}
+    There is a bijection
+    \begin{equation}
+        \set{\text{quasi-coherent ideal sheaves of } \shf O_X} \leftrightarrow \set{\text{closed subschemes of } X}.
+    \end{equation}
+\end{thm}
+\begin{proof}
+    Given a quasi-coherent ideal sheaf $\shf I$ of $\shf O_X$ we obatin a closed embedding $Z\to X$.
+    Conversely, given a closed embedding $i:Z\to X$ we obatin an ideal sheaf from the kernel of $\shf O_X\to i_*\shf O_Z$.
+    We need only show that any such kernel is quasi-coherent since we have already showed that the maps are mutually inverse.
+    Let $\shf I$ denote the kernel of $i^\#$ and let $U = \Spec(A)$ be an affine piece of $X$.
+    $i$ is an affine morphism so $W = i^{-1}(U)$ is also affine and so $i|_W:W\to U$ is given by $\Spec(A\to A/I)$ for some ideal $I$ of $A$.
+    Thus the exact sequence 
+    \begin{equation}
+        0 \to \shf I|_U \to \shf O_X|_U \to i|_{W*}\shf O_Z|_W \to 0
+    \end{equation}
+    becomes
+    \begin{equation}
+        0 \to \shf I|_U \to \shf O_{\Spec(A)} \to (A/I)^\sim \to 0
+    \end{equation}
+    and so $\shf I|_U = \tilde I$ and so $\shf I$ is quasi-coherent.
+\end{proof}
+\begin{remark}
+    Let $Z$ be a closed subset of $X$.
+    Then the bijection specialises to
+    \begin{equation}
+        \left\{\begin{array}{c}\text{q-c ideal sheafs } \shf I \text{ such} \\ \text{that } \supp(\shf O_X/\shf I) = Z\end{array}\right\} \leftrightarrow \left\{\begin{array}{c}\text{closed subschemes w/ underlying} \\ \text{topological space } Z \end{array}\right\}.
+    \end{equation}
+\end{remark}
 \section{Reduced schemes}
 \begin{definition}
     A scheme $(X,\shf{O}_X)$ is reduced if $\shf{O}_X(U)$ is reduced for all $U\subseteq X$ open.
@@ -2295,6 +2396,28 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     If $X$ is a Noetherian scheme then for any affine $U = \Spec(R)$, we have that $\shf J_Z(U)$ is an ideal of $R$ and so is finitely generated.
     It follows that all ideal sheaves on Noetherian schemes are coherent.
 \end{remark}
+\begin{proposition}
+    Let $Z$ be a closed subset of $X$ and $i:Z'\to X$ the corresponding reduced scheme.
+    If $j:Z''\to X$ is any closed immersion with image $Z$, then $i$ factors through $j$.
+\end{proposition}
+\begin{proof}
+    By theorem \ref{thm:ideal-subsch} it suffices to show that $\shf I_Z$ is the largest ideal with $\supp(\shf O_X/\shf I) = Z$.
+    But any such sheaf $\shf I$ must have $\shf I_x\subseteq \mf m_x$ for $x\in Z$.
+    It follows that $\shf I\subseteq \shf I_Z$ as required.
+\end{proof}
+\begin{proposition}
+    Let $f:Y\to X$ be a morphism. 
+    Then there exists a unique smallest closed subscheme which $f$ factors through.
+\end{proposition}
+\begin{proof}
+    Let $\shf I = \ker f^\#$.
+    If $X$.
+\end{proof}
+\section{Fibre products}
+\begin{proposition}
+    Let $f:X\to S$ and $g:S'\to S$ be morphisms, $U\subseteq S$ and $V\subseteq g^{-1}(U)$.
+    Then $X\times_SV = f^{-1}(U)\times_UV$.
+\end{proposition}
 \section{Presheaves on the category of schemes}
 \begin{definition}
     Let $F:\Sch^{op}\to \Set$ be a functor.
