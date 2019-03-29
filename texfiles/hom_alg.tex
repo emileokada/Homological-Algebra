@@ -1114,14 +1114,21 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     Then $f$ restricted to $f^{-1}(U)$ is a closed immersion.
     The result then follows from the lemma.
 \end{proof}
-\begin{proposition}
+\begin{corollary}
+    Closed immersions are finite morphisms.
+\end{corollary}
+\begin{thm}
     Being a closed immersion is invariant under base change.
-\end{proposition}
+\end{thm}
 \begin{proof}
     Let $f:X\to S$ be a closed immersion and $g:S'\to S$ any morphism of schemes.
     It suffices to check for $X,S,S'$ affine.
     But then the result follows from the fact that tensoring is right exact.
 \end{proof}
+\begin{thm}
+    Let $f:X\to Y$ be a morphism.
+    Then $f$ is a closed immersion iff $f$ is affine and for each affine $\Spec(B)\subseteq Y$, $f^{-1}(\Spec(B)) \cong \Spec(A)$, the map $B\to A$ is surjective.
+\end{thm}
 \subsection{Open immersion}
 \begin{definition}
     Let $(f,f^\#):X\to Y$ be a morphism of schemes.
@@ -1348,6 +1355,35 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     Let $\shf F$ be a locally free $\shf O_X$-module.
     Then $-\otimes_{\shf O_X}\shf F$ is exact.
 \end{proposition}
+\begin{lemma}
+    Let $X$ be an integral scheme.
+    Then if $\emptyset\ne V\subseteq U$ and $s\in \shf O_X(U)$ is such that $s|_V = 0$ then $s = 0$.
+\end{lemma}
+\begin{proof}
+    If $s\ne 0$ then $U_s\ne \emptyset$, and so, since $X$ is irreducible, $V\cap U_s \ne \emptyset$ which is clearly a contradiction.
+\end{proof}
+\begin{lemma}
+    Let $X$ be an integral scheme and $\shf F$ a locally free sheaf on $X$.
+    If $\emptyset \ne V \subseteq U \subseteq X$ and $s\in \shf F(U)$ is such that $s|_V = 0$ then $s = 0$.
+\end{lemma}
+\begin{proof}
+    Let $x\in U$ and $W_x$ be an open neighbourhood contained in $U$ such that $\shf F|_{W_x}\cong \bigoplus^n\shf O_X|_{W_x}$.
+    Then $V\cap W_x \ne \emptyset$ and $s|_{V\cap W_x} = 0$.
+    Then by the lemma it follows that $s|_{W_x}$.
+    But $x$ was arbitrary and so $s=0$.
+\end{proof}
+\begin{proposition}
+    Let $X$ be an integral scheme and $\phi:\shf F\to \shf G$ be a morphism of coherent locally free sheaves on $X$.
+    Let $U$ be a non-empty open affine subscheme of $X$ and suppose that $\phi(U)$ is injective.
+    Then $\phi$ is a monomorphism.
+\end{proposition}
+\begin{proof}
+    First note that $\phi(V)$ is injective for all $V\subseteq U$.
+    Now suppose $\emptyset \ne V\subseteq X$ and $s\in \ker\phi(V)$.
+    Since $X$ is irreducible, $U\cap V \ne \emptyset$.
+    Then since $\phi(V\cap U)$ is injective, $s|_{U\cap V} = 0$.
+    It follows from the lemma that $s = 0$ and so $\phi(V)$ is injective.
+\end{proof}
 \section{Line bundles}
 \begin{definition}
     Let $S$ be a scheme and $\shf{L}, \shf{L}'$ be locally free sheaves on $S$.
@@ -1494,6 +1530,35 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     Finally $(\eta_\phi)^*(\chi_k)$ maps to $f_{ki}$ on the trivialisation on $S_{\sigma_i}$.
     The result follows.
 \end{proof}
+\section{Vanishing scheme}
+\begin{definition}
+    Let $\shf L$ be a line bundle on a scheme $X$ and let $\sigma$ be a global section.
+    Then $\sigma$ defines a morphism of $\shf O_X$-modules $\sigma^\vee:\shf L^\vee\to \shf O_X$ given by evaluating at $\sigma$.
+    The (categorical) image is a quasi-coherent sheaf of ideals $\shf I$.
+    We write $i:V(\sigma)\to X$ for the corresponding closed subscheme of $X$.
+\end{definition}
+\begin{remark}
+    Note that $\sigma^\vee$ factors through $\shf I\to \shf O_X$ and so $i^*(\sigma^\vee) = 0$.
+\end{remark}
+\begin{proposition}
+    Let $f:Y\to X$ be a morphism of schemes.
+    Then $f$ factors through $V(\sigma)$ iff $f^*(\sigma^\vee) = 0$.
+\end{proposition}
+\begin{proof}
+    $(\Rightarrow)$ Follows from the remark.
+    $(\Leftarrow)$ We have that $\sigma^\vee$ factors as 
+    \begin{equation}
+        \begin{tikzcd}
+            \shf L^\vee \arrow[r,twoheadrightarrow,"p"] & \shf I \arrow[r,hook] & \shf O_X.
+        \end{tikzcd}
+    \end{equation}
+    Applying $f^*$ to the diagram we get that $f^*p = 0$.
+    But $f^*p$ is epi and so $f^*\shf I = 0$.
+    The result follows.
+\end{proof}
+\begin{thm}
+    $Z(\sigma)$ is a representative for the functor $\Sch^{op}\to \Set$, $S\mapsto \set{f\in \Hom(S,X):f^*(\sigma^\vee) = 0}$.
+\end{thm}
 \section{Ample line bundles}
 \begin{lemma}
     \label{lem:ext}
@@ -1577,30 +1642,61 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     \begin{equation}
         0 \to \shf F\to \shf I \to \shf F/\shf I \to 0
     \end{equation}
-    which gives the long exact sequence
+    which gives the exact sequence
     \begin{equation}
-        0 \to f_*\shf F\to f_*\shf I \to f_*(\shf F/\shf I) \to 
+        0 \to f_*\shf F\to f_*\shf I \to f_*(\shf F/\shf I) \to R^1f_*\shf F \to 0.
     \end{equation}
+    But $\shf F$ is flabby so $f_*\shf F$ is too which implies that 
+    \begin{equation}
+        0 \to f_*\shf F\to f_*\shf I \to f_*(\shf F/\shf I) \to 0
+    \end{equation}
+    is also exact.
+    Thus $R^1f_*\shf F$ must be $0$.
+    Now, $\shf F/\shf I$ is also flabby and so induction + the long exact sequence gives that $R^if_*\shf F = 0$ for all $i>0$.
 \end{proof}
+\begin{remark}
+    This proof holds with $f_*$ viewed as a functor $\Ab(X)\to \Ab(Y)$ or as a functor $\QCoh X \to \QCoh Y$.
+\end{remark}
 \begin{lemma}
     Let $f:X\to Y$ be an affine morphism of schemes and suppose that $X$ is noetherian.
-    Then for all quasi-coherent $\shf O_X$-modules $\shf F$, we have $R^kf_*(\shf F) = 0$ for all $k>0$.
-\end{lemma}
-\begin{lemma}
-    Let $X$ be a Noetherian scheme and $i:X\to Y$ be a closed immersion.
-    Then $i$ is an affine morphism.
+    Then for all quasi-coherent $\shf O_X$-modules $\shf F$, we have $R^kf_*\shf F = 0$ for all $k>0$.
 \end{lemma}
 \begin{proof}
-    WLOG $Y$ is affine.
-    Note that $i_*:\Ab(X)\to \Ab(Y)$ is an exact functor.
-    Let $\shf F$ be a quasi-coherent $\shf O_X$-module and $0\to \shf F\to \shf I^\bullet$ a flasque quasi-coherent resolution.
-    Then $0 \to i_*\shf F\to i_*\shf I^\bullet$ is a flasque quasi-coherent resolution of $i_*\shf F$.
-    Thus, as $Y$ is affine,
+    Let $0\to \shf F\to \shf I^\bullet$ be an injective resolution of $\shf F$ in $\QCoh X$.
+    We wish to show that $0\to f_*\shf F \to f_*\shf I^\bullet$ is exact.
+    This is enough because $\shf I^\bullet$ is flasque and so $f_*$-acyclic.
+    To do this we only need to check locally.
+    Let $U \cong \Spec(B)$ be an open affine subset of $Y$, $V = f^{-1}(U) \cong \Spec(A)$ and $\phi:A\to B$ the restriction of $f$ as a function from $U$ to $V$.
+    Moreover, let $M = \shf F(V)$ and $I^\bullet = \shf I^\bullet (V)$.
+    Restricting $f_*$ of the resolution to $U$ we get $0\to \Spec(\phi)_* \tilde M\to \Spec(\phi)_*\tilde I^\bullet$.
+    But $0\to M\to I^\bullet$ was exact and so we have the required result.
+\end{proof}
+\begin{lemma}
+    Let $f:X\to Y$ be a morphism of schemes, $\shf F$ be an $\shf O_X$-module and $s\in \Gamma(Y,\shf O_Y)$.
+    Let $\phi:\shf F\to \shf F$ denote the multiplication by $f^*s$ map.
+    Then $R^kf_*\phi:R^kf_*\shf F\to R^kf_*\shf F$ is the multiplication by $s$ map.
+\end{lemma}
+\begin{proposition}
+    (Projection formula) Let $f:X\to Y$ be a morphism of schemes where $X$ is noetherian.
+    Let $\shf F$ be a quasi-coherent sheaf on $X$ and $M$ a locally free sheaf on $Y$. 
+    Then for $k\ge 0$ there is a canonical isomorphism 
     \begin{equation}
-        0 = H^k(\Gamma(Y,i_*\shf I^\bullet)) = H^k(\Gamma(X,\shf I^\bullet)) = H^k(X,\shf F)
+        R^kf_*(\shf F\otimes_{\shf O_X} f^*(M)) \cong R^kf_*(\shf F)\otimes_{\shf O_Y} M
     \end{equation}
-    for $k>0$.
-    Thus $X$ must be affine.
+    which is natural in $\shf F$ and $M$.
+\end{proposition}
+\begin{proof}
+    Let $U$ be a trivialising open subset of $Y$ for $M$, and let $g$ denote $f$ restricted to a map from $V=f^{-1}(U)$ ot $U$.
+    Then 
+    \begin{align}
+        R^kf_*(\shf F\otimes_{\shf O_X} f^*(M))|_U &\cong R^kg_*(\shf F|_V\otimes_{\shf O_X|_V}g^*(M)|_V) \nonumber \\
+        &\cong R^kg_*\left(\shf F|_V\otimes_{\shf O_X|_V}\bigoplus^n\shf O_X|_V\right) \nonumber \\
+        &\cong \bigoplus^nR^kg_*(\shf F|_V) \nonumber \\
+        &\cong R^kg_*(\shf F|_V)\otimes_{\shf O_Y|_U}\bigoplus^n\shf O_Y|_U\nonumber \\
+        &\cong (R^kf_*(\shf F)\otimes_{\shf O_Y}M)|_U.
+    \end{align}
+    These isomorphisms are compatible by the previous lemma and so glue to give the required isomorphism.
+    Naturality follows from naturality of all the intermediate isomorphisms.
 \end{proof}
 \section{Flatness}
 \begin{definition}
@@ -2119,6 +2215,43 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     $(3)$ then follows.
 \end{proof}
 \chapter{Appendix - Scheme theoretic results}
+\section{Properties of schemes}
+\begin{definition}
+    A scheme is connected (resp. irreducible) if the topological space is connected (resp. irreducible).
+\end{definition}
+\begin{definition}
+    A scheme $X$ is integral if $\shf O_X(U)$ is an integral domain for all open subsets $U$ of $X$.
+\end{definition}
+\begin{definition}
+    A scheme $X$ is reduced if $\shf O_X(U)$ is reduced for all open subsets $U$ of $X$.
+\end{definition}
+\begin{remark}
+    Let $X = \Spec(A)$.
+    $X$ is irreducible iff $N(A)$ is prime.
+    $X$ is reduced iff $N(A)=0$.
+    $X$ is integral iff $A$ is an integral domain.
+\end{remark}
+\begin{lemma}
+    Let $X$ be an integral scheme and $U\subseteq X$ an open subset.
+    If $s\in \shf O_X(U)$ is not $0$ then $U_s \ne \emptyset$.
+\end{lemma}
+\begin{proof}
+    If $U_s = \emptyset$ then $s$ restricted to any affine piece of $U$ is nilpotent and hence $0$.
+    Thus $s = 0$ which is a contradiction.
+\end{proof}
+\begin{proposition}
+    A scheme $X$ is integral iff it is irreducible and reduced.
+\end{proposition}
+\begin{proof}
+    $(\Rightarrow)$ Obvious.
+    $(\Leftarrow)$ By the remark this is true if $X$ is affine.
+    Now let $X$ be a general scheme.
+    Suppose there is a $U\subseteq X$ open and $a,b\in \shf O_X(U)$ such that $a,b\ne 0$, but $ab=0$.
+    Let $Z_a = Z\backslash U_a$ and similarly define $Z_b$.
+    Then $U = Z_a\cup Z_b$.
+    Since $X$ is irreducible this implies that $Z_a = U$ or $Z_b = U$; say $Z_a = U$.
+    Then by the lemma $a=0$, which is a contradiction.
+\end{proof}
 \section{Basic open sets}
 \begin{proposition}
     Let $X$ be a scheme and $f\in \Gamma(X,\shf{O}_X)$.
@@ -2340,6 +2473,80 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
         \left\{\begin{array}{c}\text{q-c ideal sheafs } \shf I \text{ such} \\ \text{that } \supp(\shf O_X/\shf I) = Z\end{array}\right\} \leftrightarrow \left\{\begin{array}{c}\text{closed subschemes w/ underlying} \\ \text{topological space } Z \end{array}\right\}.
     \end{equation}
 \end{remark}
+\begin{remark}
+    Let $X$ be a scheme and suppose that for every affine open subset $\Spec(B)$ of $X$ we have an ideal $I(B)\subseteq B$.
+    If $I(B_f)\cong I(B)_f$ then we can glue the $\Spec(B/I)$ to obtain a closed immersion $i:Z\to X$.
+\end{remark}
+\begin{lemma}
+    Let $f:X\to Spec(B)$ be a morphism of schemes and let $I\normal B$.
+    If the composition $\tilde I \to \shf O_{\Spec(B)} \to f_*\shf O_X$ is $0$ then $f$ factors through $\Spec(B/I)$.
+\end{lemma}
+\begin{proposition}
+    Let $f:X\to Y$ be a morphism of schemes and $\shf I$ a quasi-coherent sheaf of ideals on $Y$ with corresponding closed immersion $i:Z\to Y$.
+    Then $f$ factors through $i$ iff the composition $\shf I \to \shf O_Y\to f_*\shf O_X$ is $0$.
+\end{proposition}
+\begin{proof}
+    $(\Rightarrow)$ Obvious.
+    $(\Leftarrow)$ Let $U = \Spec(B)$ be an affine open subset of $Y$.
+    Restricting the composition gives that $f|_{f^{-1}(U)}$ factors through $\Spec(B/I(B))$.
+    Now let $s\in B$.
+    The following diagram commutes
+    \begin{equation}
+        \begin{tikzcd}
+            & & B/I \arrow[dr] & \\
+            I \arrow[r] \arrow[d] & B \arrow[rr] \arrow[ur] \arrow[d] & & \Gamma(X,\shf O_X) \arrow[d] \\
+            I_s \arrow[r] & B_s \arrow[rr] \arrow[dr] & & \Gamma(X_s,\shf O_X) \\
+                          & & B_s/I_s \arrow[ru] \arrow[from=uuu,crossing over] &
+        \end{tikzcd}
+    \end{equation}
+    Thus the map from $f^{-1}(U)_{f^\#(s)}$ to $\Spec(B/I)$ is the restriction of the one from $f^{-1}(U)$ to $\Spec(B/I)$.
+    It follows that we can glue the morphisms together to obtain a factorisation of $f$ through $i$.
+\end{proof}
+\begin{proposition}
+    Let $X$ be a scheme, $\shf I$ a quasi-coherent sheaf of ideals on $X$ and $i:Z\to X$ the corresponding closed immersion.
+    Then $i^*\shf I = 0$.
+\end{proposition}
+\begin{proof}
+    Let $U \cong \Spec(B)$ be an open affine subset of $X$, $V = i^{-1}(U)$ and $j$ the restriction of $i$ to a morphism $V\to U$.
+    Let $I$ be the corrsponding ideal of $B$.
+    Then $(i^*\shf I)|_V = j^*\shf I|_U = (I\otimes_BB/I)^\sim = 0$.
+\end{proof}
+\begin{proposition}
+    Let $f:X\to Y$ be a morphism of schemes and $\shf I$ a quasi-coherent sheaf of ideals on $Y$.
+    Then the composition $\shf I\to \shf O_Y\to f_*\shf O_X$ is $0$ iff $f^*\shf I = 0$.
+\end{proposition}
+\begin{proof}
+    $(\Rightarrow)$ We have canonical maps $f^*\shf O_Y\to f^*f_*f^*\shf O_Y\to f^*\shf O_Y$ that compose to the identity.
+    Thus applying $f^*$ we obtain $0\to f^*\shf I \to \shf O_X$ composes to $0$ and so $f^*\shf I = 0$.
+
+    $(\Leftarrow)$ We have the following commutative diagram
+    \begin{equation}
+        \begin{tikzcd}
+            & & f_*\shf O_X \\
+            \shf O_Y \arrow[r] \arrow[urr,bend left=20,"f^\#"] & f_*f^*\shf O_Y \arrow[ur] \\
+            \shf I \arrow[r] \arrow[u] & f_*f^*\shf I \arrow[u] \\
+        \end{tikzcd}
+    \end{equation}
+    The result follows.
+\end{proof}
+\section{Vanishing scheme}
+\begin{definition}
+    Let $X$ be a scheme and $s\in \Gamma(X,\shf O_X)$.
+    For affine open subsets $\Spec(B)$ of $X$ define $I(B) = s|_{\Spec(B)}B$.
+    Then $I(B)_f\cong I(B_f)$ for all $f\in B$ and so we obtain a closed subscheme $i:V(s)\to X$.
+    We call this subscheme the vanishing scheme of $s$.
+    
+    We can similarly define $V(S)$ for any set $S$ of global sections of $X$.
+\end{definition}
+\section{Scheme theoretic intersections and unions}
+\begin{definition}
+    Let $i_1:Z_1\to X,i_2:Z_2\to X$ be closed immersions corresponding to the ideal sheafs $\shf I_1,\shf I_2$.
+    We define the union to be the closed immersion corresponding to the ideal sheaf $\shf I_1\cap \shf I_2$ (this is the quasi-coherent sheaf given by $\shf I_1(U)\cap \shf I_2(U)$ on affine open susbetes $U\subseteq X$).
+\end{definition}
+\begin{definition}
+    Let $\set{i_k:Z_k\to X}_k$ be a collection of closed immersion with corresponding ideal sheafs $\set{\shf I_k}_k$.
+    We define their intersection to be the closed immersion corresponding to $\sum_k\shf I_k$ (where again we mean the quasi-coherent sheaf given by this expression on affine open subsets).
+\end{definition}
 \section{Reduced schemes}
 \begin{definition}
     A scheme $(X,\shf{O}_X)$ is reduced if $\shf{O}_X(U)$ is reduced for all $U\subseteq X$ open.
@@ -2426,10 +2633,6 @@ commutes and so $h^\#_p = f^\#_p\circ g^\#_{f(p)}$ is a morphism of local rings 
     Let $f:Y\to X$ be a morphism. 
     Then there exists a unique smallest closed subscheme which $f$ factors through.
 \end{proposition}
-\begin{proof}
-    Let $\shf I = \ker f^\#$ and $\shf I_Y$ be the maximal quasi-coherent sheaf of ideals contained in $\shf I$ (take the sum).
-    Let $i:Z\to X$ be the corresponding closed embedding.
-\end{proof}
 \section{Fibre products}
 \begin{proposition}
     Let $f:X\to S$ and $g:S'\to S$ be morphisms, $U\subseteq S$ and $V\subseteq g^{-1}(U)$.
